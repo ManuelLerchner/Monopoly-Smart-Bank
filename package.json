@@ -7,7 +7,6 @@
         "start": "cross-env NODE_ENV=production node app.js",
         "dev": "cross-env NODE_ENV=developement nodemon app.js"
     },
-    
     "author": "Lerry-Jesacher-Ind.",
     "license": "ISC",
     "dependencies": {
