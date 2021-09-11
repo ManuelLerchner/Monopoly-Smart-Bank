@@ -1,4 +1,4 @@
-.buttons_home{
+.buttons_home {
     position: fixed;
     left: 50%;
     bottom: 10px;
@@ -7,18 +7,18 @@
 }
 
 .center {
-    display:block;
-    margin-left:auto;
-    margin-right:auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-#logo{
-    height:20%;
+#logo {
+    height: 20%;
 }
 
-body{
-    background-image:url("Skyline2.jpeg");
-    background-repeat:no-repeat;
+body {
+    background-image: url("Skyline2.jpeg");
+    background-repeat: no-repeat;
     background-size: cover;
+    background-position: center top;
 }
-
