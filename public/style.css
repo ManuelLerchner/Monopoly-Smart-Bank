@@ -1,3 +1,11 @@
+.buttons_home{
+    position: fixed;
+    left: 50%;
+    bottom: 10px;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+}
+
 .center {
     display:block;
     margin-left:auto;
@@ -5,5 +13,12 @@
 }
 
 #logo{
-    height:30%;
+    height:20%;
 }
+
+body{
+    background-image:url("Skyline2.jpeg");
+    background-repeat:no-repeat;
+    background-size: cover;
+}
+
