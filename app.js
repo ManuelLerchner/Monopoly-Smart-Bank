@@ -32,6 +32,6 @@ const PORT =
 
 app.listen(PORT, () => {
     console.log(
-        `HTTPS_Server running in ${process.env.NODE_ENV} mode on https://localhost:${PORT}`
+        `HTTPS_Server running in ${process.env.NODE_ENV} mode on http://localhost:${PORT}`
     );
 });
