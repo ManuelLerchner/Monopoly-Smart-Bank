@@ -4,12 +4,15 @@
     "description": "\"# Monopoly-Autmatic-Bank\"",
     "main": "app.js",
     "scripts": {
-        "dev": "nodemon app.js",
-        "start": "node app.js"
+        "start": "cross-env NODE_ENV=production node app.js",
+        "dev": "cross-env NODE_ENV=developement nodemon app.js"
     },
+    
     "author": "Lerry-Jesacher-Ind.",
     "license": "ISC",
     "dependencies": {
+        "cross-env": "^7.0.3",
+        "dotenv": "^10.0.0",
         "express": "^4.17.1",
         "express-handlebars": "^5.3.3",
         "nodemon": "^2.0.12"
