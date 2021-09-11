@@ -1,14 +1,17 @@
 {
-  "name": "monopoly-autmatic-bank",
-  "version": "1.0.0",
-  "description": "\"# Monopoly-Autmatic-Bank\"",
-  "main": "app.js",
-  "scripts": {
-    "start": "node app.js"
-  },
-  "author": "Lerry-Jesacher-Ind.",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.17.1"
-  }
+    "name": "monopoly-autmatic-bank",
+    "version": "1.0.0",
+    "description": "\"# Monopoly-Autmatic-Bank\"",
+    "main": "app.js",
+    "scripts": {
+        "dev": "nodemon app.js",
+        "start": "node app.js"
+    },
+    "author": "Lerry-Jesacher-Ind.",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1",
+        "express-handlebars": "^5.3.3",
+        "nodemon": "^2.0.12"
+    }
 }

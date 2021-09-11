@@ -1,11 +1,16 @@
-const express = require("express");
-const app = express();
-const port = 3000;
+var express = require("express");
+var exphbs = require("express-handlebars");
 
-app.get("/", (req, res) => {
-    res.send("Cringe");
+var app = express();
+PORT=3000
+
+app.engine("handlebars", exphbs());
+app.set("view engine", "handlebars");
+
+app.get("/", function (req, res) {
+    res.render("home");
 });
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
 });
