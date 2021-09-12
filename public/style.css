@@ -6,14 +6,8 @@
     margin: 0 auto;
 }
 
-.center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#logo {
-    height: 20%;
+.logo {
+    height: 35vh;
 }
 
 body {
