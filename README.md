@@ -1,1 +1,1 @@
-"# Monopoly-Autmatic-Bank" 
+"# Monopoly-Automatic-Bank" 
