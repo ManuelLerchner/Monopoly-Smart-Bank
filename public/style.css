@@ -11,8 +11,12 @@
 }
 
 body {
-    background-image: url("Skyline2.jpeg");
+    background-image: url("Skyline1.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center top;
+}
+
+.offset_top{
+    padding-top: 5vh;
 }

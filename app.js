@@ -20,6 +20,10 @@ app.get("/", function (req, res) {
     res.render("home");
 });
 
+app.get("/users", function (req, res) {
+    res.render("users");
+});
+
 app.get("/test", function (req, res) {
     res.render("test");
 });
