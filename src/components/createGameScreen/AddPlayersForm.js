@@ -8,6 +8,7 @@ export default function AddPlayersForm({ setPlayers, setgameState }) {
     const nameRef = useRef();
     const iconRef = useRef();
 
+    //Rerender Materialize on rerender
     useEffect(() => {
         try {
             var elemsCarousell = document.querySelectorAll(".carousel");
@@ -30,12 +31,12 @@ export default function AddPlayersForm({ setPlayers, setgameState }) {
         }
     });
 
+    //Submit New Player Form
     const handleSubmit = (evt) => {
         evt.preventDefault();
 
         let name = nameRef.current.value;
-        const icon =
-            iconRef.current.options[iconRef.current.selectedIndex].value;
+        let icon = iconRef.current.options[iconRef.current.selectedIndex].value;
 
         if (name === "") {
             return;
@@ -45,13 +46,11 @@ export default function AddPlayersForm({ setPlayers, setgameState }) {
             return;
         }
 
-        let nameTruncated = name;
         let length = 16;
         name =
-            nameTruncated.length > length
-                ? nameTruncated.substring(0, length - 3) + "..."
-                : nameTruncated;
+            name.length > length ? name.substring(0, length - 3) + "..." : name;
 
+        //Update PlayerList
         setPlayers((prevPlayers) => {
             const newPlayer = new PlayerClass(name, icon);
             return [...prevPlayers, newPlayer];
@@ -60,6 +59,7 @@ export default function AddPlayersForm({ setPlayers, setgameState }) {
         nameRef.current.value = "";
     };
 
+    //Start Game Button
     const startGame = () => {
         setgameState("main");
     };
@@ -70,13 +70,14 @@ export default function AddPlayersForm({ setPlayers, setgameState }) {
                 <div className="card blue-grey darken-3 transparent1 ">
                     <div className="card-content white-text">
                         {/*Title */}
+
                         <div className="section">
                             <div className="card-title orange-text center">
                                 Add Players!
                             </div>
                         </div>
 
-                        {/*Name Input */}
+                        {/*Form */}
 
                         <div className="row">
                             <form onSubmit={handleSubmit}>
@@ -90,6 +91,7 @@ export default function AddPlayersForm({ setPlayers, setgameState }) {
                                             </i>
                                         </div>
 
+                                        {/*Select Icon  */}
                                         <div className="input-field col s6">
                                             <select
                                                 className="icons "
@@ -122,14 +124,19 @@ export default function AddPlayersForm({ setPlayers, setgameState }) {
                                     </div>
                                 </div>
 
+                                {/*Name  */}
+
                                 <div className="row">
-                                    {/*Name  */}
+                                    {/*Icon  */}
+
                                     <div className="input-field col s12">
                                         <div className="col s1 input-field offset-s1">
                                             <i className="material-icons prefix">
                                                 edit
                                             </i>
                                         </div>
+
+                                        {/*Name Input  */}
 
                                         <div className="input-field col s6">
                                             <input
@@ -143,7 +150,7 @@ export default function AddPlayersForm({ setPlayers, setgameState }) {
                                             </label>
                                         </div>
 
-                                        {/*Add */}
+                                        {/*Add Player Button */}
                                         <div className="input-field col s3 ">
                                             <button
                                                 className="btn waves-effect waves-light"
@@ -157,8 +164,9 @@ export default function AddPlayersForm({ setPlayers, setgameState }) {
                                 </div>
                             </form>
 
+                            {/*Start Game Button */}
+
                             <div className="row">
-                                {/*Add */}
                                 <div className="input-field col s3 offset-s1">
                                     <button
                                         className="btn waves-effect waves-light orange darken-3 startButton"

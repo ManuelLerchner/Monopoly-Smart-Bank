@@ -1,16 +1,15 @@
 import React from "react";
 
-import AddPlayersForm from "../components/home/AddPlayersForm";
-import Logo from "../components/home/Logo";
+import AddPlayersForm from "../components/createGameScreen/AddPlayersForm";
+import Logo from "../components/logo/Logo";
 
-export default function CreateGame({ setPlayers, setgameState }) {
+export default function CreateGameScreen({ setPlayers, setgameState }) {
     return (
         <>
             <Logo />
             <AddPlayersForm
                 setPlayers={setPlayers}
                 setgameState={setgameState}
-                key="AddPlayerForm"
             />
         </>
     );

@@ -4,6 +4,7 @@ export default function Navbar({ setgameState }) {
     const toHome = () => {
         setgameState("createGame");
     };
+    
     return (
         <nav>
             <div className="nav-wrapper grey darken-4">

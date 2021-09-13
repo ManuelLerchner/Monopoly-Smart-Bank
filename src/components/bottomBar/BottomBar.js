@@ -10,7 +10,7 @@ export default function BottomBar({ players }) {
                 {players.map((player) => {
                     return (
                         <PlayerCard
-                            key={player.name + player.id}
+                            key={player.name + player.icon}
                             player={player}
                         />
                     );

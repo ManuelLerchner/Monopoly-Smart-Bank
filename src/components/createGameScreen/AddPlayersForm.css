@@ -31,3 +31,7 @@ input {
     margin-top: 5px;
     margin-bottom: 10px;
 }
+
+.transparent1{
+    opacity: 0.95;
+}

@@ -3,27 +3,22 @@ import React from "react";
 import "./PlayerCard.css";
 
 export default function PlayerCard({ player }) {
-    const {
-        name,
-        icon,
-        balance,
-        properties,
-        houses,
-        skyscraper,
-        estimatedValue
-    } = player;
-
+    //temp Avatar Image
     const imageSrc = `https://avatars.dicebear.com/api/open-peeps/${
-        name + icon
+        player.name + player.icon
     }.svg`;
 
     return (
         <div className="carousel-item">
+            {/*Card */}
+
             <div className="playerCard">
+                {/*Name and Icon */}
+
                 <div className="row centerRow ">
                     <div className="col s8">
                         <h4>
-                            <b>{name}</b>
+                            <b>{player.name}</b>
                         </h4>
                     </div>
                     <div className="col s4">
@@ -31,37 +26,38 @@ export default function PlayerCard({ player }) {
                     </div>
                 </div>
 
+                {/*Table */}
                 <div className="row">
                     <table className="col l12 ">
                         <tbody>
                             <tr>
                                 <td>Balance</td>
                                 <td>
-                                    <b>{balance}</b>
+                                    <b>{player.formatMoney()}</b>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Properties</td>
                                 <td>
-                                    <b>{properties}</b>
+                                    <b>{player.properties}</b>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Houses</td>
                                 <td>
-                                    <b>{houses}</b>
+                                    <b>{player.houses}</b>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Skyscraper</td>
                                 <td>
-                                    <b>{skyscraper}</b>
+                                    <b>{player.skyscraper}</b>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Estimated Value</td>
                                 <td>
-                                    <b>{estimatedValue}</b>
+                                    <b>{player.estimatedValue}</b>
                                 </td>
                             </tr>
                         </tbody>

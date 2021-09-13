@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./MainMenu.css";
+import "./MainScreen.css";
 
 export default function MainMenu() {
     return (
@@ -11,10 +11,10 @@ export default function MainMenu() {
                         <div className="ButtonBox">
                             <div className="">
                                 <a
-                                    class="waves-effect waves-light btn-large red darken-2"
+                                    className="waves-effect waves-light btn-large red darken-2"
                                     href="#!"
                                 >
-                                    <i class="material-icons right">
+                                    <i className="material-icons right">
                                         attach_money
                                     </i>
                                     Pay
@@ -22,10 +22,10 @@ export default function MainMenu() {
                             </div>
                             <div className="">
                                 <a
-                                    class="waves-effect waves-light btn-large deep-orange darken-1"
+                                    className="waves-effect waves-light btn-large deep-orange darken-1"
                                     href="#!"
                                 >
-                                    <i class="material-icons right">
+                                    <i className="material-icons right">
                                         account_balance
                                     </i>
                                     Buy
@@ -33,10 +33,10 @@ export default function MainMenu() {
                             </div>
                             <div className="">
                                 <a
-                                    class="waves-effect waves-light btn-large green darken-1"
+                                    className="waves-effect waves-light btn-large green darken-1"
                                     href="#!"
                                 >
-                                    <i class="material-icons right">
+                                    <i className="material-icons right">
                                         double_arrow
                                     </i>
                                     Start
@@ -44,10 +44,10 @@ export default function MainMenu() {
                             </div>
                             <div className="">
                                 <a
-                                    class="waves-effect waves-light btn-large  light-blue darken-3"
+                                    className="waves-effect waves-light btn-large  light-blue darken-3"
                                     href="#!"
                                 >
-                                    <i class="material-icons right">
+                                    <i className="material-icons right">
                                         trending_up
                                     </i>
                                     Stock
