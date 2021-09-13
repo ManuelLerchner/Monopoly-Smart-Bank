@@ -1,0 +1,39 @@
+.playerCard {
+    height: 320px;
+    width: 220px;
+
+    border: 1px solid rgb(19, 57, 139);
+    border-radius: 15px 15px 0px 0px;
+    box-shadow: 0 0 10px 8px;
+
+    background: white;
+}
+
+h4 {
+    font-size: 25px;
+}
+
+td {
+    padding: 10px;
+}
+
+.icon {
+    width: 64px;
+    height: 64px;
+    padding: 4px;
+}
+
+h4 {
+    margin: 0px;
+    word-wrap: break-word;
+    vertical-align: middle;
+}
+
+.centerRow {
+    display: flex;
+    align-items: center;
+}
+
+.cardTitle {
+    height: 32px;
+}

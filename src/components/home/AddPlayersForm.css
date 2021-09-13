@@ -1,0 +1,33 @@
+.card-title {
+    font-size: 35px !important;
+    font-weight: 400 !important;
+    margin: 0px !important;
+}
+
+.card-content {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.card {
+    border-radius: 10px !important;
+    padding-left: 10px !important;
+}
+
+input {
+    color: whitesmoke;
+}
+
+.row {
+    margin: 0px;
+    padding: 0px;
+}
+
+.input-field {
+    margin: 5px;
+}
+
+.startButton {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
