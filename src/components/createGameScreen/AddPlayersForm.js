@@ -60,7 +60,8 @@ export default function AddPlayersForm({ setPlayers, setgameState }) {
     };
 
     //Start Game Button
-    const startGame = () => {
+    const startGame = (e) => {
+        e.preventDefault();
         setgameState("main");
     };
 
@@ -72,7 +73,7 @@ export default function AddPlayersForm({ setPlayers, setgameState }) {
                         {/*Title */}
 
                         <div className="section">
-                            <div className="card-title orange-text center">
+                            <div className="card-title grey-text text-lighten-5 center title">
                                 Add Players!
                             </div>
                         </div>
@@ -92,7 +93,7 @@ export default function AddPlayersForm({ setPlayers, setgameState }) {
                                         </div>
 
                                         {/*Select Icon  */}
-                                        <div className="input-field col s6">
+                                        <div className="input-field col s8">
                                             <select
                                                 className="icons "
                                                 defaultValue="empty"
@@ -138,7 +139,7 @@ export default function AddPlayersForm({ setPlayers, setgameState }) {
 
                                         {/*Name Input  */}
 
-                                        <div className="input-field col s6">
+                                        <div className="input-field col s8">
                                             <input
                                                 id="icon_prefix"
                                                 type="text"
@@ -149,35 +150,35 @@ export default function AddPlayersForm({ setPlayers, setgameState }) {
                                                 Name
                                             </label>
                                         </div>
+                                    </div>
+                                </div>
 
-                                        {/*Add Player Button */}
-                                        <div className="input-field col s3 ">
-                                            <button
-                                                className="btn waves-effect waves-light"
-                                                type="submit"
-                                                name="action"
-                                            >
-                                                Add Player!
-                                            </button>
-                                        </div>
+                                <div className="row marginBot">
+                                    {/*Add Player Button */}
+                                    <div className="input-field col s3 offset-s3 ">
+                                        <button
+                                            className="btn waves-effect waves-light green"
+                                            type="submit"
+                                            name="action"
+                                        >
+                                            Add!
+                                        </button>
+                                    </div>
+
+                                    <div className="input-field col s3">
+                                        <button
+                                            className="btn waves-effect waves-light orange darken-3"
+                                            type="submit"
+                                            name="action"
+                                            onClick={startGame}
+                                        >
+                                            Start Game!
+                                        </button>
                                     </div>
                                 </div>
                             </form>
 
                             {/*Start Game Button */}
-
-                            <div className="row">
-                                <div className="input-field col s3 offset-s1">
-                                    <button
-                                        className="btn waves-effect waves-light orange darken-3 startButton"
-                                        type="submit"
-                                        name="action"
-                                        onClick={startGame}
-                                    >
-                                        Start Game!
-                                    </button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

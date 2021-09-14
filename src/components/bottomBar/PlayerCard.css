@@ -1,5 +1,5 @@
 .playerCard {
-    height: 320px;
+    height: 260px;
     width: 220px;
 
     border: 1px solid rgb(19, 57, 139);
@@ -14,13 +14,14 @@ h4 {
 }
 
 td {
-    padding: 10px;
+    padding: 8px;
 }
 
 .icon {
     width: 64px;
     height: 64px;
-    padding: 4px;
+
+    padding-right: 8px;
 }
 
 h4 {
@@ -37,5 +38,3 @@ h4 {
 .cardTitle {
     height: 32px;
 }
-
-

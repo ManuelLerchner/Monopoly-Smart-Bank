@@ -27,11 +27,24 @@ input {
     margin: 5px;
 }
 
-.startButton {
-    margin-top: 5px;
-    margin-bottom: 10px;
+.marginBot {
+    margin-bottom: 20px;
 }
 
-.transparent1{
+.transparent1 {
     opacity: 0.95;
+}
+
+.select-wrapper .caret {
+    fill: whitesmoke;
+}
+
+.title {
+    font-weight: 600 !important;
+}
+
+input.valid[type="text"],
+.select-wrapper input.select-dropdown:focus {
+    border-bottom: 1px solid #10be44 !important;
+    box-shadow: 0 1px 0 0 #10be44;
 }
