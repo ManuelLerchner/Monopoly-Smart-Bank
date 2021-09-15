@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
-import "./PayScreen.css";
+import "./PayMenu.css";
 import PlayerRow from "./PlayerRow";
 
 import $ from "jquery";
@@ -54,13 +54,13 @@ export default function PayScreen({ players, setPlayers }) {
     return (
         <div className="row">
             <div className="col l3 offset-l1 s4 ">
-                <div className="card cardColor ">
+                <div className="card cardColor-pay ">
                     <div className="card-content white-text">
                         {/* Title */}
 
                         <div className="section">
                             <div className="card-title red-text center title">
-                                Sender!
+                                Sender
                             </div>
                         </div>
 
@@ -78,7 +78,7 @@ export default function PayScreen({ players, setPlayers }) {
             </div>
 
             <div className="col l2 offset-l1 s4">
-                <div className="card cardColor ">
+                <div className="card cardColor-pay ">
                     <div className="card-content white-text">
                         {/* Title */}
                         <div className="section">
@@ -87,38 +87,28 @@ export default function PayScreen({ players, setPlayers }) {
                             </div>
                         </div>
 
-                        <div className="row">
-                            <div className="row">
-                                <div className="input-field col l8 offset-l2 s12 m12 ">
-                                    <p></p>
-                                </div>
+                        <div className="row smallRow">
+                            <div className="input-field col l8 offset-l2 s10 offset-s1  ">
+                                <input
+                                    id="first_name"
+                                    type="text"
+                                    className="validate"
+                                    ref={amountRef}
+                                />
+                                <label htmlFor="first_name">Amount</label>
                             </div>
-                            <form className="col s12">
-                                <div className="row">
-                                    <div className="input-field col l8 offset-l2 s12 m12 ">
-                                        <input
-                                            placeholder="ex. 1.2M, 500k"
-                                            id="first_name"
-                                            type="text"
-                                            className="validate"
-                                            ref={amountRef}
-                                        />
-                                        <label htmlFor="first_name">
-                                            Amount
-                                        </label>
-                                    </div>
-                                </div>
-                            </form>
                         </div>
 
-                        <div className="row center paddingBottom">
+                        <div className="row center paddingBot">
                             <button
-                                className="btn waves-effect waves-light"
+                                className=" btn waves-effect waves-light"
                                 type="submit"
                                 onClick={transfer}
                             >
-                                Transfer
-                                <i className="material-icons right">send</i>
+                                Send
+                                <i className="material-icons right hide-on-small-only ">
+                                    send
+                                </i>
                             </button>
                         </div>
                     </div>
@@ -126,13 +116,13 @@ export default function PayScreen({ players, setPlayers }) {
             </div>
 
             <div className="col l3 offset-l1 s4 ">
-                <div className="card cardColor ">
+                <div className="card cardColor-pay ">
                     <div className="card-content white-text">
                         {/* Title */}
 
                         <div className="section">
                             <div className="card-title light-green-text text-accent-4 center title">
-                                Receiver!
+                                Receiver
                             </div>
                         </div>
 

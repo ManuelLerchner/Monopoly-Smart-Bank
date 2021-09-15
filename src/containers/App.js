@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 
-import CreateGameScreen from "./CreateGameScreen";
-import Navbar from "../components/Navbar";
+import LobbyScreen from "./LobbyScreen";
+import Navbar from "../components/navbar/Navbar";
 import BottomBar from "../components/bottomBar/BottomBar";
 import MainScreen from "./MainScreen";
 
 import { PlayerClass } from "./../Data/PlayerClass";
 
 import "./App.css";
-import Pay from "./Pay";
+import PayScreen from "./PayScreen";
 
 export default function App() {
     //Player List
@@ -16,8 +16,8 @@ export default function App() {
 
     useEffect(() => {
         setPlayers([
-            new PlayerClass("Manuel", "TestIcon", setPlayers),
-            new PlayerClass("Cringo", "TestIcon", setPlayers)
+            new PlayerClass("Manuel", setPlayers),
+            new PlayerClass("Cringo", setPlayers)
         ]);
     }, []);
 
@@ -28,7 +28,7 @@ export default function App() {
     function Content() {
         if (gameState === "createGame")
             return (
-                <CreateGameScreen
+                <LobbyScreen
                     players={players}
                     setPlayers={setPlayers}
                     setgameState={setgameState}
@@ -37,14 +37,14 @@ export default function App() {
         else if (gameState === "main")
             return <MainScreen setgameState={setgameState} />;
         else if (gameState === "pay")
-            return <Pay players={players} setPlayers={setPlayers} />;
+            return <PayScreen players={players} setPlayers={setPlayers} />;
     }
 
     return (
         <header className="App-header">
+            <BottomBar players={players} />
             <Navbar setgameState={setgameState} />
             <Content />
-            <BottomBar players={players} />
         </header>
     );
 }

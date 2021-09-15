@@ -5,7 +5,7 @@ import "./Logo.css";
 
 export default function Logo() {
     return (
-        <div className="container center logoContainer">
+        <div className="container center logoContainer hide-on-med-and-down">
             <img className="logo" src={LogoPNG} alt="logo" />
         </div>
     );

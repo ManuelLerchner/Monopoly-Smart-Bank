@@ -7,11 +7,47 @@
     padding: 0px;
 }
 
-.card {
-    box-shadow: 0px 2px 10px 3px black;
-}
-
 div {
     -webkit-transition: all 0.1s;
     transition: all 0.1s;
+}
+
+.cardColor-pay {
+    background-color: #0f0f11b2 !important;
+}
+
+.cardColor-main {
+    background-color: #131111d8 !important;
+}
+
+.cardColor-lobby {
+    background-color: #131111d5 !important;
+}
+
+.card {
+    border-radius: 10px !important;
+    box-shadow: 0px 2px 25px 10px black;
+}
+
+.card-title {
+    font-size: calc(00.8vw + 1.6vh + 1.2vmin) !important;
+    font-weight: 400 !important;
+    margin: 0px !important;
+}
+
+.card-content {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.icon {
+    width: 64px;
+    height: 64px;
+    padding-right: 8px;
+}
+
+.iconSmall {
+    width: 56px;
+    height: 56px;
+    padding-right: 8px;
 }

@@ -1,0 +1,7 @@
+.selected {
+    background-color: rgb(77, 74, 74) !important;
+}
+
+#nav-mobile li a {
+    border-radius: 5px !important;
+}

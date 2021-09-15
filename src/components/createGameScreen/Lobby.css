@@ -1,0 +1,21 @@
+input {
+    color: whitesmoke;
+}
+
+.input-field {
+    margin: 5px;
+}
+
+.marginBot {
+    margin-bottom: 10px;
+}
+
+.select-wrapper .caret {
+    fill: whitesmoke;
+}
+
+input.valid[type="text"],
+.select-wrapper input.select-dropdown:focus {
+    border-bottom: 1px solid #10be44 !important;
+    box-shadow: 0 1px 0 0 #10be44;
+}

@@ -1,21 +1,25 @@
 import React from "react";
+
+import Lobby from "../components/createGameScreen/Lobby";
 import Logo from "../components/logo/Logo";
-import MainMenu from "../components/mainScreen/MainScreen";
 
 import $ from "jquery";
 
-export default function MainScreen({ setgameState }) {
-    $("#navbar_lobby").removeClass("selected");
-    $("#navbar_main").addClass("selected");
+export default function LobbyScreen({ setPlayers, setgameState }) {
+    $("#navbar_lobby").addClass("selected");
+    $("#navbar_main").removeClass("selected");
     $("#navbar_pay").removeClass("selected");
     $("#navbar_buy").removeClass("selected");
     $("#navbar_start").removeClass("selected");
     $("#navbar_stock").removeClass("selected");
-
+    
     return (
         <>
             <Logo />
-            <MainMenu setgameState={setgameState} />
+            <Lobby
+                setPlayers={setPlayers}
+                setgameState={setgameState}
+            />
         </>
     );
 }

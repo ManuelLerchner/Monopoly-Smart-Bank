@@ -1,11 +1,10 @@
 const { v4: uuidv4 } = require("uuid");
 export class PlayerClass {
-    constructor(name, icon, setPlayers) {
+    constructor(name, setPlayers) {
         this.id = uuidv4();
         this.setPlayers = setPlayers;
 
         this.name = name;
-        this.icon = icon;
 
         this.balance = 5.352 * 10 ** 6;
         this.properties = 0;
@@ -13,9 +12,7 @@ export class PlayerClass {
         this.skyscraper = 0;
         this.estimatedValue = 0;
 
-        this.img = `https://avatars.dicebear.com/api/open-peeps/${
-            name + icon
-        }.svg`;
+        this.img = `https://avatars.dicebear.com/api/open-peeps/${name}.svg`;
 
         this.formatMoney = this.formatMoney.bind(this);
     }

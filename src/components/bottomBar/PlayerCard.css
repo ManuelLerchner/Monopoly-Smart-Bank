@@ -3,13 +3,13 @@
     width: 220px;
     margin-top: 26px;
 
-    border: 2px solid rgb(209, 209, 216);
+    border: 2px solid rgb(179, 137, 113);
     border-radius: 15px 15px 0px 0px;
 
-    box-shadow: rgb(0, 7, 15) 0px 0px 20px 15px,
+    box-shadow: rgb(0, 7, 15) 0px 0px 13px 10px,
         inset rgb(0, 7, 15) 0px 0px 5px 1px;
 
-    background: rgba(255, 255, 255, 0.98);
+    background: rgba(255, 230, 213, 0.986);
 }
 
 .isBroke {
@@ -23,20 +23,6 @@ h4 {
 
 td {
     padding: 8px;
-}
-
-.icon {
-    width: 64px;
-    height: 64px;
-
-    padding-right: 8px;
-}
-
-.iconSmall {
-    width: 64px;
-    height: 54px;
-
-    padding-right: 8px;
 }
 
 h4 {
