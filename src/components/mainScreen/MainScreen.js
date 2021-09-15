@@ -2,7 +2,11 @@ import React from "react";
 
 import "./MainScreen.css";
 
-export default function MainMenu() {
+export default function MainMenu({ setgameState }) {
+    const handlePay = () => {
+        setgameState("pay");
+    };
+
     return (
         <div className="row ">
             <div className="col l6 offset-l3 m8 offset-m2 s10 offset-s1">
@@ -13,6 +17,7 @@ export default function MainMenu() {
                                 <a
                                     className="waves-effect waves-light btn-large red darken-2"
                                     href="#!"
+                                    onClick={handlePay}
                                 >
                                     <i className="material-icons right">
                                         attach_money

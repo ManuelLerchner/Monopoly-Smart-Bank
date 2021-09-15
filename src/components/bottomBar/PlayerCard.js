@@ -3,16 +3,13 @@ import React from "react";
 import "./PlayerCard.css";
 
 export default function PlayerCard({ player }) {
-    //temp Avatar Image
-    const imageSrc = `https://avatars.dicebear.com/api/open-peeps/${
-        player.name + player.icon
-    }.svg`;
+    let style = player.balance < 0 ? `playerCard isBroke` : "playerCard";
 
     return (
         <div className="carousel-item">
             {/*Card */}
 
-            <div className="playerCard">
+            <div className={style}>
                 {/*Name and Icon */}
 
                 <div className="row centerRow ">
@@ -22,7 +19,7 @@ export default function PlayerCard({ player }) {
                         </h4>
                     </div>
                     <div className="col s4">
-                        <img className="icon" src={imageSrc} alt="Avatar" />
+                        <img className="icon" src={player.img} alt="Avatar" />
                     </div>
                 </div>
 

@@ -8,12 +8,7 @@ export default function BottomBar({ players }) {
         <div className="stickBottom">
             <div className="carousel">
                 {players.map((player) => {
-                    return (
-                        <PlayerCard
-                            key={player.name + player.icon}
-                            player={player}
-                        />
-                    );
+                    return <PlayerCard key={player.id} player={player} />;
                 })}
             </div>
         </div>

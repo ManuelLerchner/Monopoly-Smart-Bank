@@ -52,7 +52,7 @@ export default function AddPlayersForm({ setPlayers, setgameState }) {
 
         //Update PlayerList
         setPlayers((prevPlayers) => {
-            const newPlayer = new PlayerClass(name, icon);
+            const newPlayer = new PlayerClass(name, icon, setPlayers);
             return [...prevPlayers, newPlayer];
         });
 

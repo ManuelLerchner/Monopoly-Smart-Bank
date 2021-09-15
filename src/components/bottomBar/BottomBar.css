@@ -4,12 +4,8 @@
     bottom: 0;
     width: 100vw;
 }
-
-.carousel .carousel-item {
-    opacity: 1 !important;
-    height: 260px !important;
-}
-
+.carousel-item,
 .carousel {
-    height: 260px !important;
+    opacity: 1 !important;
+    height: 296px !important;
 }

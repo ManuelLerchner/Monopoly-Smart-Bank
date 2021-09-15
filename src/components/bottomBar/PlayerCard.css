@@ -1,12 +1,20 @@
 .playerCard {
-    height: 260px;
+    height: 270px;
     width: 220px;
+    margin-top: 26px;
 
-    border: 1px solid rgb(19, 57, 139);
+    border: 2px solid rgb(209, 209, 216);
     border-radius: 15px 15px 0px 0px;
-    box-shadow: 0 0 10px 8px;
+
+    box-shadow: rgb(0, 7, 15) 0px 0px 20px 15px,
+        inset rgb(0, 7, 15) 0px 0px 5px 1px;
 
     background: rgba(255, 255, 255, 0.98);
+}
+
+.isBroke {
+    box-shadow: rgb(192, 0, 0) 0px 0px 10px 10px,
+        inset rgb(0, 7, 15) 0px 0px 5px 1px;
 }
 
 h4 {
@@ -20,6 +28,13 @@ td {
 .icon {
     width: 64px;
     height: 64px;
+
+    padding-right: 8px;
+}
+
+.iconSmall {
+    width: 64px;
+    height: 54px;
 
     padding-right: 8px;
 }

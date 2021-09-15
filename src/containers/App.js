@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import CreateGameScreen from "./CreateGameScreen";
 import Navbar from "../components/Navbar";
@@ -8,12 +8,18 @@ import MainScreen from "./MainScreen";
 import { PlayerClass } from "./../Data/PlayerClass";
 
 import "./App.css";
+import Pay from "./Pay";
 
 export default function App() {
     //Player List
-    const [players, setPlayers] = useState([
-        new PlayerClass("Manuel", "TestIcon")
-    ]);
+    const [players, setPlayers] = useState([]);
+
+    useEffect(() => {
+        setPlayers([
+            new PlayerClass("Manuel", "TestIcon", setPlayers),
+            new PlayerClass("Cringo", "TestIcon", setPlayers)
+        ]);
+    }, []);
 
     //Game State
     const [gameState, setgameState] = useState("createGame");
@@ -28,7 +34,10 @@ export default function App() {
                     setgameState={setgameState}
                 />
             );
-        else if (gameState === "main") return <MainScreen />;
+        else if (gameState === "main")
+            return <MainScreen setgameState={setgameState} />;
+        else if (gameState === "pay")
+            return <Pay players={players} setPlayers={setPlayers} />;
     }
 
     return (
