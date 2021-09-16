@@ -2,12 +2,12 @@ import React from "react";
 
 export default function Footer() {
     return (
-        <footer class="page-footer  blue-grey darken-2">
-            <div class="container">
-                <div class="row">
-                    <div class="col l6 s12">
-                        <h5 class="white-text">Monopoly Smart-Bank</h5>
-                        <p class="grey-text text-lighten-4">
+        <footer className="page-footer  blue-grey darken-2">
+            <div className="container">
+                <div className="row">
+                    <div className="col l6 s12">
+                        <h5 className="white-text">Monopoly Smart-Bank</h5>
+                        <p className="grey-text text-lighten-4">
                             This project is an attempt to automate the Monopoly
                             Bank.
                             <br />
@@ -25,26 +25,26 @@ export default function Footer() {
                             effects.
                         </p>
                     </div>
-                    <div class="col l3 offset-l3 s12">
-                        <h5 class="white-text">Links</h5>
+                    <div className="col l3 offset-l3 s12">
+                        <h5 className="white-text">Links</h5>
                         <ul>
                             <li>
-                                <a class="grey-text text-lighten-3" href="#!">
+                                <a className="grey-text text-lighten-3" href="#!">
                                     Link 1
                                 </a>
                             </li>
                             <li>
-                                <a class="grey-text text-lighten-3" href="#!">
+                                <a className="grey-text text-lighten-3" href="#!">
                                     Link 2
                                 </a>
                             </li>
                             <li>
-                                <a class="grey-text text-lighten-3" href="#!">
+                                <a className="grey-text text-lighten-3" href="#!">
                                     Link 3
                                 </a>
                             </li>
                             <li>
-                                <a class="grey-text text-lighten-3" href="#!">
+                                <a className="grey-text text-lighten-3" href="#!">
                                     Link 4
                                 </a>
                             </li>
@@ -52,8 +52,8 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
-            <div class="footer-copyright">
-                <div class="container">© 2021 Manuel Lerchner</div>
+            <div className="footer-copyright">
+                <div className="container">© 2021 Manuel Lerchner</div>
             </div>
         </footer>
     );

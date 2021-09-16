@@ -41,7 +41,7 @@ export default function PlayerCard({ player }) {
                             <tr>
                                 <td>Properties</td>
                                 <td>
-                                    <b>{player.properties}</b>
+                                    <b>{player.properties.length}</b>
                                 </td>
                             </tr>
                             <tr>

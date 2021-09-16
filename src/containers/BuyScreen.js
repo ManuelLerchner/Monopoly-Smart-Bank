@@ -11,6 +11,7 @@ export default function BuyScreen({
     setGameState,
     properties,
     setProperties,
+    buildings,
 }) {
     $("#navbar_lobby").removeClass("selected");
     $("#navbar_main").removeClass("selected");
@@ -26,6 +27,7 @@ export default function BuyScreen({
                 setPlayers={setPlayers}
                 properties={properties}
                 setProperties={setProperties}
+                buildings={buildings}
             />
         </>
     );

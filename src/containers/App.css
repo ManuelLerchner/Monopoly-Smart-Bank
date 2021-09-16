@@ -50,13 +50,15 @@
     padding-right: 8px;
 }
 
-#toast-container {
-    top: 50%;
-    right: 50%;
-    transform: translateX(50%) translateY(-30%);
-}
-
 .toast {
     font-size: 18px !important;
     font-weight: 600;
+}
+
+.materials-icons {
+    margin-left: 0px !important;
+}
+
+.material-icons {
+    margin-left: 0px !important;
 }

@@ -4,6 +4,7 @@ import "./PayMenu.css";
 
 import $ from "jquery";
 import { PlayerClass } from "../../Data/PlayerClass";
+import PlayerList from "../../components/playerList/PlayerList";
 
 export default function PayScreen({ players, setPlayers }) {
     const amountRef = useRef();
@@ -28,18 +29,37 @@ export default function PayScreen({ players, setPlayers }) {
         const amount = amountRef.current.value;
 
         if (senderID === undefined || receiverID === undefined) {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: "No Players selected",
+                classes: "rounded red black-text",
+            });
             return;
         }
 
         if (amount === "") {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: "No Amount selected",
+                classes: "rounded red black-text",
+            });
             return;
         }
 
         const sender = players.find((player) => player.id === senderID);
         const receiver = players.find((player) => player.id === receiverID);
 
-        const succesfull = PlayerClass.sendMoney(sender, receiver, amount);
+        const [succesfull, paymentMSG] = PlayerClass.sendMoney(
+            sender,
+            receiver,
+            amount
+        );
         if (!succesfull) {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: paymentMSG,
+                classes: "rounded red black-text",
+            });
             return;
         }
 
@@ -55,12 +75,9 @@ export default function PayScreen({ players, setPlayers }) {
 
         setPlayers([...clone]);
 
-        $("input:radio[name=Sender]:checked")[0].checked = false;
-        $("input:radio[name=Receiver]:checked")[0].checked = false;
-
         // eslint-disable-next-line no-undef
         M.toast({
-            html: "Success",
+            html: paymentMSG,
             classes: "rounded green  black-text",
         });
     };
@@ -78,32 +95,7 @@ export default function PayScreen({ players, setPlayers }) {
                             </div>
                         </div>
 
-                        <form action="#">
-                            {players.map((player, i) => (
-                                <div className="row centerRow ">
-                                    <div className="col l8 offset-l1">
-                                        <label>
-                                            <div className="Sender">
-                                                <input
-                                                    name="Sender"
-                                                    type="radio"
-                                                    value={player.id}
-                                                />
-                                                <span className="name">
-                                                    {player.name}
-                                                </span>
-                                            </div>
-                                        </label>
-                                    </div>
-
-                                    <img
-                                        className="iconSmall hide-on-med-and-down"
-                                        src={player.img}
-                                        alt="Avatar"
-                                    />
-                                </div>
-                            ))}
-                        </form>
+                        <PlayerList players={players} type={"Sender"} />
                     </div>
                 </div>
             </div>
@@ -158,32 +150,7 @@ export default function PayScreen({ players, setPlayers }) {
                             </div>
                         </div>
 
-                        <form action="#">
-                            {players.map((player, i) => (
-                                <div className="row centerRow ">
-                                    <div className="col l8 offset-l1">
-                                        <label>
-                                            <div className="Receiver">
-                                                <input
-                                                    name="Receiver"
-                                                    type="radio"
-                                                    value={player.id}
-                                                />
-                                                <span className="name">
-                                                    {player.name}
-                                                </span>
-                                            </div>
-                                        </label>
-                                    </div>
-
-                                    <img
-                                        className="iconSmall hide-on-med-and-down"
-                                        src={player.img}
-                                        alt="Avatar"
-                                    />
-                                </div>
-                            ))}
-                        </form>
+                        <PlayerList players={players} type={"Receiver"} />
                     </div>
                 </div>
             </div>

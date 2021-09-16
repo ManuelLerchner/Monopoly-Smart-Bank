@@ -1,24 +1,26 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./BuyMenu.css";
 
 import $ from "jquery";
 import { PlayerClass } from "../../Data/PlayerClass";
-import BuyModal from "./BuyModal";
+import BuyModal from "../../components/buyModal/Modal";
+import PropertyCard from "./../../components/propertyCard/PropertyCard";
+import PlayerList from "../../components/playerList/PlayerList";
 
 export default function BuyMenu({
     players,
     setPlayers,
     properties,
     setProperties,
+    buildings,
 }) {
-    const amountRef = useRef();
+    const [selectedProperty, setselectedProperty] = useState(null);
+    const [playerProperties, setplayerProperties] = useState(null);
+
     //Rerender Materialize on rerender
     useEffect(() => {
         try {
-            // eslint-disable-next-line no-undef
-            M.updateTextFields();
-
             var modalElems = document.querySelectorAll(".modal");
             // eslint-disable-next-line no-undef
             M.Modal.init(modalElems, {});
@@ -27,42 +29,103 @@ export default function BuyMenu({
         }
     }, []);
 
-    const transfer = () => {
-        const senderID = $("input:radio[name=Sender]:checked").val();
-        const receiverID = $("input:radio[name=Receiver]:checked").val();
-
-        const amount = amountRef.current.value;
-
-        if (senderID === undefined || receiverID === undefined) {
-            return;
-        }
-
-        if (amount === "") {
-            return;
-        }
-
-        const sender = players.find((player) => player.id === senderID);
-        const receiver = players.find((player) => player.id === receiverID);
-
-        const succesfull = PlayerClass.sendMoney(sender, receiver, amount);
-        if (!succesfull) {
-            return;
-        }
-
-        setPlayers((prev) => {
-            const filtered = prev.filter(
-                (player) => player.id !== sender.id && player.id !== receiver.id
-            );
-            return [...filtered, sender, receiver];
+    const closeModal = (property) => {
+        setselectedProperty(property);
+        var modalElems = document.querySelectorAll(".modal");
+        modalElems.forEach((elem) => {
+            // eslint-disable-next-line no-undef
+            var instance = M.Modal.getInstance(elem);
+            instance.close();
         });
+    };
 
-        $("input:radio[name=Sender]:checked")[0].checked = false;
-        $("input:radio[name=Receiver]:checked")[0].checked = false;
+    const openBuyHome = () => {
+        var modalElems = document.querySelectorAll("#modalBuyHome");
+        modalElems.forEach((elem) => {
+            // eslint-disable-next-line no-undef
+            var instance = M.Modal.getInstance(elem);
+            instance.open();
+        });
+    };
+
+    const purchase = () => {
+        const buyerID = $("input:radio[name=Buyer]:checked").val();
+
+        if (buyerID === undefined) {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: "No Buyer selected",
+                classes: "rounded red  black-text",
+            });
+            return;
+        }
+
+        if (selectedProperty === null) {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: "No Property selected",
+                classes: "rounded red  black-text",
+            });
+            return;
+        }
+
+        const buyer = players.find((player) => player.id === buyerID);
+
+        const [succesfull, paymentMSG] = PlayerClass.buyProperty(
+            buyer,
+            selectedProperty
+        );
+
+        if (!succesfull) {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: paymentMSG,
+                classes: "rounded red black-text",
+            });
+            return;
+        }
+
+        setPlayers(
+            players.map((player) => {
+                if (player.id === buyer.id) {
+                    return buyer;
+                }
+                return player;
+            })
+        );
+
+        setProperties(
+            properties.filter((prop) => prop.id !== selectedProperty.id)
+        );
 
         // eslint-disable-next-line no-undef
         M.toast({
-            html: "Success",
+            html: paymentMSG,
             classes: "rounded green  black-text",
+        });
+    };
+
+    const openBuyBuilding = () => {
+        const buyerID = $("input:radio[name=Buyer]:checked").val();
+
+        if (buyerID === undefined) {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: "No Buyer selected",
+                classes: "rounded red  black-text",
+            });
+            return;
+        }
+
+        const buyer = players.find((player) => player.id === buyerID);
+
+        setplayerProperties(buyer.properties);
+
+        var modalElems = document.querySelectorAll("#modalSelectPropety");
+        modalElems.forEach((elem) => {
+            // eslint-disable-next-line no-undef
+            var instance = M.Modal.getInstance(elem);
+            instance.open();
         });
     };
 
@@ -79,77 +142,49 @@ export default function BuyMenu({
                             </div>
                         </div>
 
-                        <form action="#">
-                            {players.map((player, i) => (
-                                <div className="row centerRow ">
-                                    <div className="col l8 offset-l1">
-                                        <label>
-                                            <div className="Sender">
-                                                <input
-                                                    name="Sender"
-                                                    type="radio"
-                                                    value={player.id}
-                                                />
-                                                <span className="name">
-                                                    {player.name}
-                                                </span>
-                                            </div>
-                                        </label>
-                                    </div>
-
-                                    <img
-                                        className="iconSmall hide-on-med-and-down"
-                                        src={player.img}
-                                        alt="Avatar"
-                                    />
-                                </div>
-                            ))}
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div className="col l2 offset-l1 s4">
-                <div className="card cardColor-buy ">
-                    <div className="card-content white-text">
-                        {/* Title */}
-                        <div className="section">
-                            <div className="card-title white-text center title">
-                                Amount
-                            </div>
-                        </div>
-
-                        <div className="row smallRow">
-                            <div className="input-field col l8 offset-l2 s10 offset-s1  ">
-                                <input
-                                    id="first_name"
-                                    type="text"
-                                    className="validate"
-                                    autoComplete="off"
-                                    ref={amountRef}
-                                />
-                                <label htmlFor="first_name">Amount</label>
-                            </div>
-                        </div>
-
-                        <div className="row center paddingBot">
-                            <button
-                                className=" btn waves-effect waves-light"
-                                onClick={transfer}
-                            >
-                                Send
-                                <i className="material-icons right hide-on-small-only ">
-                                    send
-                                </i>
-                            </button>
-                        </div>
+                        <PlayerList players={players} type={"Buyer"} />
                     </div>
                 </div>
             </div>
 
             <div className="col l3 offset-l1 s4">
+                {selectedProperty !== null && (
+                    <div className="card cardColor-buy ">
+                        <div className="card-content white-text">
+                       
+
+                            <div className="row smallRow ">
+                                <div className="gridWrapperOneColumn">
+                                    <PropertyCard
+                                        property={selectedProperty}
+                                        setselectedProperty={
+                                            setselectedProperty
+                                        }
+                                        closeModal={() => {}}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="row center padding10">
+                                <a
+                                    className="waves-effect waves-light btn-large btn-large-buy blue lighten-1"
+                                    href="#!"
+                                    onClick={purchase}
+                                >
+                                    <i className="material-icons right  hide-on-small-only">
+                                        attach_money
+                                    </i>
+                                    Purchase
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
+
+            <div className="col l2 offset-l1 s4">
                 <div className="card cardColor-buy ">
-                    <div className="card-content white-text">
+                    <div className="card-content white-text ">
                         {/* Title */}
                         <div className="section">
                             <div className="card-title grey-text text-lighten-3 center title">
@@ -157,61 +192,63 @@ export default function BuyMenu({
                             </div>
                         </div>
 
-                        <div className="row">
+                        <div className="row center ">
                             <div className="col s12">
-                                <div className="flexContainer">
-                                    <div className="buttonBox">
-                                        <div className="buttonFlex">
-                                            <button
-                                                className=" btn waves-effect waves-light orange darken-2  modal-trigger"
-                                                href="#modalBuyHome"
-                                            >
-                                                <i class="material-icons right  hide-on-small-only">
-                                                    home
-                                                </i>
-                                                House
-                                            </button>
+                                <button
+                                    className=" btn-large btn-large-type waves-effect waves-light orange darken-2 "
+                                    onClick={openBuyBuilding}
+                                >
+                                    <i className="material-icons right  hide-on-small-only">
+                                        home
+                                    </i>
+                                    Bulding
+                                </button>
+                            </div>
+                        </div>
 
-                                            <a
-                                                class="waves-effect waves-light btn green darken-1 modal-trigger"
-                                                href="#modalBuyProperties"
-                                            >
-                                                <i class="material-icons right  hide-on-small-only">
-                                                    texture
-                                                </i>
-                                                Site
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="hide-on-med-and-down">
-                                        <div className="flexItem-Preview ">
-                                            <img
-                                                className="responsive-img"
-                                                src="https://picsum.photos/400/200"
-                                                alt="Preview"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
+                        <div className="row center padding10">
+                            <div className="col s12 ">
+                                <a
+                                    className=" btn-large btn-large-type waves-effect waves-light green darken-1  modal-trigger "
+                                    href="#modalBuyProperties"
+                                >
+                                    <i className="material-icons right  hide-on-small-only">
+                                        texture
+                                    </i>
+                                    Property
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id="modalBuyHome" class="modal">
+            <div id="modalSelectPropety" className="modal">
                 <BuyModal
-                    title={"Houses"}
-                    description="Buy a House!"
-                    properties={[]}
+                    title={"Player Properties:"}
+                    description={
+                        "Select a Property where you want to build a house:"
+                    }
+                    properties={playerProperties}
+                    clickCallback={openBuyHome}
                 />
             </div>
 
-            <div id="modalBuyProperties" class="modal">
+            <div id="modalBuyProperties" className="modal">
                 <BuyModal
                     title={"Properties:"}
-                    description="Buy a Property!"
+                    description={"Select a Property to buy"}
                     properties={properties}
+                    clickCallback={closeModal}
+                />
+            </div>
+
+            <div id="modalBuyHome" className="modal">
+                <BuyModal
+                    title={"Buildings:"}
+                    description={"Select a Building to buy"}
+                    properties={buildings}
+                    clickCallback={() => {}}
                 />
             </div>
         </div>

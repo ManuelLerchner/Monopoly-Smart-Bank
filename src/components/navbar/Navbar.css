@@ -1,7 +1,13 @@
 .selected {
-    background-color: rgb(77, 74, 74) !important;
+    background-color: rgb(109, 93, 93) !important;
+}
+#nav-mobile li {
+    background-color: rgb(53, 49, 49) !important;
+    border-radius: 5px !important;
+    margin-left: 1px !important;
+    margin-right: 1px !important;
 }
 
 #nav-mobile li a {
-    border-radius: 5px !important;
+    border-radius: 10px !important;
 }

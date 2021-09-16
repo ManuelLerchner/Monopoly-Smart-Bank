@@ -6,7 +6,7 @@ export class PlayerClass {
         this.name = name;
 
         this.balance = 5.352 * 10 ** 6;
-        this.properties = 0;
+        this.properties = [];
         this.houses = 0;
         this.skyscraper = 0;
         this.estimatedValue = 0;
@@ -65,11 +65,15 @@ export class PlayerClass {
         const balanceMoved = PlayerClass.parseMoney(amount);
 
         if (isNaN(balanceMoved)) {
-            return false;
+            return [false, "Invalid Money Format"];
         }
 
         if (sender.id === receiver.id) {
-            return false;
+            return [false, "Sender is Receiver"];
+        }
+
+        if (sender.balance < balanceMoved) {
+            return [false, "Not enought Money"];
         }
 
         sender.balance -= balanceMoved;
@@ -78,10 +82,31 @@ export class PlayerClass {
         sender.calcEstimatedValue();
         receiver.calcEstimatedValue();
 
-        return true;
+        return [true, "Successfull"];
+    }
+
+    static buyProperty(buyer, property) {
+        const cost = property.cost;
+
+        if (buyer.balance < cost) {
+            return [false, "Not enought Money"];
+        }
+
+        buyer.balance -= cost;
+        buyer.properties.push(property);
+
+        buyer.calcEstimatedValue();
+
+        return [true, "Successfull"];
     }
 
     calcEstimatedValue() {
-        this.estimatedValue = this.balance;
+        let estimated = this.balance;
+
+        this.properties.forEach((property) => {
+            estimated += property.cost;
+        });
+
+        this.estimatedValue = estimated;
     }
 }

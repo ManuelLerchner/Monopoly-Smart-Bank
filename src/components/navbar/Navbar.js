@@ -116,7 +116,7 @@ export default function Navbar({ setGameState }) {
                                 onClick={toStart}
                                 className=""
                             >
-                                <i className="material-icons left">start</i>
+                                <i className="material-icons left">double_arrow</i>
                                 Start
                             </a>
                         </li>

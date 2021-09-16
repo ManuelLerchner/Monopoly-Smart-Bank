@@ -1,32 +1,32 @@
-form {
-    padding-bottom: 5px !important;
-}
-
-.name {
-    font-size: calc(0.5vw + 1.2vh + 0.5vmin) !important;
-    color: whitesmoke;
-}
-
-[type="radio"]:not(:checked) + span:before {
-    border: 2px solid white !important;
-}
-
-.Sender [type="radio"]:checked + span:after {
-    background-color: red !important;
-    border: none;
-}
-
-.Receiver [type="radio"]:checked + span:after {
-    background-color: rgb(53, 219, 11) !important;
-    border: none;
-}
-
 .smallRow {
     margin: 0px !important;
+    padding-top: 15px !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
 }
 
-.paddingBot {
+.padding10 {
+    padding-top: 10px;
     padding-bottom: 10px;
+}
+
+.btn-large-buy,
+.btn-large-type {
+    font-size: 14px !important;
+    font-weight: 600;
+    margin-top: 4px;
+    margin-left: 6px;
+    margin-right: 6px;
+    padding: 0px !important;
+    padding-right: 10px !important;
+    padding-left: 5px !important;
+}
+.btn-large-type {
+    width: 90% !important;
+}
+
+.btn-large-buy {
+    width: 240px !important;
 }
 
 .centerRow {

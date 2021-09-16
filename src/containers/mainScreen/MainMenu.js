@@ -15,7 +15,7 @@ export default function MainMenu({ setGameState }) {
                         <div className="ButtonBox">
                             <div className="">
                                 <a
-                                    className="waves-effect waves-light btn-large red darken-2"
+                                    className="waves-effect waves-light btn-large btn-large-main red darken-2"
                                     href="#!"
                                     onClick={handlePay}
                                 >
@@ -27,7 +27,7 @@ export default function MainMenu({ setGameState }) {
                             </div>
                             <div className="">
                                 <a
-                                    className="waves-effect waves-light btn-large deep-orange darken-1"
+                                    className="waves-effect waves-light btn-large btn-large-main deep-orange darken-1"
                                     href="#!"
                                 >
                                     <i className="material-icons right hide-on-med-and-down">
@@ -38,7 +38,7 @@ export default function MainMenu({ setGameState }) {
                             </div>
                             <div className="">
                                 <a
-                                    className="waves-effect waves-light btn-large green darken-1"
+                                    className="waves-effect waves-light btn-large btn-large-main green darken-1"
                                     href="#!"
                                 >
                                     <i className="material-icons right hide-on-med-and-down">
@@ -49,7 +49,7 @@ export default function MainMenu({ setGameState }) {
                             </div>
                             <div className="">
                                 <a
-                                    className="waves-effect waves-light btn-large  light-blue darken-3"
+                                    className="waves-effect waves-light btn-large btn-large-main light-blue darken-3"
                                     href="#!"
                                 >
                                     <i className="material-icons right hide-on-med-and-down">

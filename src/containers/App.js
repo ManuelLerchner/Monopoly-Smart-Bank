@@ -5,6 +5,8 @@ import BottomBar from "../components/bottomBar/BottomBar";
 import Footer from "../components/footer/Footer";
 
 import { PlayerClass } from "./../Data/PlayerClass";
+import { PropertyClass } from "../Data/PropertyClass";
+import { BuildingClass } from "../Data/BuildingClass";
 
 import LobbyScreen from "./LobbyScreen";
 import MainScreen from "./MainScreen";
@@ -12,12 +14,12 @@ import PayScreen from "./PayScreen";
 import BuyScreen from "./BuyScreen";
 
 import "./App.css";
-import { PropertyClass } from "../Data/PropertyClass";
 
 export default function App() {
     //Player List,  Game State
     const [players, setPlayers] = useState([]);
     const [properties, setProperties] = useState([]);
+    const [buildings, setBuildings] = useState([]);
 
     const [gameState, setGameState] = useState("lobby");
 
@@ -25,7 +27,7 @@ export default function App() {
         setPlayers([new PlayerClass("Manuel"), new PlayerClass("Cringo")]);
 
         let name = "Bachla Street";
-        let cost = 2.8 * 10 ** 6;
+        let cost = 2.8 * 10 ** 5;
         let color = "Orange";
         let housePrices = {
             1: 1 * 10 ** 6,
@@ -42,9 +44,15 @@ export default function App() {
 
         setProperties([
             new PropertyClass(name, cost, color, housePrices, hotelPrice),
-            new PropertyClass(name, cost, "Lightblue", housePrices, hotelPrice),
+            new PropertyClass("a", cost, "Lightblue", housePrices, hotelPrice),
             new PropertyClass(name, cost, "Black", housePrices, hotelPrice),
-            new PropertyClass(name, cost, "Pink", housePrices, hotelPrice),
+            new PropertyClass(
+                "Cringe Street",
+                cost,
+                "Pink",
+                housePrices,
+                hotelPrice
+            ),
             new PropertyClass(name, cost, "Lime", housePrices, hotelPrice),
 
             new PropertyClass(name, cost, "Lime", housePrices, hotelPrice),
@@ -57,6 +65,20 @@ export default function App() {
             new PropertyClass(name, cost, "Grey", housePrices, hotelPrice),
             new PropertyClass(name, cost, "White", housePrices, hotelPrice),
             new PropertyClass(name, cost, "Orange", housePrices, hotelPrice),
+        ]);
+
+        let img = "https://picsum.photos/200/460";
+
+        setBuildings([
+            new BuildingClass("1 House", img),
+            new BuildingClass("2 Houses", img),
+            new BuildingClass("3 Houses", img),
+            new BuildingClass("4 Houses", img),
+            new BuildingClass("5 Houses", img),
+            new BuildingClass("6 Houses", img),
+            new BuildingClass("7 Houses", img),
+            new BuildingClass("8 Houses", img),
+            new BuildingClass("Skyscraper", img),
         ]);
     }, []);
 
@@ -88,6 +110,7 @@ export default function App() {
                     setGameState={setGameState}
                     properties={properties}
                     setProperties={setProperties}
+                    buildings={buildings}
                 />
             );
     }
