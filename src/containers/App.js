@@ -41,7 +41,7 @@ export default function App() {
         let hotelPrice = 10 * 10 ** 6;
 
         setProperties([
-            new PropertyClass(name, cost, "Red", housePrices, hotelPrice),
+            new PropertyClass(name, cost, color, housePrices, hotelPrice),
             new PropertyClass(name, cost, "Lightblue", housePrices, hotelPrice),
             new PropertyClass(name, cost, "Black", housePrices, hotelPrice),
             new PropertyClass(name, cost, "Pink", housePrices, hotelPrice),
