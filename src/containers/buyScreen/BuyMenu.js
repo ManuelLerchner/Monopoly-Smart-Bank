@@ -7,16 +7,19 @@ import { PlayerClass } from "../../Data/PlayerClass";
 import BuyModal from "../../components/buyModal/Modal";
 import PropertyCard from "./../../components/propertyCard/PropertyCard";
 import PlayerList from "../../components/playerList/PlayerList";
+import { PropertyClass } from "../../Data/PropertyClass";
 
 export default function BuyMenu({
     players,
     setPlayers,
-    properties,
-    setProperties,
+    availableProperties,
+    setAvailableProperties,
     buildings,
 }) {
     const [selectedProperty, setselectedProperty] = useState(null);
-    const [playerProperties, setplayerProperties] = useState(null);
+    const [playerProperties, setplayerProperties] = useState([]);
+    const [selectedPropertyToBuild, setselectedPropertyToBuild] =
+        useState(null);
 
     //Rerender Materialize on rerender
     useEffect(() => {
@@ -29,26 +32,7 @@ export default function BuyMenu({
         }
     }, []);
 
-    const closeModal = (property) => {
-        setselectedProperty(property);
-        var modalElems = document.querySelectorAll(".modal");
-        modalElems.forEach((elem) => {
-            // eslint-disable-next-line no-undef
-            var instance = M.Modal.getInstance(elem);
-            instance.close();
-        });
-    };
-
-    const openBuyHome = () => {
-        var modalElems = document.querySelectorAll("#modalBuyHome");
-        modalElems.forEach((elem) => {
-            // eslint-disable-next-line no-undef
-            var instance = M.Modal.getInstance(elem);
-            instance.open();
-        });
-    };
-
-    const purchase = () => {
+    const purchaseProperty = () => {
         const buyerID = $("input:radio[name=Buyer]:checked").val();
 
         if (buyerID === undefined) {
@@ -94,14 +78,127 @@ export default function BuyMenu({
             })
         );
 
-        setProperties(
-            properties.filter((prop) => prop.id !== selectedProperty.id)
+        setAvailableProperties(
+            availableProperties.filter(
+                (prop) => prop.id !== selectedProperty.id
+            )
         );
 
         // eslint-disable-next-line no-undef
         M.toast({
             html: paymentMSG,
             classes: "rounded green  black-text",
+        });
+    };
+
+    const buyBuilding = (building, price) => {
+        const buyerID = $("input:radio[name=Buyer]:checked").val();
+
+        if (buyerID === undefined) {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: "No Buyer selected",
+                classes: "rounded red  black-text",
+            });
+            return;
+        }
+
+        if (selectedPropertyToBuild === null) {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: "No Property selected",
+                classes: "rounded red  black-text",
+            });
+            return;
+        }
+
+        const buyer = players.find((player) => player.id === buyerID);
+
+        if (buyer.balance < price) {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: "Not enought Money",
+                classes: "rounded red black-text",
+            });
+            return;
+        }
+
+        const [succesfullTransaction, transactionMSG] =
+            PlayerClass.builtBuilding(
+                buyer,
+                selectedPropertyToBuild,
+                building,
+                price
+            );
+
+        if (!succesfullTransaction) {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: transactionMSG,
+                classes: "rounded red black-text",
+            });
+            return;
+        }
+
+        const [succesfull, paymentMSG] = PropertyClass.builtBuilding(
+            selectedPropertyToBuild,
+            building
+        );
+
+        if (!succesfull) {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: paymentMSG,
+                classes: "rounded red black-text",
+            });
+            return;
+        }
+
+        setPlayers(
+            players.map((player) => {
+                if (player.id === buyer.id) {
+                    return buyer;
+                }
+                return player;
+            })
+        );
+
+        closeBuyHome();
+
+        // eslint-disable-next-line no-undef
+        M.toast({
+            html: paymentMSG,
+            classes: "rounded green  black-text",
+        });
+    };
+
+    const openBuyHome = (property) => {
+        setselectedPropertyToBuild(property);
+        var modalElems = document.querySelectorAll("#modalBuyHome");
+        modalElems.forEach((elem) => {
+            // eslint-disable-next-line no-undef
+            var instance = M.Modal.getInstance(elem);
+            instance.open();
+        });
+    };
+
+    const closeBuyHome = (property) => {
+        setselectedPropertyToBuild(property);
+        var modalElems = document.querySelectorAll("#modalBuyHome");
+        modalElems.forEach((elem) => {
+            // eslint-disable-next-line no-undef
+            var instance = M.Modal.getInstance(elem);
+            instance.close();
+        });
+    };
+
+    const closeModal = (property) => {
+        setselectedProperty(property);
+        var modalElems = document.querySelectorAll(".modal");
+        modalElems.forEach((elem) => {
+            // eslint-disable-next-line no-undef
+            var instance = M.Modal.getInstance(elem);
+            instance.close();
         });
     };
 
@@ -151,8 +248,6 @@ export default function BuyMenu({
                 {selectedProperty !== null && (
                     <div className="card cardColor-buy ">
                         <div className="card-content white-text">
-                       
-
                             <div className="row smallRow ">
                                 <div className="gridWrapperOneColumn">
                                     <PropertyCard
@@ -169,7 +264,7 @@ export default function BuyMenu({
                                 <a
                                     className="waves-effect waves-light btn-large btn-large-buy blue lighten-1"
                                     href="#!"
-                                    onClick={purchase}
+                                    onClick={purchaseProperty}
                                 >
                                     <i className="material-icons right  hide-on-small-only">
                                         attach_money
@@ -238,7 +333,7 @@ export default function BuyMenu({
                 <BuyModal
                     title={"Properties:"}
                     description={"Select a Property to buy"}
-                    properties={properties}
+                    properties={availableProperties}
                     clickCallback={closeModal}
                 />
             </div>
@@ -248,7 +343,8 @@ export default function BuyMenu({
                     title={"Buildings:"}
                     description={"Select a Building to buy"}
                     properties={buildings}
-                    clickCallback={() => {}}
+                    selectedProperty={selectedPropertyToBuild}
+                    clickCallback={buyBuilding}
                 />
             </div>
         </div>

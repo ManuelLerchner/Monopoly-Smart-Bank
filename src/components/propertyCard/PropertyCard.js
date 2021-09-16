@@ -15,7 +15,7 @@ export default function PropertyCard({
 
     return (
         <a className={style} href="#!" onClick={handleClick}>
-            <div className="flexContainerProperty">
+           <div className="flexContainerProperty"> 
                 <div className="descriptionFlex">
                     <p className="propertyTitle">{property.name}</p>
 

@@ -9,8 +9,8 @@ export default function BuyScreen({
     players,
     setPlayers,
     setGameState,
-    properties,
-    setProperties,
+    availableProperties,
+    setAvailableProperties,
     buildings,
 }) {
     $("#navbar_lobby").removeClass("selected");
@@ -25,8 +25,8 @@ export default function BuyScreen({
             <BuyMenu
                 players={players}
                 setPlayers={setPlayers}
-                properties={properties}
-                setProperties={setProperties}
+                availableProperties={availableProperties}
+                setAvailableProperties={setAvailableProperties}
                 buildings={buildings}
             />
         </>

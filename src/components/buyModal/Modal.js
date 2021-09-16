@@ -1,5 +1,6 @@
 import React from "react";
 
+import BuildingCard from "../buildingCard/BuildingCard";
 import PropertyCard from "../propertyCard/PropertyCard";
 
 import "./Modal.css";
@@ -8,14 +9,11 @@ export default function BuyModal({
     title,
     description,
     properties,
+    selectedProperty,
     setselectedProperty,
     clickCallback,
 }) {
-    if (properties === null) {
-        return <></>;
-    }
-
-    function renderCards(property) {
+    function renderCards(property, i) {
         if (property.constructor.name === "PropertyClass") {
             return (
                 <PropertyCard
@@ -27,7 +25,21 @@ export default function BuyModal({
             );
         }
         if (property.constructor.name === "BuildingClass") {
-            return <>empty</>;
+            if (selectedProperty === null) {
+                return <div key={property.id}></div>;
+            }
+
+            let type = i < 3 ? "house" : i < 4 ? "skyscraper" : "monopolyTower";
+            let modifier = i < 3 ? i + 1 : 1;
+
+            return (
+                <BuildingCard
+                    key={property.id}
+                    building={property}
+                    price={selectedProperty.buildingPrice[type] * modifier}
+                    clickCallback={clickCallback}
+                />
+            );
         }
     }
 
@@ -40,7 +52,7 @@ export default function BuyModal({
 
             <div className="gridWrapper">
                 {properties.length === 0 && <h5>(Player has no properties)</h5>}
-                {properties.map((property) => renderCards(property))}
+                {properties.map((property, i) => renderCards(property, i))}
             </div>
         </div>
     );

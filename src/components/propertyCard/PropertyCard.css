@@ -6,8 +6,6 @@
 
     grid-gap: 20px;
 
-    color: #444;
-
     width: 100%;
     font-size: max(min(0.5vw, 1em), 2rem);
 }
@@ -20,7 +18,7 @@
 }
 
 .gridBox {
-    background-color: #444;
+    background-color: rgb(85, 77, 77);
     color: #fff;
     border-radius: 5px;
 
@@ -57,6 +55,7 @@
     margin: 0px;
     font-weight: 600;
     word-break: keep-all;
+
 }
 
 .propertyDescription {

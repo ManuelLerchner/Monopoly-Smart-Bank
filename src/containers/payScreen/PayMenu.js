@@ -125,7 +125,7 @@ export default function PayScreen({ players, setPlayers }) {
 
                         <div className="row center paddingBot">
                             <button
-                                className=" btn waves-effect waves-light"
+                                className=" btn-large waves-effect waves-light blue darken-1"
                                 type="submit"
                                 onClick={transfer}
                             >
