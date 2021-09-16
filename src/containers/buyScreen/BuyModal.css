@@ -1,0 +1,98 @@
+.modal {
+    background-color: rgb(225, 230, 225) !important;
+}
+
+.gridWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+
+    grid-gap: 10px;
+
+    color: #444;
+}
+
+.gridBox {
+    background-color: #444;
+    color: #fff;
+    border-radius: 5px;
+
+    border: 3px solid black;
+    font-size: 150%;
+    height: 164px;
+
+    box-shadow: rgb(38, 57, 77) 0px 5px 15px 5px;
+}
+
+.flexContainerProperty {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.descriptionFlex {
+    width: 100px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-around;
+
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    flex-grow: 1;
+}
+
+.imageFlex img {
+    box-shadow: rgb(13, 19, 26) 0px 0px 2px 1px;
+}
+
+.propertyTitle {
+    font-size: 24px;
+    margin: 0px;
+    font-weight: 600;
+}
+
+.propertyDescription {
+    font-size: 18px;
+    margin: 0px;
+    font-weight: 500;
+}
+
+.White {
+    background-color: rgba(240, 238, 238, 0.945);
+    color: rgb(37, 28, 28);
+}
+
+.Grey {
+    background-color: rgba(117, 115, 115, 0.966);
+}
+
+.Black {
+    background-color: rgba(19, 17, 17, 0.959);
+}
+
+.Lime {
+    background-color: rgba(107, 255, 0, 0.925);
+    color: rgb(48, 45, 45);
+}
+
+.Lightblue {
+    background-color: rgba(70, 240, 240, 0.911);
+    color: rgb(51, 44, 44);
+}
+
+.Pink {
+    background-color: rgba(240, 50, 230, 0.89);
+}
+
+.Orange {
+    background-color: rgba(243, 117, 14, 0.911);
+    color: rgb(51, 44, 44);
+}
+
+.Red {
+    background-color: rgba(255, 28, 28, 0.932);
+}

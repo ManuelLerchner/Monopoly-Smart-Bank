@@ -1,10 +1,10 @@
 import React from "react";
 import Logo from "../components/logo/Logo";
-import MainMenu from "../components/mainScreen/MainScreen";
+import MainMenu from "./mainScreen/MainMenu";
 
 import $ from "jquery";
 
-export default function MainScreen({ setgameState }) {
+export default function MainScreen({ setGameState }) {
     $("#navbar_lobby").removeClass("selected");
     $("#navbar_main").addClass("selected");
     $("#navbar_pay").removeClass("selected");
@@ -14,8 +14,8 @@ export default function MainScreen({ setgameState }) {
 
     return (
         <>
-            <Logo />
-            <MainMenu setgameState={setgameState} />
+            <Logo setGameState={setGameState} />
+            <MainMenu setGameState={setGameState} />
         </>
     );
 }

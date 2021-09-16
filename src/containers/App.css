@@ -1,19 +1,17 @@
-.App-header {
+.wallpaper {
     background-image: url("../images/Skyline1.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center top;
-    min-height: 100vh;
-    padding: 0px;
-}
-
-div {
-    -webkit-transition: all 0.1s;
-    transition: all 0.1s;
+    height: 100vh;
 }
 
 .cardColor-pay {
-    background-color: #0f0f11b2 !important;
+    background-color: #1d1d1db2 !important;
+}
+
+.cardColor-buy {
+    background-color: #212122b2 !important;
 }
 
 .cardColor-main {
@@ -21,7 +19,7 @@ div {
 }
 
 .cardColor-lobby {
-    background-color: #131111d5 !important;
+    background-color: #1a1818d5 !important;
 }
 
 .card {
@@ -50,4 +48,15 @@ div {
     width: 56px;
     height: 56px;
     padding-right: 8px;
+}
+
+#toast-container {
+    top: 50%;
+    right: 50%;
+    transform: translateX(50%) translateY(-30%);
+}
+
+.toast {
+    font-size: 18px !important;
+    font-weight: 600;
 }

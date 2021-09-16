@@ -1,9 +1,9 @@
 import React from "react";
 import Logo from "../components/logo/Logo";
-import PayMenu from "../components/payScreen/PayMenu";
+import PayMenu from "./payScreen/PayMenu";
 import $ from "jquery";
 
-export default function PayScreen({ players, setPlayers }) {
+export default function PayScreen({ players, setPlayers, setGameState }) {
     $("#navbar_lobby").removeClass("selected");
     $("#navbar_main").removeClass("selected");
     $("#navbar_pay").addClass("selected");
@@ -12,7 +12,7 @@ export default function PayScreen({ players, setPlayers }) {
     $("#navbar_stock").removeClass("selected");
     return (
         <>
-            <Logo />
+            <Logo setGameState={setGameState} />
             <PayMenu players={players} setPlayers={setPlayers} />
         </>
     );

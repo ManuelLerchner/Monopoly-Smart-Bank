@@ -1,12 +1,13 @@
 import React from "react";
+import { PlayerClass } from "../../Data/PlayerClass";
 
 import "./PlayerCard.css";
 
 export default function PlayerCard({ player }) {
-    let style = player.balance < 0 ? `playerCard isBroke` : "playerCard";
+    let style = player.balance < 0 ? ` isBroke` : "";
 
     return (
-        <div className="carousel-item">
+        <div className="carousel-item playerCard ">
             {/*Card */}
 
             <div className={style}>
@@ -19,7 +20,7 @@ export default function PlayerCard({ player }) {
                         </h4>
                     </div>
                     <div className="col s4">
-                        <img className="icon" src={player.img} alt="Avatar" />
+                        <img className="icon " src={player.img} alt="Avatar" />
                     </div>
                 </div>
 
@@ -30,7 +31,11 @@ export default function PlayerCard({ player }) {
                             <tr>
                                 <td>Balance</td>
                                 <td>
-                                    <b>{player.formatMoney()}</b>
+                                    <b>
+                                        {PlayerClass.formatMoney(
+                                            player.balance
+                                        )}
+                                    </b>
                                 </td>
                             </tr>
                             <tr>
@@ -54,7 +59,11 @@ export default function PlayerCard({ player }) {
                             <tr>
                                 <td>Estimated Value</td>
                                 <td>
-                                    <b>{player.estimatedValue}</b>
+                                    <b>
+                                        {PlayerClass.formatMoney(
+                                            player.estimatedValue
+                                        )}
+                                    </b>
                                 </td>
                             </tr>
                         </tbody>

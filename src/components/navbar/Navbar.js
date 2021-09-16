@@ -2,31 +2,29 @@ import React, { useEffect } from "react";
 
 import "./Navbar.css";
 
-import $ from "jquery";
-
-export default function Navbar({ setgameState }) {
+export default function Navbar({ setGameState }) {
     const toLobby = () => {
-        setgameState("createGame");
+        setGameState("lobby");
     };
 
     const toMain = () => {
-        setgameState("main");
+        setGameState("main");
     };
 
     const toPay = () => {
-        setgameState("pay");
+        setGameState("pay");
     };
 
     const toBuy = () => {
-        setgameState("pay");
+        setGameState("buy");
     };
 
     const toStart = () => {
-        setgameState("pay");
+        setGameState("start");
     };
 
     const toStocks = () => {
-        setgameState("pay");
+        setGameState("stocks");
     };
 
     useEffect(() => {

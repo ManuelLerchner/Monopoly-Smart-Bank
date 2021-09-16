@@ -1,10 +1,10 @@
 import React from "react";
 
-import "./MainScreen.css";
+import "./MainMenu.css";
 
-export default function MainMenu({ setgameState }) {
+export default function MainMenu({ setGameState }) {
     const handlePay = () => {
-        setgameState("pay");
+        setGameState("pay");
     };
 
     return (

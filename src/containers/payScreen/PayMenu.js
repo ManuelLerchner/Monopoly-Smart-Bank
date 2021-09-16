@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
 import "./PayMenu.css";
-import PlayerRow from "./PlayerRow";
 
 import $ from "jquery";
 import { PlayerClass } from "../../Data/PlayerClass";
@@ -13,6 +12,10 @@ export default function PayScreen({ players, setPlayers }) {
         try {
             // eslint-disable-next-line no-undef
             M.updateTextFields();
+
+            var elems = document.querySelectorAll(".collapsible");
+            // eslint-disable-next-line no-undef
+            M.Collapsible.init(elems, {});
         } catch (e) {
             console.log();
         }
@@ -40,15 +43,26 @@ export default function PayScreen({ players, setPlayers }) {
             return;
         }
 
-        setPlayers((prev) => {
-            const filtered = prev.filter(
-                (player) => player.id !== sender.id && player.id !== receiver.id
-            );
-            return [...filtered, sender, receiver];
+        let clone = players.map((player) => {
+            if (player.id === sender.id) {
+                return sender;
+            }
+            if (player.id === receiver.id) {
+                return receiver;
+            }
+            return player;
         });
+
+        setPlayers([...clone]);
 
         $("input:radio[name=Sender]:checked")[0].checked = false;
         $("input:radio[name=Receiver]:checked")[0].checked = false;
+
+        // eslint-disable-next-line no-undef
+        M.toast({
+            html: "Success",
+            classes: "rounded green  black-text",
+        });
     };
 
     return (
@@ -66,11 +80,28 @@ export default function PayScreen({ players, setPlayers }) {
 
                         <form action="#">
                             {players.map((player, i) => (
-                                <PlayerRow
-                                    key={player.id + "sender"}
-                                    role={"Sender"}
-                                    player={player}
-                                />
+                                <div className="row centerRow ">
+                                    <div className="col l8 offset-l1">
+                                        <label>
+                                            <div className="Sender">
+                                                <input
+                                                    name="Sender"
+                                                    type="radio"
+                                                    value={player.id}
+                                                />
+                                                <span className="name">
+                                                    {player.name}
+                                                </span>
+                                            </div>
+                                        </label>
+                                    </div>
+
+                                    <img
+                                        className="iconSmall hide-on-med-and-down"
+                                        src={player.img}
+                                        alt="Avatar"
+                                    />
+                                </div>
                             ))}
                         </form>
                     </div>
@@ -93,6 +124,7 @@ export default function PayScreen({ players, setPlayers }) {
                                     id="first_name"
                                     type="text"
                                     className="validate"
+                                    autoComplete="off"
                                     ref={amountRef}
                                 />
                                 <label htmlFor="first_name">Amount</label>
@@ -128,11 +160,28 @@ export default function PayScreen({ players, setPlayers }) {
 
                         <form action="#">
                             {players.map((player, i) => (
-                                <PlayerRow
-                                    key={player.id + "receiver"}
-                                    role={"Receiver"}
-                                    player={player}
-                                />
+                                <div className="row centerRow ">
+                                    <div className="col l8 offset-l1">
+                                        <label>
+                                            <div className="Receiver">
+                                                <input
+                                                    name="Receiver"
+                                                    type="radio"
+                                                    value={player.id}
+                                                />
+                                                <span className="name">
+                                                    {player.name}
+                                                </span>
+                                            </div>
+                                        </label>
+                                    </div>
+
+                                    <img
+                                        className="iconSmall hide-on-med-and-down"
+                                        src={player.img}
+                                        alt="Avatar"
+                                    />
+                                </div>
                             ))}
                         </form>
                     </div>

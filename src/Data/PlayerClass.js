@@ -1,8 +1,7 @@
 const { v4: uuidv4 } = require("uuid");
 export class PlayerClass {
-    constructor(name, setPlayers) {
+    constructor(name) {
         this.id = uuidv4();
-        this.setPlayers = setPlayers;
 
         this.name = name;
 
@@ -14,15 +13,14 @@ export class PlayerClass {
 
         this.img = `https://avatars.dicebear.com/api/open-peeps/${name}.svg`;
 
-        this.formatMoney = this.formatMoney.bind(this);
+        this.calcEstimatedValue = this.calcEstimatedValue.bind(this);
+
+        this.calcEstimatedValue();
     }
 
-    formatMoney() {
-        let balance = this.balance;
-        let sign = balance < 0 ? "-" : "";
-
+    static formatMoney(balance) {
+        const sign = balance < 0 ? "-" : "";
         let postFix = "";
-
         let balanceAbs = Math.abs(balance);
 
         if (balanceAbs > 10 ** 6) {
@@ -38,7 +36,6 @@ export class PlayerClass {
 
     static parseMoney(money) {
         const lastLetter = money.charAt(money.length - 1);
-
         const hasPostfix = ["k", "M"].includes(lastLetter);
         const postFix = lastLetter;
 
@@ -72,12 +69,19 @@ export class PlayerClass {
         }
 
         if (sender.id === receiver.id) {
-            return;
+            return false;
         }
 
         sender.balance -= balanceMoved;
         receiver.balance += balanceMoved;
 
+        sender.calcEstimatedValue();
+        receiver.calcEstimatedValue();
+
         return true;
+    }
+
+    calcEstimatedValue() {
+        this.estimatedValue = this.balance;
     }
 }

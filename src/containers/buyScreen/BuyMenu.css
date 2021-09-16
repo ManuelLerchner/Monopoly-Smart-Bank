@@ -1,0 +1,66 @@
+form {
+    padding-bottom: 5px !important;
+}
+
+.name {
+    font-size: calc(0.5vw + 1.2vh + 0.5vmin) !important;
+    color: whitesmoke;
+}
+
+[type="radio"]:not(:checked) + span:before {
+    border: 2px solid white !important;
+}
+
+.Sender [type="radio"]:checked + span:after {
+    background-color: red !important;
+    border: none;
+}
+
+.Receiver [type="radio"]:checked + span:after {
+    background-color: rgb(53, 219, 11) !important;
+    border: none;
+}
+
+.smallRow {
+    margin: 0px !important;
+}
+
+.paddingBot {
+    padding-bottom: 10px;
+}
+
+.centerRow {
+    margin: 0px;
+}
+
+.flexContainer {
+    display: flex;
+    padding: 0px 5px 15px 5px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.flexItem-Preview {
+    flex-grow: 1;
+    height: 160px;
+    padding: 5px;
+}
+
+.buttonBox {
+    width: 134px;
+    align-self: center;
+}
+
+.buttonFlex {
+    width: 134px;
+    height: 164px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.buttonFlex .btn {
+    width: 134px !important;
+}

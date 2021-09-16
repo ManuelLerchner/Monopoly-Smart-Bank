@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
-import "./Lobby.css";
+import "./LobbyScreen.css";
 
 import { PlayerClass } from "../../Data/PlayerClass";
 
@@ -17,7 +17,7 @@ export default function AddPlayersForm({ setPlayers, setgameState }) {
             M.Carousel.init(elemsCarousell, {
                 dist: 0,
                 padding: 100,
-                numVisible: 10
+                numVisible: 10,
             });
 
             // eslint-disable-next-line no-undef
@@ -89,6 +89,7 @@ export default function AddPlayersForm({ setPlayers, setgameState }) {
                                                 id="icon_prefix"
                                                 type="text"
                                                 className="validate"
+                                                autoComplete="off"
                                                 ref={nameRef}
                                             />
                                             <label htmlFor="icon_prefix">
