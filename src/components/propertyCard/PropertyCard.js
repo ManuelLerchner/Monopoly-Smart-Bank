@@ -21,9 +21,27 @@ export default function PropertyCard({ property, clickCallback, showType }) {
                         </p>
                     )}
                     {showType === "rent" && (
-                        <p className="propertyDescription">
-                            {"Rent: "+PlayerClass.formatMoney(property.calcRentCost())}
-                        </p>
+                        <>
+                            <p className="propertyDescription">
+                                {"Rent: " +
+                                    PlayerClass.formatMoney(
+                                        property.calcRentCost()
+                                    )}
+                            </p>
+                            <p className="propertyDescription">
+                                {"Houses: " + property.housesCount}
+                            </p>
+                            {property.owner.hasSkyScraperOn[property.color] && (
+                                <p className="propertyDescription">
+                                    {"Skyscraper: Yes"}
+                                </p>
+                            )}
+                            {property.owner.hasMonopolyTower && (
+                                <p className="propertyDescription">
+                                    {"Monopoly Tower: Yes"}
+                                </p>
+                            )}
+                        </>
                     )}
                 </div>
 

@@ -1,16 +1,15 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 
-import "./BankMenu.css";
-
-import $ from "jquery";
 import { PlayerClass } from "../../Data/PlayerClass";
 import PlayerList from "../../components/playerList/PlayerList";
 
 import BankImg from "../../images/Bank.png"; //
 
+import $ from "jquery";
+import "./BankMenu.css";
+
 export default function BankScreen({ players, setPlayers }) {
     const amountRef = useRef();
-
 
     const transfer = (direction) => {
         const customerID = $("input:radio[name=Customer]:checked").val();

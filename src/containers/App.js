@@ -62,7 +62,7 @@ export default function App() {
             new PropertyClass(
                 "a",
                 cost,
-                "Lightblue",
+                color,
                 baseRent,
                 rentPrice,
                 buildingPrice

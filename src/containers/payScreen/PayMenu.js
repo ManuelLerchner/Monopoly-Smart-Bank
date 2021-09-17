@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from "react";
 
-import "./PayMenu.css";
-
-import $ from "jquery";
 import { PlayerClass } from "../../Data/PlayerClass";
 import PlayerList from "../../components/playerList/PlayerList";
+
+import $ from "jquery";
+
+import "./PayMenu.css";
 
 export default function PayScreen({ players, setPlayers }) {
     const amountRef = useRef();

@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-import "./BuyMenu.css";
-
-import $ from "jquery";
 import { PlayerClass } from "../../Data/PlayerClass";
-import BuyModal from "../../components/buyModal/Modal";
+import BuyModal from "../../components/modal/Modal";
 import PropertyCard from "./../../components/propertyCard/PropertyCard";
 import PlayerList from "../../components/playerList/PlayerList";
 import { PropertyClass } from "../../Data/PropertyClass";
+
+import $ from "jquery";
+
+import "./BuyMenu.css";
 
 export default function BuyMenu({
     players,
@@ -108,6 +109,54 @@ export default function BuyMenu({
             // eslint-disable-next-line no-undef
             M.toast({
                 html: "Not enought Money",
+                classes: "rounded red black-text",
+            });
+            return;
+        }
+
+        var newSlotsNeeded = 0;
+        switch (building.name) {
+            case "1 House":
+                newSlotsNeeded = 1;
+                break;
+            case "2 Houses":
+                newSlotsNeeded = 2;
+                break;
+            case "3 Houses":
+                newSlotsNeeded = 3;
+                break;
+            case "Skyscraper":
+                newSlotsNeeded = 0;
+                break;
+            case "Monopoly Tower":
+                newSlotsNeeded = 0;
+                break;
+            default:
+                return [false, "Error while building"];
+        }
+
+        if (selectedPropertyToBuild.buildingSlotsTaken + newSlotsNeeded > 8) {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: `Not Enought Slots available,missing ${
+                    selectedPropertyToBuild.buildingSlotsTaken +
+                    newSlotsNeeded -
+                    8
+                }`,
+                classes: "rounded red black-text",
+            });
+            return;
+        }
+
+        if (
+            selectedPropertyToBuild.owner.hasSkyScraperOn[
+                selectedPropertyToBuild.color
+            ] &&
+            building.name === "Skyscraper"
+        ) {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: "Skyscraper is already built on this color",
                 classes: "rounded red black-text",
             });
             return;

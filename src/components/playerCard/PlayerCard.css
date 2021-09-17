@@ -1,5 +1,5 @@
 .playerCard {
-    width: 220px;
+    width: 240px;
 
     border-left: 2px solid rgb(179, 137, 113);
     border-right: 2px solid rgb(179, 137, 113);
@@ -27,8 +27,8 @@ h4 {
 }
 
 td {
-    padding-top: 10px !important;
-    padding-bottom: 10px !important;
+    padding-top: 7px !important;
+    padding-bottom: 7px !important;
 }
 
 .valuePart {

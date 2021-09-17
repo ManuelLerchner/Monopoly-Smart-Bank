@@ -11,3 +11,7 @@
 
     overflow: hidden;
 }
+
+.carousel-item {
+    width: 240px !important;
+}

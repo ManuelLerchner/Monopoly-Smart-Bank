@@ -13,7 +13,6 @@ export class PropertyClass {
         this.buildingPrice = buildingPrice;
         this.baseRent = baseRent;
 
-        this.skyScraperBuilt = false;
         this.buildingSlotsTaken = 0;
 
         this.housesCount = 0;
@@ -37,10 +36,10 @@ export class PropertyClass {
                 newSlotsNeeded = 3;
                 break;
             case "Skyscraper":
-                newSlotsNeeded = 1;
+                newSlotsNeeded = 0;
                 break;
             case "Monopoly Tower":
-                newSlotsNeeded = 1;
+                newSlotsNeeded = 0;
                 break;
             default:
                 return [false, "Error while building"];
@@ -50,19 +49,21 @@ export class PropertyClass {
             return [
                 false,
                 `Not Enought Slots available,missing ${
-                    8 - property.buildingSlotsTaken - newSlotsNeeded
+                    property.buildingSlotsTaken + newSlotsNeeded - 8
                 }`,
             ];
         }
 
-        if (property.skyScraperBuilt === true && building === "Skyscraper") {
-            return [false, "Skyscraper is already built here"];
+        if (
+            property.owner.hasSkyScraperOn[this.color] === true &&
+            building.name === "Skyscraper"
+        ) {
+            return [false, "Skyscraper is already built on this color"];
         }
 
         property.buildingSlotsTaken += newSlotsNeeded;
 
         if (building.name === "Skyscraper") {
-            property.skyScraperBuilt = true;
             property.buildingsWorth += property.buildingPrice["skyscraper"];
         } else if (building.name === "Monopoly Tower") {
             property.buildingsWorth += property.buildingPrice["monopolyTower"];
@@ -82,7 +83,10 @@ export class PropertyClass {
             rentPrice += this.rentPrices[this.housesCount];
         }
 
-        if (this.skyScraperBuilt === true || this.owner.hasMonopolyTower) {
+        if (
+            this.owner.hasSkyScraperOn[this.color] ||
+            this.owner.hasMonopolyTower
+        ) {
             rentPrice *= 2;
         }
 

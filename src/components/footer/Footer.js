@@ -6,7 +6,9 @@ export default function Footer() {
             <div className="container">
                 <div className="row">
                     <div className="col l6 s12">
-                        <h5 className="white-text">Monopoly Smart-Bank</h5>
+                        <h5 className="orange-text text-darken-1">
+                            Monopoly Smart-Bank
+                        </h5>
                         <p className="grey-text text-lighten-4">
                             This project is an attempt to automate the Monopoly
                             Bank.
@@ -26,26 +28,31 @@ export default function Footer() {
                         </p>
                     </div>
                     <div className="col l3 offset-l3 s12">
-                        <h5 className="white-text">Links</h5>
+                        <h5 className="orange-text text-darken-1">Links</h5>
                         <ul>
                             <li>
-                                <a className="grey-text text-lighten-3" href="#!">
-                                    Link 1
+                                <a
+                                    className="grey-text text-lighten-3"
+                                    href="http://manuellerchner.ddns.net/"
+                                >
+                                    Website
                                 </a>
                             </li>
                             <li>
-                                <a className="grey-text text-lighten-3" href="#!">
-                                    Link 2
+                                <a
+                                    className="grey-text text-lighten-3"
+                                    href="http://manuellerchner.ddns.net/about"
+                                >
+                                    About Me
                                 </a>
                             </li>
+
                             <li>
-                                <a className="grey-text text-lighten-3" href="#!">
-                                    Link 3
-                                </a>
-                            </li>
-                            <li>
-                                <a className="grey-text text-lighten-3" href="#!">
-                                    Link 4
+                                <a
+                                    className="grey-text text-lighten-3"
+                                    href="https://github.com/ManuelLerchner"
+                                >
+                                    Github
                                 </a>
                             </li>
                         </ul>

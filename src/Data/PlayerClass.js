@@ -11,6 +11,8 @@ export class PlayerClass {
         this.estimatedValue = 0;
         this.hasMonopolyTower = false;
 
+        this.hasSkyScraperOn = {};
+
         this.history = [];
 
         this.changes = {
@@ -154,6 +156,7 @@ export class PlayerClass {
                 break;
             case "Skyscraper":
                 buyer.skyscraper += 1;
+                buyer.hasSkyScraperOn[property.color] = true;
                 break;
             case "Monopoly Tower":
                 buyer.hasMonopolyTower = true;

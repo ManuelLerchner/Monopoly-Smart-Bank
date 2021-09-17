@@ -10,21 +10,19 @@ export default function PlayerCard({ player }) {
 
     const entries = Object.entries(player.changes);
     for (const [key, value] of entries) {
-        try {
-            $(`#${key}_${player.id}`).addClass(
-                value === "+"
-                    ? "animationIncrease"
-                    : value === "-"
-                    ? "animationDecrease"
-                    : ""
-            );
-            setTimeout(() => {
-                $(`#${key}_${player.id}`).removeClass("animationIncrease");
-                $(`#${key}_${player.id}`).removeClass("animationDecrease");
-            }, 3000);
+        $(`#${key}_${player.id}`).addClass(
+            value === "+"
+                ? "animationIncrease"
+                : value === "-"
+                ? "animationDecrease"
+                : ""
+        );
+        setTimeout(() => {
+            $(`#${key}_${player.id}`).removeClass("animationIncrease");
+            $(`#${key}_${player.id}`).removeClass("animationDecrease");
+        }, 2000);
 
-            player.changes[key] = "";
-        } catch (e) {}
+        player.changes[key] = "";
     }
 
     return (
@@ -87,6 +85,14 @@ export default function PlayerCard({ player }) {
                                     className="valuePart"
                                 >
                                     <b>{player.skyscraper}</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Monopoly Tower</td>
+                                <td className="valuePart">
+                                    <b>
+                                        {player.hasMonopolyTower ? "Yes" : "No"}
+                                    </b>
                                 </td>
                             </tr>
                             <tr>

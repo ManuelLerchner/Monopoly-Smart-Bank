@@ -191,14 +191,15 @@ export default function Navbar({ setGameState }) {
                     </a>
                 </li>
                 <li>
-                    <a
-                        id="navbar_start"
-                        href="#!"
-                        onClick={toBank}
-                        className=""
-                    >
-                        <i className="material-icons left">start</i>
-                        Start
+                    <a id="navbar_rent" href="#!" onClick={toRent} className="">
+                        <i className="material-icons left">receipt_long</i>
+                        Rent
+                    </a>
+                </li>
+                <li>
+                    <a id="navbar_bank" href="#!" onClick={toBank} className="">
+                        <i className="material-icons left">account_balance</i>
+                        Bank
                     </a>
                 </li>
                 <li>

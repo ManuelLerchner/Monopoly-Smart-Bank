@@ -1,18 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
+
+import PlayerList from "../../components/playerList/PlayerList";
+import BuyModal from "../../components/modal/Modal";
+import PropertyCard from "../../components/propertyCard/PropertyCard";
+
+import { PlayerClass } from "../../Data/PlayerClass";
+import $ from "jquery";
 
 import "./RentMenu.css";
-
-import $ from "jquery";
-import { PlayerClass } from "../../Data/PlayerClass";
-import PlayerList from "../../components/playerList/PlayerList";
-import BuyModal from "../../components/buyModal/Modal";
-import PropertyCard from "../../components/propertyCard/PropertyCard";
 
 export default function RentMenu({ players, setPlayers }) {
     const [playerProperties, setplayerProperties] = useState([]);
     const [selectedProperty, setselectedProperty] = useState(null);
-
- 
 
     const pay = () => {
         const renterID = $("input:radio[name=Renter]:checked").val();
