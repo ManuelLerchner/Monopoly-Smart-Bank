@@ -4,7 +4,7 @@ import "./LobbyScreen.css";
 
 import { PlayerClass } from "../../Data/PlayerClass";
 
-export default function AddPlayersForm({ setPlayers, setgameState }) {
+export default function AddPlayersForm({ setPlayers }) {
     const nameRef = useRef();
 
     //Rerender Materialize on rerender

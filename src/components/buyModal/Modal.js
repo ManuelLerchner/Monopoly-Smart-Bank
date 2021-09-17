@@ -12,6 +12,7 @@ export default function BuyModal({
     selectedProperty,
     setselectedProperty,
     clickCallback,
+    showType,
 }) {
     function renderCards(property, i) {
         if (property.constructor.name === "PropertyClass") {
@@ -21,6 +22,7 @@ export default function BuyModal({
                     property={property}
                     setselectedProperty={setselectedProperty}
                     clickCallback={clickCallback}
+                    showType={showType}
                 />
             );
         }
@@ -51,7 +53,9 @@ export default function BuyModal({
             </div>
 
             <div className="gridWrapper">
-                {properties.length === 0 && <h5>(Player has no properties)</h5>}
+                {properties.length === 0 && (
+                    <h5>Player doesn't own any properties</h5>
+                )}
                 {properties.map((property, i) => renderCards(property, i))}
             </div>
         </div>

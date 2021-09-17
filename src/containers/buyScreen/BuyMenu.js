@@ -15,6 +15,7 @@ export default function BuyMenu({
     availableProperties,
     setAvailableProperties,
     buildings,
+    setBuildings,
 }) {
     const [selectedProperty, setselectedProperty] = useState(null);
     const [playerProperties, setplayerProperties] = useState([]);
@@ -23,13 +24,9 @@ export default function BuyMenu({
 
     //Rerender Materialize on rerender
     useEffect(() => {
-        try {
-            var modalElems = document.querySelectorAll(".modal");
-            // eslint-disable-next-line no-undef
-            M.Modal.init(modalElems, {});
-        } catch (e) {
-            console.log();
-        }
+        var modalElems = document.querySelectorAll(".modal");
+        // eslint-disable-next-line no-undef
+        M.Modal.init(modalElems, {});
     }, []);
 
     const purchaseProperty = () => {
@@ -131,6 +128,10 @@ export default function BuyMenu({
                 price
             );
 
+        if (building.name === "Monopoly Tower") {
+            setBuildings(buildings.filter((build) => build.id !== building.id));
+        }
+
         if (!succesfullTransaction) {
             // eslint-disable-next-line no-undef
             M.toast({
@@ -153,6 +154,8 @@ export default function BuyMenu({
             });
             return;
         }
+
+        buyer.calcEstimatedValue();
 
         setPlayers(
             players.map((player) => {
@@ -256,6 +259,7 @@ export default function BuyMenu({
                                             setselectedProperty
                                         }
                                         closeModal={() => {}}
+                                        showType={"cost"}
                                     />
                                 </div>
                             </div>
@@ -321,20 +325,20 @@ export default function BuyMenu({
             <div id="modalSelectPropety" className="modal">
                 <BuyModal
                     title={"Player Properties:"}
-                    description={
-                        "Select a Property where you want to build a house:"
-                    }
+                    description={"Select a property where you want to build"}
                     properties={playerProperties}
                     clickCallback={openBuyHome}
+                    showType={"cost"}
                 />
             </div>
 
             <div id="modalBuyProperties" className="modal">
                 <BuyModal
                     title={"Properties:"}
-                    description={"Select a Property to buy"}
+                    description={"Select a property to buy"}
                     properties={availableProperties}
                     clickCallback={closeModal}
+                    showType={"cost"}
                 />
             </div>
 
@@ -345,6 +349,7 @@ export default function BuyMenu({
                     properties={buildings}
                     selectedProperty={selectedPropertyToBuild}
                     clickCallback={buyBuilding}
+                    showType={"cost"}
                 />
             </div>
         </div>

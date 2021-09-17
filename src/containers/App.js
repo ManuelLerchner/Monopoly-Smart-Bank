@@ -12,8 +12,11 @@ import LobbyScreen from "./LobbyScreen";
 import MainScreen from "./MainScreen";
 import PayScreen from "./PayScreen";
 import BuyScreen from "./BuyScreen";
+import BankScreen from "./BankScreen";
 
 import "./App.css";
+import StocksScreen from "./StocksScreen";
+import RentScreen from "./RentScreen";
 
 export default function App() {
     //Player List,  Game State
@@ -40,17 +43,46 @@ export default function App() {
             8: 3 * 10 ** 6,
         };
 
+        let baseRent = 3 * 10 ** 5;
         let buildingPrice = {
             house: 1 * 10 ** 6,
             skyscraper: 2 * 10 ** 6,
-            monopolyTower: 10 * 10 ** 6,
+            monopolyTower: 4 * 10 ** 6,
         };
 
         setAvailableProperties([
-            new PropertyClass(name, cost, color, rentPrice, buildingPrice),
-            new PropertyClass("a", cost, "Lightblue", rentPrice, buildingPrice),
-            new PropertyClass(name, cost, "Black", rentPrice, buildingPrice),
-            new PropertyClass("Lit", cost, "Pink", rentPrice, buildingPrice),
+            new PropertyClass(
+                name,
+                cost,
+                color,
+                baseRent,
+                rentPrice,
+                buildingPrice
+            ),
+            new PropertyClass(
+                "a",
+                cost,
+                "Lightblue",
+                baseRent,
+                rentPrice,
+                buildingPrice
+            ),
+            new PropertyClass(
+                name,
+                cost,
+                "Black",
+                baseRent,
+                rentPrice,
+                buildingPrice
+            ),
+            new PropertyClass(
+                "Lit",
+                cost,
+                "Pink",
+                baseRent,
+                rentPrice,
+                buildingPrice
+            ),
         ]);
 
         let img = "https://picsum.photos/100/160";
@@ -66,7 +98,7 @@ export default function App() {
 
     // Determine which main Content to load
     function Content() {
-        if (gameState === "lobby")
+        if (gameState === "lobby") {
             return (
                 <LobbyScreen
                     players={players}
@@ -74,9 +106,11 @@ export default function App() {
                     setGameState={setGameState}
                 />
             );
-        if (gameState === "main")
+        }
+        if (gameState === "main") {
             return <MainScreen setGameState={setGameState} />;
-        if (gameState === "pay")
+        }
+        if (gameState === "pay") {
             return (
                 <PayScreen
                     players={players}
@@ -84,7 +118,8 @@ export default function App() {
                     setGameState={setGameState}
                 />
             );
-        if (gameState === "buy")
+        }
+        if (gameState === "buy") {
             return (
                 <BuyScreen
                     players={players}
@@ -93,8 +128,40 @@ export default function App() {
                     availableProperties={availableProperties}
                     setAvailableProperties={setAvailableProperties}
                     buildings={buildings}
+                    setBuildings={setBuildings}
                 />
             );
+        }
+
+        if (gameState === "rent") {
+            return (
+                <RentScreen
+                    players={players}
+                    setPlayers={setPlayers}
+                    setGameState={setGameState}
+                />
+            );
+        }
+
+        if (gameState === "bank") {
+            return (
+                <BankScreen
+                    players={players}
+                    setPlayers={setPlayers}
+                    setGameState={setGameState}
+                />
+            );
+        }
+
+        if (gameState === "stocks") {
+            return (
+                <StocksScreen
+                    players={players}
+                    setPlayers={setPlayers}
+                    setGameState={setGameState}
+                />
+            );
+        }
     }
 
     return (

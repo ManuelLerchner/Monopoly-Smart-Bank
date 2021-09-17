@@ -13,6 +13,7 @@
         inset rgb(0, 7, 15) 0px 0px 2px 1px;
 
     background: rgba(253, 234, 221, 0.986);
+    user-select: none;
 }
 
 .isBroke {

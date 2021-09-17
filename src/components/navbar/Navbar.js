@@ -19,8 +19,12 @@ export default function Navbar({ setGameState }) {
         setGameState("buy");
     };
 
-    const toStart = () => {
-        setGameState("start");
+    const toRent = () => {
+        setGameState("rent");
+    };
+
+    const toBank = () => {
+        setGameState("bank");
     };
 
     const toStocks = () => {
@@ -48,7 +52,11 @@ export default function Navbar({ setGameState }) {
                     >
                         <i className="material-icons">menu</i>
                     </a>
-                    <a href="!#" className="brand-logo center" onClick={toMain}>
+                    <a
+                        href="!#"
+                        className="brand-logo center "
+                        onClick={toMain}
+                    >
                         <i className="material-icons right hide-on-small-only">
                             apartment
                         </i>
@@ -111,13 +119,28 @@ export default function Navbar({ setGameState }) {
                         </li>
                         <li>
                             <a
-                                id="navbar_start"
+                                id="navbar_rent"
                                 href="#!"
-                                onClick={toStart}
+                                onClick={toRent}
                                 className=""
                             >
-                                <i className="material-icons left">double_arrow</i>
-                                Start
+                                <i className="material-icons left">
+                                    receipt_long
+                                </i>
+                                Rent
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                id="navbar_bank"
+                                href="#!"
+                                onClick={toBank}
+                                className=""
+                            >
+                                <i className="material-icons left">
+                                    account_balance
+                                </i>
+                                Bank
                             </a>
                         </li>
                         <li>
@@ -171,7 +194,7 @@ export default function Navbar({ setGameState }) {
                     <a
                         id="navbar_start"
                         href="#!"
-                        onClick={toStart}
+                        onClick={toBank}
                         className=""
                     >
                         <i className="material-icons left">start</i>

@@ -63,7 +63,8 @@ export class PlayerClass {
     }
 
     static sendMoney(sender, receiver, amount) {
-        const balanceMoved = PlayerClass.parseMoney(amount);
+        const balanceMoved =
+            typeof amount === String ? PlayerClass.parseMoney(amount) : amount;
 
         if (isNaN(balanceMoved)) {
             return [false, "Invalid Money Format"];
@@ -116,6 +117,8 @@ export class PlayerClass {
             amount: cost,
         });
 
+        property.owner = buyer;
+
         return [true, "Successfull"];
     }
 
@@ -161,7 +164,7 @@ export class PlayerClass {
         let estimated = this.balance;
 
         this.properties.forEach((property) => {
-            estimated += property.cost;
+            estimated += property.cost + property.buildingsWorth;
         });
 
         this.estimatedValue = estimated;

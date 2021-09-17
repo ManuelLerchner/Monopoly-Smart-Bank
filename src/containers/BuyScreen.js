@@ -12,13 +12,15 @@ export default function BuyScreen({
     availableProperties,
     setAvailableProperties,
     buildings,
+    setBuildings,
 }) {
     $("#navbar_lobby").removeClass("selected");
     $("#navbar_main").removeClass("selected");
     $("#navbar_pay").removeClass("selected");
     $("#navbar_buy").addClass("selected");
-    $("#navbar_start").removeClass("selected");
-    $("#navbar_stock").removeClass("selected");
+    $("#navbar_rent").removeClass("selected");
+    $("#navbar_bank").removeClass("selected");
+    $("#navbar_stocks").removeClass("selected");
     return (
         <>
             <Logo setGameState={setGameState} />
@@ -28,6 +30,7 @@ export default function BuyScreen({
                 availableProperties={availableProperties}
                 setAvailableProperties={setAvailableProperties}
                 buildings={buildings}
+                setBuildings={setBuildings}
             />
         </>
     );

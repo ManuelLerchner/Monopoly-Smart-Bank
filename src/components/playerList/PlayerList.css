@@ -11,11 +11,13 @@ form {
     border: 2px solid white !important;
 }
 
+.Renter [type="radio"]:checked + span:after,
 .Sender [type="radio"]:checked + span:after {
     background-color: red !important;
     border: none;
 }
 
+.Owner [type="radio"]:checked + span:after,
 .Receiver [type="radio"]:checked + span:after {
     background-color: rgb(53, 219, 11) !important;
     border: none;
@@ -23,6 +25,11 @@ form {
 
 .Buyer [type="radio"]:checked + span:after {
     background-color: rgb(54, 197, 19) !important;
+    border: none;
+}
+
+.Customer [type="radio"]:checked + span:after {
+    background-color: rgb(219, 181, 9) !important;
     border: none;
 }
 

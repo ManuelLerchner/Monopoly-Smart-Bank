@@ -1,0 +1,9 @@
+.bankImg {
+    width: 80%;
+    filter: drop-shadow(0 0 1rem rgb(88, 83, 83));
+}
+
+.btn-large-amount {
+    width: 60% !important;
+    font-weight: 600 !important;
+}
