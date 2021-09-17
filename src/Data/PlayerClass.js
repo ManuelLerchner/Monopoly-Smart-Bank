@@ -13,6 +13,13 @@ export class PlayerClass {
 
         this.history = [];
 
+        this.changes = {
+            balance: "",
+            properties: "",
+            houses: "",
+            skyscraper: "",
+        };
+
         this.img = `https://avatars.dicebear.com/api/open-peeps/${name}.svg`;
 
         this.calcEstimatedValue = this.calcEstimatedValue.bind(this);
@@ -68,7 +75,6 @@ export class PlayerClass {
                 ? PlayerClass.parseMoney(amount)
                 : amount;
 
-        console.log(balanceMoved);
         if (isNaN(balanceMoved)) {
             return [false, "Invalid Money Format"];
         }
@@ -86,6 +92,9 @@ export class PlayerClass {
 
         sender.calcEstimatedValue();
         receiver.calcEstimatedValue();
+
+        sender.changes["balance"] = "-";
+        receiver.changes["balance"] = "+";
 
         sender.history.push({
             msg: `Paid Money to ${receiver.name}`,
@@ -113,6 +122,9 @@ export class PlayerClass {
         buyer.properties.push(property);
 
         buyer.calcEstimatedValue();
+
+        buyer.changes["balance"] = "-";
+        buyer.changes["properties"] = "+";
 
         buyer.history.push({
             msg: `Bought ${property.name}`,
@@ -151,6 +163,9 @@ export class PlayerClass {
         }
 
         buyer.balance -= price;
+
+        buyer.changes["balance"] = "-";
+        buyer.changes["houses"] = "+";
 
         buyer.history.push({
             msg: `Bought ${building.name} on ${property.name}`,

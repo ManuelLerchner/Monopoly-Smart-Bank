@@ -1,7 +1,5 @@
 .playerCard {
-    height: 270px;
     width: 220px;
-    margin-top: 26px;
 
     border-left: 2px solid rgb(179, 137, 113);
     border-right: 2px solid rgb(179, 137, 113);
@@ -29,7 +27,14 @@ h4 {
 }
 
 td {
-    padding: 8px;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+
+.valuePart {
+    text-align: end;
+    margin-left: 5px;
+    padding-right: 10px;
 }
 
 h4 {
@@ -45,4 +50,46 @@ h4 {
 
 .cardTitle {
     height: 32px;
+}
+
+.animationIncrease {
+    animation: increase 3s ease;
+    transition: 0.2s;
+}
+
+.animationDecrease {
+    animation: decrease 3s ease;
+    transition: 0.2s;
+}
+
+@keyframes increase {
+    0% {
+    }
+    25% {
+        background-color: rgb(107, 184, 36);
+        padding-right: 20px;
+        border-radius: 15px 0px 0px 15px;
+    }
+    50% {
+        background-color: rgb(107, 184, 36);
+        border-radius: 15px 0px 0px 15px;
+    }
+    100% {
+    }
+}
+
+@keyframes decrease {
+    0% {
+    }
+    25% {
+        background-color: rgb(238, 23, 23);
+        padding-right: 20px;
+        border-radius: 15px 0px 0px 15px;
+    }
+    50% {
+        background-color: rgb(238, 23, 23);
+        border-radius: 15px 0px 0px 15px;
+    }
+    100% {
+    }
 }

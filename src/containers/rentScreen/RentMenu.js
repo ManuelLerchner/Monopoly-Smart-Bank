@@ -12,11 +12,7 @@ export default function RentMenu({ players, setPlayers }) {
     const [playerProperties, setplayerProperties] = useState([]);
     const [selectedProperty, setselectedProperty] = useState(null);
 
-    useEffect(() => {
-        var modalElems = document.querySelectorAll(".modal");
-        // eslint-disable-next-line no-undef
-        M.Modal.init(modalElems, {});
-    }, []);
+ 
 
     const pay = () => {
         const renterID = $("input:radio[name=Renter]:checked").val();

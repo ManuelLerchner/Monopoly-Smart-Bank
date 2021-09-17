@@ -10,24 +10,9 @@ export default function AddPlayersForm({ setPlayers }) {
     //Rerender Materialize on rerender
     useEffect(() => {
         try {
-            var elemsCarousell = document.querySelectorAll(".carousel");
-            var elemsForm = document.querySelectorAll("select");
-
-            // eslint-disable-next-line no-undef
-            M.Carousel.init(elemsCarousell, {
-                dist: 0,
-                padding: 100,
-                numVisible: 10,
-            });
-
             // eslint-disable-next-line no-undef
             M.updateTextFields();
-
-            // eslint-disable-next-line no-undef
-            M.FormSelect.init(elemsForm);
-        } catch (e) {
-            console.log();
-        }
+        } catch (e) {}
     });
 
     //Submit New Player Form

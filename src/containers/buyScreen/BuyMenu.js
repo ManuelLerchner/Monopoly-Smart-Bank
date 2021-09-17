@@ -22,13 +22,6 @@ export default function BuyMenu({
     const [selectedPropertyToBuild, setselectedPropertyToBuild] =
         useState(null);
 
-    //Rerender Materialize on rerender
-    useEffect(() => {
-        var modalElems = document.querySelectorAll(".modal");
-        // eslint-disable-next-line no-undef
-        M.Modal.init(modalElems, {});
-    }, []);
-
     const purchaseProperty = () => {
         const buyerID = $("input:radio[name=Buyer]:checked").val();
 

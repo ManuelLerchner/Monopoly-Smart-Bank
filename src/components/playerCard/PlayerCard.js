@@ -3,8 +3,29 @@ import { PlayerClass } from "../../Data/PlayerClass";
 
 import "./PlayerCard.css";
 
+import $ from "jquery";
+
 export default function PlayerCard({ player }) {
     let style = player.balance < 0 ? ` isBroke` : "";
+
+    const entries = Object.entries(player.changes);
+    for (const [key, value] of entries) {
+        try {
+            $(`#${key}_${player.id}`).addClass(
+                value === "+"
+                    ? "animationIncrease"
+                    : value === "-"
+                    ? "animationDecrease"
+                    : ""
+            );
+            setTimeout(() => {
+                $(`#${key}_${player.id}`).removeClass("animationIncrease");
+                $(`#${key}_${player.id}`).removeClass("animationDecrease");
+            }, 3000);
+
+            player.changes[key] = "";
+        } catch (e) {}
+    }
 
     return (
         <div className="carousel-item playerCard ">
@@ -30,7 +51,10 @@ export default function PlayerCard({ player }) {
                         <tbody>
                             <tr>
                                 <td>Balance</td>
-                                <td>
+                                <td
+                                    id={"balance_" + player.id}
+                                    className=" valuePart"
+                                >
                                     <b>
                                         {PlayerClass.formatMoney(
                                             player.balance
@@ -40,25 +64,34 @@ export default function PlayerCard({ player }) {
                             </tr>
                             <tr>
                                 <td>Properties</td>
-                                <td>
+                                <td
+                                    id={"properties_" + player.id}
+                                    className="valuePart"
+                                >
                                     <b>{player.properties.length}</b>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Houses</td>
-                                <td>
+                                <td
+                                    id={"houses_" + player.id}
+                                    className="valuePart"
+                                >
                                     <b>{player.houses}</b>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Skyscraper</td>
-                                <td>
+                                <td
+                                    id={"skyscraper_" + player.id}
+                                    className="valuePart"
+                                >
                                     <b>{player.skyscraper}</b>
                                 </td>
                             </tr>
                             <tr>
-                                <td>Estimated Value</td>
-                                <td>
+                                <td>Net Worth</td>
+                                <td className="valuePart">
                                     <b>
                                         {PlayerClass.formatMoney(
                                             player.estimatedValue

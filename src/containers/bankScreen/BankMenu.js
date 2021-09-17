@@ -10,19 +10,7 @@ import BankImg from "../../images/Bank.png"; //
 
 export default function BankScreen({ players, setPlayers }) {
     const amountRef = useRef();
-    //Rerender Materialize on rerender
-    useEffect(() => {
-        try {
-            // eslint-disable-next-line no-undef
-            M.updateTextFields();
 
-            var elems = document.querySelectorAll(".collapsible");
-            // eslint-disable-next-line no-undef
-            M.Collapsible.init(elems, {});
-        } catch (e) {
-            console.log();
-        }
-    });
 
     const transfer = (direction) => {
         const customerID = $("input:radio[name=Customer]:checked").val();

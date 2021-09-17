@@ -13,13 +13,7 @@ export default function PayScreen({ players, setPlayers }) {
         try {
             // eslint-disable-next-line no-undef
             M.updateTextFields();
-
-            var elems = document.querySelectorAll(".collapsible");
-            // eslint-disable-next-line no-undef
-            M.Collapsible.init(elems, {});
-        } catch (e) {
-            console.log();
-        }
+        } catch (e) {}
     });
 
     const transfer = () => {
@@ -45,8 +39,6 @@ export default function PayScreen({ players, setPlayers }) {
             });
             return;
         }
-
-   
 
         const sender = players.find((player) => player.id === senderID);
         const receiver = players.find((player) => player.id === receiverID);

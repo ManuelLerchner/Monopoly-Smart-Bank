@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import BuildingCard from "../buildingCard/BuildingCard";
 import PropertyCard from "../propertyCard/PropertyCard";
@@ -14,6 +14,12 @@ export default function BuyModal({
     clickCallback,
     showType,
 }) {
+    useEffect(() => {
+        var modalElems = document.querySelectorAll(".modal");
+        // eslint-disable-next-line no-undef
+        M.Modal.init(modalElems, {});
+    }, []);
+
     function renderCards(property, i) {
         if (property.constructor.name === "PropertyClass") {
             return (
