@@ -231,7 +231,7 @@ export default function BuyMenu({
 
     return (
         <div className="row">
-            <div className="col l3 offset-l1 s4 ">
+            <div className="col l2 offset-l1 s4 ">
                 <div className="card cardColor-buy ">
                     <div className="card-content white-text">
                         {/* Title */}
@@ -247,7 +247,7 @@ export default function BuyMenu({
                 </div>
             </div>
 
-            <div className="col l3 offset-l1 s4">
+            <div className="col l4 offset-l1 s4">
                 {selectedProperty !== null && (
                     <div className="card cardColor-buy ">
                         <div className="card-content white-text">

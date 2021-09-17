@@ -114,7 +114,7 @@ export default function RentMenu({ players, setPlayers }) {
     return (
         <>
             <div className="row">
-                <div className="col l3 offset-l1 s4 ">
+                <div className="col l2 offset-l1 s4 ">
                     <div className="card cardColor-pay ">
                         <div className="card-content white-text">
                             {/* Title */}
@@ -130,7 +130,7 @@ export default function RentMenu({ players, setPlayers }) {
                     </div>
                 </div>
 
-                <div className="col l3 offset-l1 s4">
+                <div className="col l4 offset-l1 s4">
                     <div className="card cardColor-pay ">
                         <div className="card-content white-text">
                             {selectedProperty !== null && (

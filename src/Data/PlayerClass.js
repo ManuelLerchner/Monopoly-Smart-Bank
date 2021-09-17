@@ -64,8 +64,11 @@ export class PlayerClass {
 
     static sendMoney(sender, receiver, amount) {
         const balanceMoved =
-            typeof amount === String ? PlayerClass.parseMoney(amount) : amount;
+            typeof amount === "string"
+                ? PlayerClass.parseMoney(amount)
+                : amount;
 
+        console.log(balanceMoved);
         if (isNaN(balanceMoved)) {
             return [false, "Invalid Money Format"];
         }

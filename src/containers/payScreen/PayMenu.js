@@ -46,6 +46,8 @@ export default function PayScreen({ players, setPlayers }) {
             return;
         }
 
+   
+
         const sender = players.find((player) => player.id === senderID);
         const receiver = players.find((player) => player.id === receiverID);
 
