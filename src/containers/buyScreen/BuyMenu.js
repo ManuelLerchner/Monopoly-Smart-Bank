@@ -17,6 +17,7 @@ export default function BuyMenu({
     setAvailableProperties,
     buildings,
     setBuildings,
+    bank,
 }) {
     const [selectedProperty, setselectedProperty] = useState(null);
     const [playerProperties, setplayerProperties] = useState([]);
@@ -378,7 +379,7 @@ export default function BuyMenu({
                 <BuyModal
                     title={"Properties:"}
                     description={"Select a property to buy"}
-                    properties={availableProperties}
+                    properties={[...availableProperties, ...bank.properties]}
                     clickCallback={closeModal}
                     showType={"cost"}
                 />

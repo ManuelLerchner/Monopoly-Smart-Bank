@@ -1,4 +1,7 @@
+import BankIMG from "../images/Bank.png";
+
 const { v4: uuidv4 } = require("uuid");
+
 export class PlayerClass {
     constructor(name) {
         this.id = uuidv4();
@@ -15,6 +18,14 @@ export class PlayerClass {
 
         this.history = [];
 
+        this.history.push({
+            msg: `Received Start Money`,
+            time: new Date().toLocaleTimeString(),
+            amount: this.balance,
+            total: this.balance,
+            direction: "+",
+        });
+
         this.changes = {
             balance: "",
             properties: "",
@@ -23,6 +34,10 @@ export class PlayerClass {
         };
 
         this.img = `https://avatars.dicebear.com/api/open-peeps/${name}.svg`;
+
+        if (this.name === "Bank") {
+            this.img = BankIMG;
+        }
 
         this.calcEstimatedValue = this.calcEstimatedValue.bind(this);
         this.calcEstimatedValue();
@@ -101,13 +116,17 @@ export class PlayerClass {
         sender.history.push({
             msg: `Paid Money to ${receiver.name}`,
             time: new Date().toLocaleTimeString(),
-            amount: amount,
+            amount: balanceMoved,
+            total: sender.balance,
+            direction: "-",
         });
 
         receiver.history.push({
             msg: `Received Money from ${sender.name}`,
             time: new Date().toLocaleTimeString(),
-            amount: amount,
+            amount: balanceMoved,
+            total: receiver.balance,
+            direction: "+",
         });
 
         return [true, "Successfull"];
@@ -132,6 +151,8 @@ export class PlayerClass {
             msg: `Bought ${property.name}`,
             time: new Date().toLocaleTimeString(),
             amount: cost,
+            total: buyer.balance,
+            direction: "-",
         });
 
         property.owner = buyer;
@@ -147,15 +168,19 @@ export class PlayerClass {
         switch (building.name) {
             case "1 House":
                 buyer.houses += 1;
+                buyer.changes["houses"] = "+";
                 break;
             case "2 Houses":
                 buyer.houses += 2;
+                buyer.changes["houses"] = "+";
                 break;
             case "3 Houses":
                 buyer.houses += 3;
+                buyer.changes["houses"] = "+";
                 break;
             case "Skyscraper":
                 buyer.skyscraper += 1;
+                buyer.changes["skyscraper"] = "+";
                 buyer.hasSkyScraperOn[property.color] = true;
                 break;
             case "Monopoly Tower":
@@ -166,14 +191,14 @@ export class PlayerClass {
         }
 
         buyer.balance -= price;
-
         buyer.changes["balance"] = "-";
-        buyer.changes["houses"] = "+";
 
         buyer.history.push({
             msg: `Bought ${building.name} on ${property.name}`,
             time: new Date().toLocaleTimeString(),
             amount: price,
+            total: buyer.balance,
+            direction: "-",
         });
 
         buyer.calcEstimatedValue();

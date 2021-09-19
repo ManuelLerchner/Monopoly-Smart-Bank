@@ -3,34 +3,6 @@ import React, { useEffect } from "react";
 import "./Navbar.css";
 
 export default function Navbar({ setGameState }) {
-    const toLobby = () => {
-        setGameState("lobby");
-    };
-
-    const toMain = () => {
-        setGameState("main");
-    };
-
-    const toPay = () => {
-        setGameState("pay");
-    };
-
-    const toBuy = () => {
-        setGameState("buy");
-    };
-
-    const toRent = () => {
-        setGameState("rent");
-    };
-
-    const toBank = () => {
-        setGameState("bank");
-    };
-
-    const toStocks = () => {
-        setGameState("stocks");
-    };
-
     useEffect(() => {
         try {
             var elemsSidenav = document.querySelectorAll(".sidenav");
@@ -55,7 +27,9 @@ export default function Navbar({ setGameState }) {
                     <a
                         href="!#"
                         className="brand-logo center "
-                        onClick={toMain}
+                        onClick={() => {
+                            setGameState("main");
+                        }}
                     >
                         <i className="material-icons right hide-on-small-only">
                             apartment
@@ -68,7 +42,9 @@ export default function Navbar({ setGameState }) {
                             <a
                                 id="navbar_lobby"
                                 href="#!"
-                                onClick={toLobby}
+                                onClick={() => {
+                                    setGameState("lobby");
+                                }}
                                 className=""
                             >
                                 <i className="material-icons left">home</i>
@@ -79,13 +55,30 @@ export default function Navbar({ setGameState }) {
                             <a
                                 id="navbar_main"
                                 href="#!"
-                                onClick={toMain}
+                                onClick={() => {
+                                    setGameState("main");
+                                }}
                                 className=""
                             >
                                 <i className="material-icons left">
                                     sports_esports
                                 </i>
                                 Main
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                id="navbar_overview"
+                                href="#!"
+                                onClick={() => {
+                                    setGameState("overview");
+                                }}
+                                className=""
+                            >
+                                <i className="material-icons left">
+                                    visibility
+                                </i>
+                                Overview
                             </a>
                         </li>
                     </ul>
@@ -95,7 +88,9 @@ export default function Navbar({ setGameState }) {
                             <a
                                 id="navbar_pay"
                                 href="#!"
-                                onClick={toPay}
+                                onClick={() => {
+                                    setGameState("pay");
+                                }}
                                 className=""
                             >
                                 <i className="material-icons left">
@@ -108,7 +103,9 @@ export default function Navbar({ setGameState }) {
                             <a
                                 id="navbar_buy"
                                 href="#!"
-                                onClick={toBuy}
+                                onClick={() => {
+                                    setGameState("buy");
+                                }}
                                 className=""
                             >
                                 <i className="material-icons left">
@@ -121,7 +118,9 @@ export default function Navbar({ setGameState }) {
                             <a
                                 id="navbar_rent"
                                 href="#!"
-                                onClick={toRent}
+                                onClick={() => {
+                                    setGameState("rent");
+                                }}
                                 className=""
                             >
                                 <i className="material-icons left">
@@ -132,9 +131,24 @@ export default function Navbar({ setGameState }) {
                         </li>
                         <li>
                             <a
+                                id="navbar_sell"
+                                href="#!"
+                                onClick={() => {
+                                    setGameState("sell");
+                                }}
+                                className=""
+                            >
+                                <i className="material-icons left">sell</i>
+                                Sell
+                            </a>
+                        </li>
+                        <li>
+                            <a
                                 id="navbar_bank"
                                 href="#!"
-                                onClick={toBank}
+                                onClick={() => {
+                                    setGameState("bank");
+                                }}
                                 className=""
                             >
                                 <i className="material-icons left">
@@ -147,7 +161,9 @@ export default function Navbar({ setGameState }) {
                             <a
                                 id="navbar_stocks"
                                 href="#!"
-                                onClick={toStocks}
+                                onClick={() => {
+                                    setGameState("stocks");
+                                }}
                                 className=""
                             >
                                 <i className="material-icons left">
@@ -165,7 +181,9 @@ export default function Navbar({ setGameState }) {
                     <a
                         id="navbar_lobby"
                         href="#!"
-                        onClick={toLobby}
+                        onClick={() => {
+                            setGameState("lobby");
+                        }}
                         className=""
                     >
                         <i className="material-icons left">home</i>
@@ -173,31 +191,93 @@ export default function Navbar({ setGameState }) {
                     </a>
                 </li>
                 <li>
-                    <a id="navbar_main" href="#!" onClick={toMain} className="">
+                    <a
+                        id="navbar_main"
+                        href="#!"
+                        onClick={() => {
+                            setGameState("main");
+                        }}
+                        className=""
+                    >
                         <i className="material-icons left">sports_esports</i>
                         Main
                     </a>
                 </li>
                 <li>
-                    <a id="navbar_pay" href="#!" onClick={toPay} className="">
+                    <a
+                        id="navbar_overview"
+                        href="#!"
+                        onClick={() => {
+                            setGameState("overview");
+                        }}
+                        className=""
+                    >
+                        <i className="material-icons left">visibility</i>
+                        Overview
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        id="navbar_pay"
+                        href="#!"
+                        onClick={() => {
+                            setGameState("pay");
+                        }}
+                        className=""
+                    >
                         <i className="material-icons left">attach_money</i>
                         Pay
                     </a>
                 </li>
                 <li>
-                    <a id="navbar_buy" href="#!" onClick={toBuy} className="">
+                    <a
+                        id="navbar_buy"
+                        href="#!"
+                        onClick={() => {
+                            setGameState("buy");
+                        }}
+                        className=""
+                    >
                         <i className="material-icons left">credit_card</i>
                         Buy
                     </a>
                 </li>
                 <li>
-                    <a id="navbar_rent" href="#!" onClick={toRent} className="">
+                    <a
+                        id="navbar_rent"
+                        href="#!"
+                        onClick={() => {
+                            setGameState("rent");
+                        }}
+                        className=""
+                    >
                         <i className="material-icons left">receipt_long</i>
                         Rent
                     </a>
                 </li>
                 <li>
-                    <a id="navbar_bank" href="#!" onClick={toBank} className="">
+                    <a
+                        id="navbar_sell"
+                        href="#!"
+                        onClick={() => {
+                            setGameState("sell");
+                        }}
+                        className=""
+                    >
+                        <i className="material-icons left">sell</i>
+                        Sell
+                    </a>
+                </li>
+                <li>
+                    <a
+                        id="navbar_bank"
+                        href="#!"
+                        onClick={() => {
+                            setGameState("bank");
+                        }}
+                        className=""
+                    >
                         <i className="material-icons left">account_balance</i>
                         Bank
                     </a>
@@ -206,7 +286,9 @@ export default function Navbar({ setGameState }) {
                     <a
                         id="navbar_stocks"
                         href="#!"
-                        onClick={toStocks}
+                        onClick={() => {
+                            setGameState("stocks");
+                        }}
                         className=""
                     >
                         <i className="material-icons left">trending_up</i>

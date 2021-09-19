@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Footer() {
     return (
-        <footer className="page-footer  blue-grey darken-2">
+        <footer className="page-footer  blue-grey darken-3">
             <div className="container">
                 <div className="row">
                     <div className="col l6 s12">
@@ -20,11 +20,11 @@ export default function Footer() {
                             start-money.
                             <br />
                             <br />
-                            Additionally you can interact with some advanced and
-                            custom features, like buying stocks or use custom
-                            monopoly cards with RFID-chips inside, so that you
-                            just need to scan the card to read its price and
-                            effects.
+                            In the future you can also interact with some
+                            advanced and custom features, like buying stocks or
+                            use custom monopoly cards with RFID-chips inside, so
+                            that you just need to scan the card to read its
+                            price and attributes.
                         </p>
                     </div>
                     <div className="col l3 offset-l3 s12">

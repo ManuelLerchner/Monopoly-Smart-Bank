@@ -2,11 +2,20 @@ import React from "react";
 
 import "./PlayerList.css";
 
-export default function PlayerList({ players, type }) {
+export default function PlayerList({ players, type, callback }) {
+    const click = (player) => () => {
+        if (callback !== undefined) {
+            callback(player);
+        }
+    };
     return (
         <form action="#">
             {players.map((player, i) => (
-                <div className="row centerRow " key={player.id + type}>
+                <div
+                    className="row centerRow "
+                    key={player.id + type}
+                    onClick={click(player)}
+                >
                     <div className="col l8 offset-l1">
                         <label>
                             <div className={type}>

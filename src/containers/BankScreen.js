@@ -12,7 +12,10 @@ export default function BankScreen({ players, setPlayers, setGameState }) {
     $("#navbar_rent").removeClass("selected");
     $("#navbar_bank").addClass("selected");
     $("#navbar_stocks").removeClass("selected");
+    $("#navbar_overview").removeClass("selected");
+    $("#navbar_sell").removeClass("selected");
 
+    $(".carousel").show();
     return (
         <>
             <Logo setGameState={setGameState} />

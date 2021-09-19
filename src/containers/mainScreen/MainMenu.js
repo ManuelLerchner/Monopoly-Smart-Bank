@@ -3,25 +3,9 @@ import React from "react";
 import "./MainMenu.css";
 
 export default function MainMenu({ setGameState }) {
-    const handlePay = () => {
-        setGameState("pay");
-    };
-
-    const handleBuy = () => {
-        setGameState("buy");
-    };
-
-    const handleBank = () => {
-        setGameState("bank");
-    };
-
-    const handleStocks = () => {
-        setGameState("stocks");
-    };
-
     return (
         <div className="row ">
-            <div className="col l6 offset-l3 m8 offset-m2 s12 ">
+            <div className="col l8 offset-l2 m8 offset-m2 s12 ">
                 <div className="card cardColor-main">
                     <div className="card-content white-text">
                         <div className="ButtonBox">
@@ -29,7 +13,9 @@ export default function MainMenu({ setGameState }) {
                                 <a
                                     className="waves-effect waves-light btn-large btn-large-main red darken-2"
                                     href="#!"
-                                    onClick={handlePay}
+                                    onClick={() => {
+                                        setGameState("pay");
+                                    }}
                                 >
                                     <i className="material-icons right hide-on-med-and-down">
                                         attach_money
@@ -41,7 +27,9 @@ export default function MainMenu({ setGameState }) {
                                 <a
                                     className="waves-effect waves-light btn-large btn-large-main deep-orange darken-1"
                                     href="#!"
-                                    onClick={handleBuy}
+                                    onClick={() => {
+                                        setGameState("buy");
+                                    }}
                                 >
                                     <i className="material-icons right hide-on-med-and-down">
                                         account_balance
@@ -51,21 +39,53 @@ export default function MainMenu({ setGameState }) {
                             </div>
                             <div className="">
                                 <a
-                                    className="waves-effect waves-light btn-large btn-large-main green darken-1"
+                                    className="waves-effect waves-light btn-large btn-large-main light-green darken-3"
                                     href="#!"
-                                    onClick={handleBank}
+                                    onClick={() => {
+                                        setGameState("rent");
+                                    }}
                                 >
                                     <i className="material-icons right hide-on-med-and-down">
-                                        double_arrow
+                                        receipt_long
+                                    </i>
+                                    Rent
+                                </a>
+                            </div>
+                            <div className="">
+                                <a
+                                    className="waves-effect waves-light btn-large btn-large-main teal darken-1"
+                                    href="#!"
+                                    onClick={() => {
+                                        setGameState("bank");
+                                    }}
+                                >
+                                    <i className="material-icons right hide-on-med-and-down">
+                                        sell
+                                    </i>
+                                    Sell
+                                </a>
+                            </div>
+                            <div className="">
+                                <a
+                                    className="waves-effect waves-light btn-large btn-large-main light-blue darken-2"
+                                    href="#!"
+                                    onClick={() => {
+                                        setGameState("bank");
+                                    }}
+                                >
+                                    <i className="material-icons right hide-on-med-and-down">
+                                        account_balance
                                     </i>
                                     Bank
                                 </a>
                             </div>
                             <div className="">
                                 <a
-                                    className="waves-effect waves-light btn-large btn-large-main light-blue darken-3"
+                                    className="waves-effect waves-light btn-large btn-large-main deep-purple darken-1"
                                     href="#!"
-                                    onClick={handleStocks}
+                                    onClick={() => {
+                                        setGameState("stocks");
+                                    }}
                                 >
                                     <i className="material-icons right hide-on-med-and-down">
                                         trending_up

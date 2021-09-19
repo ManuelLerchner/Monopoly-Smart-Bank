@@ -13,6 +13,9 @@ export class PropertyClass {
         this.buildingPrice = buildingPrice;
         this.baseRent = baseRent;
 
+        this.skyScraperBuilt = false;
+        this.monopolyTowerBuilt = false;
+
         this.buildingSlotsTaken = 0;
 
         this.housesCount = 0;
@@ -65,8 +68,10 @@ export class PropertyClass {
 
         if (building.name === "Skyscraper") {
             property.buildingsWorth += property.buildingPrice["skyscraper"];
+            property.skyScraperBuilt = true;
         } else if (building.name === "Monopoly Tower") {
             property.buildingsWorth += property.buildingPrice["monopolyTower"];
+            property.monopolyTowerBuilt = true;
         } else {
             property.housesCount += 1;
             property.buildingsWorth +=

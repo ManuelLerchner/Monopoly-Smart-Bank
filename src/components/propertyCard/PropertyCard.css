@@ -2,19 +2,24 @@
     display: grid;
 
     justify-content: space-around;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 
     grid-gap: 20px;
 
     width: 100%;
-    font-size: max(min(0.5vw, 1em), 2rem);
+    height: min(100%, 240px);
 }
 
 .gridWrapperOneColumn {
     display: grid;
+
+    justify-content: space-around;
     grid-template-columns: 1fr;
-    color: #444;
+
+    grid-gap: 20px;
+
     width: 100%;
+    max-height: 220px;
 }
 
 .gridBox {
@@ -25,16 +30,18 @@
     border: 3px solid black;
 
     box-shadow: rgb(38, 57, 77) 0px 5px 15px 5px;
+    height: min(100%, 220px);
 }
 
 .flexContainerProperty {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    height: 100%;
 }
 
 .descriptionFlex {
-    width: 100%;
+    width: 80%;
 
     display: flex;
     flex-direction: column;
@@ -44,9 +51,20 @@
     padding: 5px;
 }
 
+.imageFlex {
+    width: 40%;
+    height: 100%;
+}
+
+.rent-table tbody tr td {
+    padding: 3px !important;
+    padding-right: 10px !important;
+}
+
 .imageFlex img {
     box-shadow: rgb(13, 19, 26) 0px 0px 2px 1px;
     object-fit: fill;
+    width: 100%;
     height: 100%;
 }
 
@@ -54,7 +72,7 @@
     font-size: 24px;
     margin: 0px;
     font-weight: 600;
-    word-break: keep-all;
+    overflow: hidden;
 }
 
 .propertyDescription {
@@ -91,7 +109,7 @@
 }
 
 .Orange {
-    background-color: rgba(243, 117, 14, 0.911);
+    background-color: rgba(243, 117, 14, 0.911) ;
     color: rgb(51, 44, 44);
 }
 

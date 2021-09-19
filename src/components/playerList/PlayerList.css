@@ -11,6 +11,7 @@ form {
     border: 2px solid white !important;
 }
 
+.Seller [type="radio"]:checked + span:after,
 .Renter [type="radio"]:checked + span:after,
 .Sender [type="radio"]:checked + span:after {
     background-color: red !important;
@@ -28,6 +29,7 @@ form {
     border: none;
 }
 
+.Player [type="radio"]:checked + span:after,
 .Customer [type="radio"]:checked + span:after {
     background-color: rgb(219, 181, 9) !important;
     border: none;
