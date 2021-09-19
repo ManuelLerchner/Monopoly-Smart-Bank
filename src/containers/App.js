@@ -20,7 +20,6 @@ import Overview from "./OverviewScreen";
 import "./App.css";
 import BottomBar from "../components/bottomBar/BottomBar";
 
-
 import loadGameData from "../Data/loadGameData";
 
 export default function App() {
@@ -62,8 +61,9 @@ export default function App() {
                 let baseRent = property.baseRent;
                 let buildingPrice = {
                     house: property.housePrice,
-                    skyscraper: property,
-                    monopolyTower: property.monopolyTowerPrice,
+                    skyscraper: property.skyScraperPrice,
+                    monopolyTower: 10 * 10 ** 6,
+                    industrialBuilding: property.industrialBuildingPrice,
                 };
 
                 properties.push(
@@ -89,6 +89,9 @@ export default function App() {
             new BuildingClass("1 House", img),
             new BuildingClass("2 Houses", img),
             new BuildingClass("3 Houses", img),
+            new BuildingClass("1 Industrial Building", img),
+            new BuildingClass("2 Industrial Building", img),
+            new BuildingClass("3 Industrial Building", img),
             new BuildingClass("Skyscraper", img),
             new BuildingClass("Monopoly Tower", img),
         ]);

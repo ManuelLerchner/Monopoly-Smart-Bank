@@ -37,8 +37,15 @@ export default function BuyModal({
                 return <div key={property.id}></div>;
             }
 
-            let type = i < 3 ? "house" : i < 4 ? "skyscraper" : "monopolyTower";
-            let modifier = i < 3 ? i + 1 : 1;
+            let type =
+                i < 3
+                    ? "house"
+                    : i < 6
+                    ? "industrialBuilding"
+                    : i < 7
+                    ? "skyscraper"
+                    : "monopolyTower";
+            let modifier = i < 6 ? (i % 3) + 1 : 1;
 
             return (
                 <BuildingCard

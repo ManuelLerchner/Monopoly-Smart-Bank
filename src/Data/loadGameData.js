@@ -27,10 +27,12 @@ export default function loadCSV() {
                 property.rentPrice_8 = Number.parseFloat(tmpArray[11]);
                 property.housePrice = Number.parseFloat(tmpArray[12]);
                 property.skyScraperPrice = Number.parseFloat(tmpArray[13]);
-                property.monopolyTowerPrice = Number.parseFloat(tmpArray[14]);
+                property.industrialBuildingPrice = Number.parseFloat(tmpArray[14]);
                 property.img = tmpArray[15];
                 dataArray.push(property);
             });
+
+            console.log(dataArray);
 
             resolve(dataArray);
         };

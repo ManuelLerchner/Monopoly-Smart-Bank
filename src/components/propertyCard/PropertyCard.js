@@ -41,7 +41,7 @@ export default function PropertyCard({ property, clickCallback, showType }) {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Hotel:</td>
+                                        <td>Skyscraper:</td>
                                         <td className="valuePart">
                                             <b>
                                                 {property.owner.hasSkyScraperOn[

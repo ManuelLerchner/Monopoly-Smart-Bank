@@ -1,4 +1,4 @@
-name;cost;color;baseRent;rentPrice_1;rentPrice_2;rentPrice_3;rentPrice_4;rentPrice_5;rentPrice_6;rentPrice_7;rentPrice_8;housePrice;skyScraperPrice;monopolyTowerPrice;img
+name;cost;color;baseRent;rentPrice_1;rentPrice_2;rentPrice_3;rentPrice_4;rentPrice_5;rentPrice_6;rentPrice_7;rentPrice_8;housePrice;skyScraperPrice;industrialBuildingPrice;img
 Bachla Street;2800000;Orange;300000;1000000;1200000;1400000;1600000;1800000;2000000;2200000;2400000;500000;1000000;2000000;bachla_street
 Cringe Street;3000000;Black;320000;1200000;1400000;1600000;1800000;2000000;2200000;2400000;2600000;2800000;1200000;2050000;cringe_steet
 Sus Street;2800000;Orange;500000;1000000;1600000;1560000;1520000;1480000;1440000;1400000;1360000;800000;1600000;3000000;sus_street

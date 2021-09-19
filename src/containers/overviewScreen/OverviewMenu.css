@@ -19,7 +19,7 @@
     height: 50px;
     overflow: auto;
     height: 100% !important;
-    max-height: 240px;
+    max-height: 200px;
 }
 .thead-scrollable,
 .tbody-scrollable tr {
