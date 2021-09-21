@@ -42,8 +42,7 @@ export default function App() {
             for (const id in data) {
                 const property = data[id];
 
-                if (id === "0" || id === "") continue;
-
+       
                 let name = property.name;
                 let cost = property.cost;
                 let color = property.color;

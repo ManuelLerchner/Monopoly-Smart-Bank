@@ -109,17 +109,22 @@ export default function RentMenu({ players, setPlayers, bank, setBank }) {
         seller.changes["properties"] = "-";
         buyer.changes["properties"] = "+";
 
+        const balanceMoved =
+            typeof amount === "string"
+                ? PlayerClass.parseMoney(amount)
+                : amount;
+
         buyer.history.push({
             msg: `Bought ${selectedProperty.name} from ${seller.name}`,
             time: new Date().toLocaleTimeString(),
-            amount: amount,
+            amount: balanceMoved,
             total: buyer.balance,
             direction: "-",
         });
         seller.history.push({
-            msg: `Sold ${selectedProperty.name} to ${seller.name}`,
+            msg: `Sold ${selectedProperty.name} to ${buyer.name}`,
             time: new Date().toLocaleTimeString(),
-            amount: amount,
+            amount: balanceMoved,
             total: seller.balance,
             direction: "-",
         });

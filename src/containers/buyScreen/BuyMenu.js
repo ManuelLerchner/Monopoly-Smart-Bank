@@ -126,6 +126,15 @@ export default function BuyMenu({
             case "3 Houses":
                 newSlotsNeeded = 3;
                 break;
+            case "1 Industrial Building":
+                newSlotsNeeded = 1;
+                break;
+            case "2 Industrial Building":
+                newSlotsNeeded = 2;
+                break;
+            case "3 Industrial Building":
+                newSlotsNeeded = 3;
+                break;
             case "Skyscraper":
                 newSlotsNeeded = 0;
                 break;
@@ -171,6 +180,7 @@ export default function BuyMenu({
                 price
             );
 
+      
         if (building.name === "Monopoly Tower") {
             setBuildings(buildings.filter((build) => build.id !== building.id));
         }

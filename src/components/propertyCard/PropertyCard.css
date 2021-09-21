@@ -52,7 +52,7 @@
 }
 
 .imageFlex {
-    width: 40%;
+    width: 70%;
     height: 100%;
 }
 
@@ -81,38 +81,69 @@
     font-weight: 600;
 }
 
-.White {
-    background-color: rgba(240, 238, 238, 0.945);
-    color: rgb(37, 28, 28);
-}
-
 .Grey {
-    background-color: rgba(117, 115, 115, 0.966);
+    background-color: rgba(166, 166, 166);
+    color: rgb(39, 35, 39);
 }
 
 .Black {
-    background-color: rgba(19, 17, 17, 0.959);
+    background-color: rgba(19, 17, 17);
 }
 
-.Lime {
-    background-color: rgba(107, 255, 0, 0.925);
+.White {
+    background-color: rgba(243, 243, 243);
+    color: rgb(37, 28, 28);
+}
+
+.Green {
+    background-color: rgba(107, 255, 0);
     color: rgb(48, 45, 45);
 }
 
-.Lightblue {
-    background-color: rgba(70, 240, 240, 0.911);
+.Light_Blue {
+    background-color: rgba(70, 240, 240);
     color: rgb(51, 44, 44);
 }
 
-.Pink {
-    background-color: rgba(240, 50, 230, 0.89);
+.Violett {
+    background-color: rgba(240, 50, 230);
 }
 
 .Orange {
-    background-color: rgba(243, 117, 14, 0.911) ;
+    background-color: rgba(243, 117, 14, 0.911);
     color: rgb(51, 44, 44);
 }
 
 .Red {
-    background-color: rgba(255, 28, 28, 0.932);
+    background-color: rgba(255, 28, 28);
+}
+
+.Light_Green {
+    background-color: rgba(0, 255, 153);
+    color: rgb(51, 44, 44);
+}
+
+.Dark_Red {
+    background-color: rgba(128, 0, 0);
+}
+
+.Yellow {
+    background-color: rgba(255, 255, 0);
+    color: rgb(51, 44, 44);
+}
+
+.Cyan {
+    background-color: rgba(0, 128, 128);
+}
+
+.Dark_Violett {
+    background-color: rgba(128, 0, 128);
+}
+
+.Dark_Green {
+    background-color: rgba(0, 120, 0);
+}
+
+.Blue {
+    background-color: rgba(0, 0, 255);
 }

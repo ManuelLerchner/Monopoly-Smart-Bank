@@ -22,8 +22,20 @@ export class PropertyClass {
 
         this.buildingsWorth = 0;
 
-        this.img = "https://picsum.photos/100/160";
+        this.img = "hhttps://picsum.photos/100/160";
+
+        this.loadImage(name);
     }
+
+    loadImage = async (imageName) => {
+        return await import(`../images/properties/${imageName}.jpg`)
+            .then((image) => {
+                this.img = image.default;
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    };
 
     static builtBuilding(property, building) {
         let newSlotsNeeded = 0;
@@ -36,6 +48,15 @@ export class PropertyClass {
                 newSlotsNeeded = 2;
                 break;
             case "3 Houses":
+                newSlotsNeeded = 3;
+                break;
+            case "1 Industrial Building":
+                newSlotsNeeded = 1;
+                break;
+            case "2 Industrial Building":
+                newSlotsNeeded = 2;
+                break;
+            case "3 Industrial Building":
                 newSlotsNeeded = 3;
                 break;
             case "Skyscraper":
@@ -73,7 +94,7 @@ export class PropertyClass {
             property.buildingsWorth += property.buildingPrice["monopolyTower"];
             property.monopolyTowerBuilt = true;
         } else {
-            property.housesCount += 1;
+            property.housesCount += newSlotsNeeded;
             property.buildingsWorth +=
                 property.buildingPrice["house"] * newSlotsNeeded;
         }
@@ -82,10 +103,12 @@ export class PropertyClass {
     }
 
     calcRentCost() {
-        let rentPrice = this.baseRent;
+        let rentPrice = 0;
 
         if (this.housesCount > 0) {
             rentPrice += this.rentPrices[this.housesCount];
+        } else {
+            rentPrice = this.baseRent;
         }
 
         if (

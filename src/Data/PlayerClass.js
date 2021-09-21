@@ -56,7 +56,12 @@ export class PlayerClass {
             balanceAbs /= 10 ** 3;
         }
 
-        return sign + String(balanceAbs.toPrecision(4)) + postFix;
+        return (
+            sign +
+            String(Math.round(balanceAbs * 100) / 100).replace(".", ",") +
+            " " +
+            postFix
+        );
     }
 
     static parseMoney(money) {
@@ -178,6 +183,18 @@ export class PlayerClass {
                 buyer.houses += 3;
                 buyer.changes["houses"] = "+";
                 break;
+            case "1 Industrial Building":
+                buyer.houses += 1;
+                buyer.changes["houses"] = "+";
+                break;
+            case "2 Industrial Building":
+                buyer.houses += 2;
+                buyer.changes["houses"] = "+";
+                break;
+            case "3 Industrial Building":
+                buyer.houses += 3;
+                buyer.changes["houses"] = "+";
+                break;
             case "Skyscraper":
                 buyer.skyscraper += 1;
                 buyer.changes["skyscraper"] = "+";
@@ -187,6 +204,7 @@ export class PlayerClass {
                 buyer.hasMonopolyTower = true;
                 break;
             default:
+                console.log(building.name);
                 return [false, "Error while building"];
         }
 
