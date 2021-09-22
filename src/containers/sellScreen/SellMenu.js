@@ -7,7 +7,7 @@ import PropertyCard from "../../components/propertyCard/PropertyCard";
 import { PlayerClass } from "../../Data/PlayerClass";
 import $ from "jquery";
 
-export default function RentMenu({ players, setPlayers, bank, setBank }) {
+export default function RentMenu({ players, setPlayers, bank, set }) {
     const [playerProperties, setplayerProperties] = useState([]);
     const [selectedProperty, setselectedProperty] = useState(null);
 
@@ -168,6 +168,24 @@ export default function RentMenu({ players, setPlayers, bank, setBank }) {
         openSelectProperty();
     };
 
+    const toggleMortage = (property) => {
+        property.mortage = !property.mortage;
+
+        let clone = players.map((player) => {
+            return player;
+        });
+
+        setPlayers([...clone]);
+
+        // eslint-disable-next-line no-undef
+        M.toast({
+            html: `Mortage toggled ${property.mortage ? "On" : "Off"} for ${
+                property.name
+            }`,
+            classes: "rounded green black-text",
+        });
+    };
+
     const closeSelectList = (property) => {
         setselectedProperty(property);
         var modalElems = document.querySelectorAll("#modalSelectProperty");
@@ -204,6 +222,9 @@ export default function RentMenu({ players, setPlayers, bank, setBank }) {
                             <PlayerList
                                 players={[...players, bank]}
                                 type={"Seller"}
+                                callback={() => {
+                                    setselectedProperty(null);
+                                }}
                             />
                         </div>
                     </div>
@@ -213,22 +234,24 @@ export default function RentMenu({ players, setPlayers, bank, setBank }) {
                     <div className="card cardColor-pay ">
                         <div className="card-content white-text">
                             {selectedProperty !== null && (
-                                <div className="row smallRow ">
-                                    <div className="gridWrapperOneColumn">
+                                <div className="row smallRow center">
+                                    {selectedProperty && (
+                                        <p1>
+                                            Click on Property to toggle mortage
+                                        </p1>
+                                    )}
+                                    <div className="gridWrapperOneColumn padding10">
                                         <PropertyCard
                                             property={selectedProperty}
-                                            setselectedProperty={
-                                                setselectedProperty
-                                            }
-                                            clickCallback={closeSelectList}
+                                            clickCallback={toggleMortage}
                                             showType={"rent"}
                                         />
                                     </div>
                                 </div>
                             )}
 
-                            <div className="row  padding10 center  ">
-                                <div className="col l4 marginBottom">
+                            <div className="row   center  ">
+                                <div className="col l3 offset-l1 marginBottom">
                                     <button
                                         className=" btn-large btn-large-rent waves-effect waves-light green darken-1"
                                         onClick={select}
@@ -249,6 +272,7 @@ export default function RentMenu({ players, setPlayers, bank, setBank }) {
                                     />
                                     <label htmlFor="first_name">Amount</label>
                                 </div>
+
                                 <div className="col l3  marginBottom">
                                     <button
                                         className=" btn-large btn-large-rent waves-effect waves-light red darken-2 "

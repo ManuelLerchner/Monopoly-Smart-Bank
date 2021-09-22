@@ -34,6 +34,15 @@ export default function RentMenu({ players, setPlayers }) {
             return;
         }
 
+        if (selectedProperty.mortage === true) {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: "Property has mortage",
+                classes: "rounded red black-text",
+            });
+            return;
+        }
+
         const renter = players.find((player) => player.id === renterID);
 
         const [succesfull, paymentMSG] = PlayerClass.sendMoney(
@@ -182,7 +191,13 @@ export default function RentMenu({ players, setPlayers }) {
                                 </div>
                             </div>
 
-                            <PlayerList players={players} type={"Owner"} />
+                            <PlayerList
+                                players={players}
+                                type={"Owner"}
+                                callback={() => {
+                                    setselectedProperty(null);
+                                }}
+                            />
                         </div>
                     </div>
                 </div>

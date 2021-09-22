@@ -42,7 +42,6 @@ export default function App() {
             for (const id in data) {
                 const property = data[id];
 
-       
                 let name = property.name;
                 let cost = property.cost;
                 let color = property.color;
@@ -156,7 +155,6 @@ export default function App() {
                     setPlayers={setPlayers}
                     setGameState={setGameState}
                     bank={bank}
-                    setBank={setbank}
                 />
             );
         }

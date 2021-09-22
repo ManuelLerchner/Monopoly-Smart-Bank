@@ -1,7 +1,7 @@
 .bankImg {
     filter: drop-shadow(0 0 1rem rgb(88, 83, 83));
     height: auto;
-    max-height: 250px !important;
+    max-height: 190px !important;
 }
 
 .btn-large-amount {

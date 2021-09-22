@@ -112,7 +112,7 @@ export default function OverviewMenu({ players }) {
                                             <th>Time</th>
                                             <th>Description</th>
                                             <th>Amount</th>
-                                            <th>Total</th>
+                                            <th>Total Money</th>
                                         </tr>
                                     </thead>
                                     <tbody className="tbody-scrollable  ">

@@ -11,10 +11,10 @@ import "./BankMenu.css";
 export default function BankScreen({ players, setPlayers }) {
     const amountRef = useRef();
 
-    const transfer = (direction) => {
+    const transfer = (direction, val) => {
         const customerID = $("input:radio[name=Customer]:checked").val();
 
-        const amount = amountRef.current.value;
+        const amount = val === undefined ? amountRef.current.value : val;
 
         if (customerID === undefined) {
             // eslint-disable-next-line no-undef
@@ -99,7 +99,7 @@ export default function BankScreen({ players, setPlayers }) {
                         </div>
 
                         <div className="row smallRow">
-                            <div className="input-field col l8 offset-l2 s10 offset-s1  ">
+                            <div className="input-field col l10 offset-l1 s10 offset-s1  ">
                                 <input
                                     id="first_name"
                                     type="text"
@@ -153,12 +153,42 @@ export default function BankScreen({ players, setPlayers }) {
                         </div>
 
                         <div className="row center">
-                            <div className="l10">
+                            <div className=" col l12">
                                 <img
                                     className="bankImg"
                                     src={BankImg}
                                     alt="Bank"
                                 />
+                            </div>
+                        </div>
+                        <div className="row paddingBot center">
+                            <div className="col l4 offset-l2">
+                                <button
+                                    className=" btn-large  waves-effect waves-light blue darken-1"
+                                    type="submit"
+                                    onClick={() => {
+                                        transfer("receive", "2M");
+                                    }}
+                                >
+                                    <strong>2 M </strong>
+                                    <i className="material-icons left hide-on-small-only ">
+                                        keyboard_double_arrow_left
+                                    </i>
+                                </button>
+                            </div>
+                            <div className="col l4 ">
+                                <button
+                                    className=" btn-large  waves-effect waves-light purple lighten-1"
+                                    type="submit"
+                                    onClick={() => {
+                                        transfer("receive", "3M");
+                                    }}
+                                >
+                                    <strong>3 M </strong>
+                                    <i className="material-icons left hide-on-small-only ">
+                                        keyboard_double_arrow_left
+                                    </i>
+                                </button>
                             </div>
                         </div>
                     </div>

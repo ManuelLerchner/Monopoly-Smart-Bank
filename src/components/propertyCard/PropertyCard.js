@@ -4,7 +4,10 @@ import { PlayerClass } from "../../Data/PlayerClass";
 import "./PropertyCard.css";
 
 export default function PropertyCard({ property, clickCallback, showType }) {
-    let style = ` gridBox ${property.color}`;
+    let style = `gridBox ${property.color} ${
+        property.mortage === true ? "mortage" : ""
+    }`;
+
     const handleClick = () => {
         clickCallback(property);
     };

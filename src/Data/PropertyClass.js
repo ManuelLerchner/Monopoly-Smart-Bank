@@ -22,7 +22,8 @@ export class PropertyClass {
 
         this.buildingsWorth = 0;
 
-        this.img = "hhttps://picsum.photos/100/160";
+        this.img = "https://picsum.photos/100/160";
+        this.mortage = false;
 
         this.loadImage(name);
     }

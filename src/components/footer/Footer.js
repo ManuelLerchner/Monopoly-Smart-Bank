@@ -5,7 +5,7 @@ export default function Footer() {
         <footer className="page-footer  blue-grey darken-3">
             <div className="container">
                 <div className="row">
-                    <div className="col l6 s12">
+                    <div className="col l4 s12">
                         <h5 className="orange-text text-darken-1">
                             Monopoly Smart-Bank
                         </h5>
@@ -16,8 +16,8 @@ export default function Footer() {
                             <br />
                             You can add new players in the lobby and use some
                             standard features, such as transfering money ,
-                            buying appartments and properties, and claim the
-                            start-money.
+                            buying appartments and properties. Or receive rent
+                            from other players.
                             <br />
                             <br />
                             In the future you can also interact with some
@@ -27,7 +27,21 @@ export default function Footer() {
                             price and attributes.
                         </p>
                     </div>
-                    <div className="col l3 offset-l3 s12">
+                    <div className="col l4 offset-l1 s7 ">
+                        <h5 className="orange-text text-darken-1">Features</h5>
+                        <ol>
+                            <li>Add Players in the "Lobby"</li>
+                            <li>Transfer money between players in "Pay"</li>
+                            <li>Buy properties and buildings in "Buy"</li>
+                            <li>Receive rent from others in "Rent"</li>
+                            <li>
+                                Pay or receive money from the bank in "Bank"
+                            </li>
+                            <li>Toggle mortage on a property in "Sell"</li>
+                            <li>Look at the game history in "Overview"</li>
+                        </ol>
+                    </div>
+                    <div className="col l2  offset-l1 s3 offset-s1">
                         <h5 className="orange-text text-darken-1">Links</h5>
                         <ul>
                             <li>

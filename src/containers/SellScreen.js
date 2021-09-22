@@ -24,12 +24,7 @@ export default function SellScreen({
     return (
         <>
             <Logo setGameState={setGameState} />
-            <SellMenu
-                players={players}
-                setPlayers={setPlayers}
-                bank={bank}
-                setBank={setBank}
-            />
+            <SellMenu players={players} setPlayers={setPlayers} bank={bank} />
         </>
     );
 }

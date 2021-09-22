@@ -59,7 +59,7 @@ export class PlayerClass {
         return (
             sign +
             String(Math.round(balanceAbs * 100) / 100).replace(".", ",") +
-            " " +
+            '\u00A0'+
             postFix
         );
     }
