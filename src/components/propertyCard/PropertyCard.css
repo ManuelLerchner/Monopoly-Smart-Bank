@@ -2,12 +2,9 @@
     display: grid;
 
     justify-content: space-around;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(320px, 400px));
 
     grid-gap: 20px;
-
-    width: 100%;
-    height: min(100%, 240px);
 }
 
 .gridWrapperOneColumn {
@@ -30,7 +27,7 @@
     border: 3px solid black;
 
     box-shadow: rgb(38, 57, 77) 0px 5px 15px 5px;
-    height: min(100%, 220px);
+    max-height:  220px;
 }
 
 .flexContainerProperty {

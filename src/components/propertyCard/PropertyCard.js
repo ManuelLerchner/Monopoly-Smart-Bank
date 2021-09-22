@@ -81,7 +81,7 @@ export default function PropertyCard({ property, clickCallback, showType }) {
                     )}
                 </div>
 
-                <div className="imageFlex hide-on-med-and-down">
+                <div className="imageFlex ">
                     <img src={property.img} alt="img"></img>
                 </div>
             </div>
