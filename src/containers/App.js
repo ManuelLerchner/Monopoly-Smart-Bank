@@ -37,7 +37,6 @@ export default function App() {
             bank.balance = 10 ** 10;
             return bank;
         });
-        setPlayers([new PlayerClass("Manuel"), new PlayerClass("Cringo")]);
 
         async function fetchData() {
             const data = await loadGameData();
