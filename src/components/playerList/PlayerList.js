@@ -12,13 +12,13 @@ export default function PlayerList({ players, type, callback }) {
         <form action="#" className="playerList">
             {players.map((player, i) => (
                 <div
-                    className="row centerRow playerListItem "
+                    className="row centerRow  "
                     key={player.id + type}
                     onClick={click(player)}
                 >
                     <div className="col l8 offset-l1">
                         <label>
-                            <div className={type}>
+                            <div className={"textPart " + type}>
                                 <input
                                     name={type}
                                     type="radio"
@@ -28,12 +28,14 @@ export default function PlayerList({ players, type, callback }) {
                             </div>
                         </label>
                     </div>
-
-                    <img
-                        className="iconSmall hide-on-med-and-down"
-                        src={player.img}
-                        alt="Avatar"
-                    />
+                    <div className="col l4">
+                        <img
+                            className="iconSmall hide-on-med-and-down"
+                            src={player.img}
+                            alt="Avatar"
+                            onClick={click(player)}
+                        />
+                    </div>
                 </div>
             ))}
         </form>

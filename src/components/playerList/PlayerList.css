@@ -4,12 +4,20 @@ form {
 
 .playerList {
     max-height: 300px;
-
-    overflow-y: scroll;
+    padding: 5px;
+    overflow: auto;
     overflow-x: hidden;
 }
 
-.playerListItem {
+.textPart {
+    height: 60px !important;
+    line-height: 60px;
+    height: 60px;
+}
+
+.textPart span {
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .name {
