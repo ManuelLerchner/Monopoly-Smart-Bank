@@ -1,5 +1,5 @@
 const { v4: uuidv4 } = require("uuid");
-
+let counter = 0;
 export class PropertyClass {
     constructor(name, cost, color, baseRent, rentPrices, buildingPrice) {
         this.id = uuidv4();
@@ -22,7 +22,9 @@ export class PropertyClass {
 
         this.buildingsWorth = 0;
 
-        this.img = "https://picsum.photos/100/160";
+        this.img = `https://picsum.photos/id/${counter}/300/480`;
+      
+
         this.mortage = false;
 
         this.className = "PropertyClass";
