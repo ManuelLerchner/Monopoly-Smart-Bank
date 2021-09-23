@@ -250,7 +250,7 @@ export default function RentMenu({ players, setPlayers, bank, set }) {
                                 </div>
                             )}
 
-                            <div className="row   center  ">
+                            <div className="row  padding10 center ">
                                 <div className="col l3 offset-l1 marginBottom">
                                     <button
                                         className=" btn-large btn-large-rent waves-effect waves-light green darken-1"
@@ -272,7 +272,6 @@ export default function RentMenu({ players, setPlayers, bank, set }) {
                                     />
                                     <label htmlFor="first_name">Amount</label>
                                 </div>
-
                                 <div className="col l3  marginBottom">
                                     <button
                                         className=" btn-large btn-large-rent waves-effect waves-light red darken-2 "

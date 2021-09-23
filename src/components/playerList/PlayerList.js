@@ -9,10 +9,10 @@ export default function PlayerList({ players, type, callback }) {
         }
     };
     return (
-        <form action="#">
+        <form action="#" className="playerList">
             {players.map((player, i) => (
                 <div
-                    className="row centerRow "
+                    className="row centerRow playerListItem "
                     key={player.id + type}
                     onClick={click(player)}
                 >

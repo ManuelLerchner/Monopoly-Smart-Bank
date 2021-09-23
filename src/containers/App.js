@@ -184,7 +184,7 @@ export default function App() {
     }
 
     return (
-        <>
+        <div id="main">
             <div className="wallpaper">
                 <Navbar setGameState={setGameState} />
 
@@ -192,6 +192,6 @@ export default function App() {
                 <BottomBar players={players} />
             </div>
             <Footer />
-        </>
+        </div>
     );
 }

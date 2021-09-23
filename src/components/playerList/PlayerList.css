@@ -2,6 +2,16 @@ form {
     padding-bottom: 5px !important;
 }
 
+.playerList {
+    max-height: 300px;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.playerListItem {
+}
+
 .name {
     font-size: calc(0.5vw + 1.2vh + 0.5vmin) !important;
     color: whitesmoke;

@@ -39,14 +39,23 @@
     font-weight: 700;
 }
 
-.table-scrollable {
+.tableContainer {
     margin-bottom: 20px !important;
-    margin-left: 30px !important;
-    margin-right: 30px !important;
+
+    padding-left: 10px !important;
+}
+.table-scrollable {
+    width: 100% !important;
 }
 
-.align-right {
+.align-left {
     text-align: start;
+}
+.align-right {
+    text-align: end;
+}
+.align-center {
+    text-align: center !important;
 }
 
 .marginTop {

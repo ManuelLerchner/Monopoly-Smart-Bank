@@ -106,56 +106,67 @@ export default function OverviewMenu({ players }) {
                                     </div>
                                 </div>
 
-                                <table className="table-scrollable  white-text">
-                                    <thead className="thead-scrollable light-blue-text">
-                                        <tr className="tr-scrollable">
-                                            <th>Time</th>
-                                            <th>Description</th>
-                                            <th>Amount</th>
-                                            <th>Total Money</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="tbody-scrollable  ">
-                                        {selectedPlayer &&
-                                            selectedPlayer.history.map(
-                                                (data) => {
-                                                    let style =
-                                                        data.direction === "+"
-                                                            ? "green-text"
-                                                            : "red-text";
-                                                    return (
-                                                        <tr
-                                                            className={
-                                                                style +
-                                                                " scrollable"
-                                                            }
-                                                            key={
-                                                                data +
-                                                                selectedPlayer.id
-                                                            }
-                                                        >
-                                                            <td className="align-rigdht">
-                                                                {data.time}
-                                                            </td>
-                                                            <td className="align-right">
-                                                                {data.msg}
-                                                            </td>
-                                                            <td className="align-rfight">
-                                                                {PlayerClass.formatMoney(
-                                                                    data.amount
-                                                                )}
-                                                            </td>
-                                                            <td className="align-rfight">
-                                                                {PlayerClass.formatMoney(
-                                                                    data.total
-                                                                )}
-                                                            </td>
-                                                        </tr>
-                                                    );
-                                                }
-                                            )}
-                                    </tbody>
-                                </table>
+                                <div className="tableContainer">
+                                    <table className="table-scrollable  white-text">
+                                        <thead className="thead-scrollable light-blue-text">
+                                            <tr className="tr-scrollable">
+                                                <th className="align-center">
+                                                    Time
+                                                </th>
+                                                <th className="align-left">
+                                                    Description
+                                                </th>
+                                                <th className="align-center">
+                                                    Amount
+                                                </th>
+                                                <th className="align-center">
+                                                    Total Money
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="tbody-scrollable  ">
+                                            {selectedPlayer &&
+                                                selectedPlayer.history.map(
+                                                    (data) => {
+                                                        let style =
+                                                            data.direction ===
+                                                            "+"
+                                                                ? "green-text"
+                                                                : "red-text";
+                                                        return (
+                                                            <tr
+                                                                className={
+                                                                    style +
+                                                                    " scrollable"
+                                                                }
+                                                                key={
+                                                                    data.time +
+                                                                    selectedPlayer.id
+                                                                }
+                                                            >
+                                                                <td className="align-center">
+                                                                    {data.time}
+                                                                </td>
+                                                                <td className="align-left">
+                                                                    {data.msg}
+                                                                </td>
+                                                                <td className="align-center">
+                                                                    {PlayerClass.formatMoney(
+                                                                        data.amount
+                                                                    )}
+                                                                </td>
+                                                                <td className="align-center">
+                                                                    {PlayerClass.formatMoney(
+                                                                        data.total
+                                                                    )}
+                                                                </td>
+                                                            </tr>
+                                                        );
+                                                    }
+                                                )}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
