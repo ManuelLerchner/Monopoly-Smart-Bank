@@ -22,6 +22,15 @@ import BottomBar from "../components/bottomBar/BottomBar";
 
 import loadGameData from "../Data/loadGameData";
 
+import One_House from "../images/houses/1 House.jpg";
+import Two_Houses from "../images/houses/2 Houses.jpg";
+import Three_Houses from "../images/houses/3 Houses.jpg";
+import One_Industrial from "../images/houses/1 Industrial.jpg";
+import Two_Industrial from "../images/houses/2 Industrial.jpg";
+import Three_Industrial from "../images/houses/3 Industrial.jpg";
+import Skyscraper from "../images/houses/Skyscraper.jpg";
+import MonopolyTower from "../images/houses/Monopoly Tower.jpg";
+
 export default function App() {
     //Player List,  Game State
     const [players, setPlayers] = useState([]);
@@ -84,17 +93,15 @@ export default function App() {
 
         fetchData();
 
-        let img = "https://picsum.photos/100/160";
-
         setBuildings([
-            new BuildingClass("1 House", img),
-            new BuildingClass("2 Houses", img),
-            new BuildingClass("3 Houses", img),
-            new BuildingClass("1 Industrial Building", img),
-            new BuildingClass("2 Industrial Building", img),
-            new BuildingClass("3 Industrial Building", img),
-            new BuildingClass("Skyscraper", img),
-            new BuildingClass("Monopoly Tower", img),
+            new BuildingClass("1 House", One_House),
+            new BuildingClass("2 Houses", Two_Houses),
+            new BuildingClass("3 Houses", Three_Houses),
+            new BuildingClass("1 Industrial Building", One_Industrial),
+            new BuildingClass("2 Industrial Buildings", Two_Industrial),
+            new BuildingClass("3 Industrial Buildings", Three_Industrial),
+            new BuildingClass("Skyscraper", Skyscraper),
+            new BuildingClass("Monopoly Tower", MonopolyTower),
         ]);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

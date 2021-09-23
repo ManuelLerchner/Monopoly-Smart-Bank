@@ -192,11 +192,11 @@ export class PlayerClass {
                 buyer.houses += 1;
                 buyer.changes["houses"] = "+";
                 break;
-            case "2 Industrial Building":
+            case "2 Industrial Buildings":
                 buyer.houses += 2;
                 buyer.changes["houses"] = "+";
                 break;
-            case "3 Industrial Building":
+            case "3 Industrial Buildings":
                 buyer.houses += 3;
                 buyer.changes["houses"] = "+";
                 break;

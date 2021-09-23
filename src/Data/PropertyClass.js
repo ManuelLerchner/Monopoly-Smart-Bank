@@ -58,10 +58,10 @@ export class PropertyClass {
             case "1 Industrial Building":
                 newSlotsNeeded = 1;
                 break;
-            case "2 Industrial Building":
+            case "2 Industrial Buildings":
                 newSlotsNeeded = 2;
                 break;
-            case "3 Industrial Building":
+            case "3 Industrial Buildings":
                 newSlotsNeeded = 3;
                 break;
             case "Skyscraper":
@@ -71,6 +71,7 @@ export class PropertyClass {
                 newSlotsNeeded = 0;
                 break;
             default:
+                console.log(building.name);
                 return [false, "Error while building"];
         }
 
