@@ -5,7 +5,7 @@ import "./MainMenu.css";
 export default function MainMenu({ setGameState }) {
     return (
         <div className="row ">
-            <div className="col l8 offset-l2 m8 offset-m2 s12 ">
+            <div className="col l10 offset-l1 m8 offset-m2 s12 ">
                 <div className="card cardColor-main">
                     <div className="card-content white-text">
                         <div className="ButtonBox">

@@ -25,7 +25,8 @@ export default function Navbar({ setGameState }) {
                         <i className="material-icons">menu</i>
                     </a>
                     <a
-                        href="!#"
+                        id="logoText"
+                        href="#!"
                         className="brand-logo center "
                         onClick={() => {
                             setGameState("main");

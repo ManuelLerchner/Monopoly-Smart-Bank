@@ -48,7 +48,10 @@ export class PlayerClass {
         let postFix = "";
         let balanceAbs = Math.abs(balance);
 
-        if (balanceAbs >= 10 ** 6) {
+        if (balanceAbs >= 10 ** 9) {
+            postFix = "G";
+            balanceAbs /= 10 ** 9;
+        } else if (balanceAbs >= 10 ** 6) {
             postFix = "M";
             balanceAbs /= 10 ** 6;
         } else if (balanceAbs >= 10 ** 3) {
@@ -59,14 +62,14 @@ export class PlayerClass {
         return (
             sign +
             String(Math.round(balanceAbs * 100) / 100).replace(".", ",") +
-            '\u00A0'+
+            "\u00A0" +
             postFix
         );
     }
 
     static parseMoney(money) {
         const lastLetter = money.charAt(money.length - 1);
-        const hasPostfix = ["k", "M"].includes(lastLetter);
+        const hasPostfix = ["k", "M", "G"].includes(lastLetter);
         const postFix = lastLetter;
 
         let amountPart = hasPostfix
@@ -86,6 +89,8 @@ export class PlayerClass {
             balance *= 10 ** 6;
         } else if (postFix === "k") {
             balance *= 10 ** 3;
+        } else if (postFix === "G") {
+            balance *= 10 ** 9;
         }
 
         return balance;

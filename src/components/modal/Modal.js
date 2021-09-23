@@ -21,7 +21,7 @@ export default function BuyModal({
     }, []);
 
     function renderCards(property, i) {
-        if (property.constructor.name === "PropertyClass") {
+        if (property.className === "PropertyClass") {
             return (
                 <PropertyCard
                     key={property.id}
@@ -32,7 +32,7 @@ export default function BuyModal({
                 />
             );
         }
-        if (property.constructor.name === "BuildingClass") {
+        if (property.className === "BuildingClass") {
             if (selectedProperty === null) {
                 return <div key={property.id}></div>;
             }

@@ -29,10 +29,14 @@ export default function App() {
     const [buildings, setBuildings] = useState([]);
 
     const [gameState, setGameState] = useState("lobby");
-    const [bank, setbank] = useState(new PlayerClass("Bank"));
+    const [bank, setbank] = useState(null);
 
     useEffect(() => {
-        bank.balance = 10 ** 10;
+        setbank(() => {
+            let bank = new PlayerClass("Bank");
+            bank.balance = 10 ** 10;
+            return bank;
+        });
         setPlayers([new PlayerClass("Manuel"), new PlayerClass("Cringo")]);
 
         async function fetchData() {

@@ -26,6 +26,7 @@ export default function BuyScreen({
     $("#navbar_sell").removeClass("selected");
 
     $(".carousel").show();
+
     return (
         <>
             <Logo setGameState={setGameState} />

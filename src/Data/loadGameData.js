@@ -47,8 +47,6 @@ export default function loadCSV() {
                 dataArray.push(property);
             });
 
-            console.log(dataArray);
-
             resolve(dataArray);
         };
 

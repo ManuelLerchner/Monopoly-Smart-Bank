@@ -25,6 +25,8 @@ export class PropertyClass {
         this.img = "https://picsum.photos/100/160";
         this.mortage = false;
 
+        this.className = "PropertyClass";
+
         this.loadImage(name);
     }
 

@@ -11,3 +11,15 @@
 #nav-mobile li a {
     border-radius: 10px !important;
 }
+
+@media (min-width: 981px) and (max-width: 1400px) {
+    #logoText {
+        display: none;
+    }
+}
+
+@media (max-width: 980px) {
+    #logoText {
+        display: block;
+    }
+}

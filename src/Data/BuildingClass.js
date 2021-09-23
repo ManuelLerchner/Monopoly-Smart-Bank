@@ -6,5 +6,7 @@ export class BuildingClass {
 
         this.name = name;
         this.img = img;
+
+        this.className = "BuildingClass";
     }
 }

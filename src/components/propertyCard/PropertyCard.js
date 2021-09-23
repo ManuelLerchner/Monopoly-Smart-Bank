@@ -12,6 +12,7 @@ export default function PropertyCard({ property, clickCallback, showType }) {
         clickCallback(property);
     };
 
+
     return (
         <a className={style} href="#!" onClick={handleClick}>
             <div className="flexContainerProperty">
