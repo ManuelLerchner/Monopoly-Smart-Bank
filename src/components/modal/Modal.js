@@ -37,21 +37,15 @@ export default function BuyModal({
                 return <div key={property.id}></div>;
             }
 
-            let type =
-                i < 3
-                    ? "house"
-                    : i < 6
-                    ? "industrialBuilding"
-                    : i < 7
-                    ? "skyscraper"
-                    : "monopolyTower";
-            let modifier = i < 6 ? (i % 3) + 1 : 1;
+            let type = property.type;
+
+            let priceMultiplier = property.type === "house" ? property.slotsTaken : 1;
 
             return (
                 <BuildingCard
                     key={property.id}
                     building={property}
-                    price={selectedProperty.buildingPrice[type] * modifier}
+                    price={selectedProperty.buildingPrice[type] * priceMultiplier}
                     clickCallback={clickCallback}
                 />
             );

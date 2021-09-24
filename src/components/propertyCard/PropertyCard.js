@@ -12,7 +12,6 @@ export default function PropertyCard({ property, clickCallback, showType }) {
         clickCallback(property);
     };
 
-
     return (
         <a className={style} href="#!" onClick={handleClick}>
             <div className="flexContainerProperty">
@@ -48,7 +47,8 @@ export default function PropertyCard({ property, clickCallback, showType }) {
                                         <td>Skyscraper:</td>
                                         <td className="valuePart">
                                             <b>
-                                                {property.owner.hasSkyScraperOn[
+                                                {property.owner &&
+                                                property.owner.hasSkyScraperOn[
                                                     property.color
                                                 ]
                                                     ? "Yes"
@@ -56,14 +56,11 @@ export default function PropertyCard({ property, clickCallback, showType }) {
                                             </b>
                                         </td>
                                     </tr>
+
                                     <tr>
-                                        <td>Monopoly Tower:</td>
+                                        <td>Disturbance Slots:</td>
                                         <td className="valuePart">
-                                            <b>
-                                                {property.owner.hasMonopolyTower
-                                                    ? "Yes"
-                                                    : "No"}
-                                            </b>
+                                            <b>{property.negativeBuildings}</b>
                                         </td>
                                     </tr>
                                     <tr>

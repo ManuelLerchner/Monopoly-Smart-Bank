@@ -186,6 +186,40 @@ export default function RentMenu({ players, setPlayers, bank, set }) {
         });
     };
 
+    const sellSurgeon = (property) => {
+        const amount = property.negativeBuildings * 0.5 * 10 ** 6;
+        console.log(amount);
+
+        const sellerID = $("input:radio[name=Seller]:checked").val();
+
+        const seller = [...players, bank].find(
+            (player) => player.id === sellerID
+        );
+
+        const [succesfull, paymentMSG] = PlayerClass.sendMoney(
+            seller,
+            bank,
+            amount
+        );
+
+        if (!succesfull) {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: paymentMSG,
+                classes: "rounded red black-text",
+            });
+            return;
+        }
+
+        property.negativeBuildings = 0;
+
+        let clone = players.map((player) => {
+            return player;
+        });
+
+        setPlayers([...clone]);
+    };
+
     const closeSelectList = (property) => {
         setselectedProperty(property);
         var modalElems = document.querySelectorAll("#modalSelectProperty");
@@ -235,17 +269,48 @@ export default function RentMenu({ players, setPlayers, bank, set }) {
                         <div className="card-content white-text">
                             {selectedProperty !== null && (
                                 <div className="row smallRow center">
-                                    {selectedProperty && (
-                                        <p1>
-                                            Click on Property to toggle mortage
-                                        </p1>
-                                    )}
                                     <div className="gridWrapperOneColumn padding10">
                                         <PropertyCard
                                             property={selectedProperty}
-                                            clickCallback={toggleMortage}
                                             showType={"rent"}
                                         />
+                                    </div>
+
+                                    <div className="row  padding10 noMargin ">
+                                        <div className="col l4">
+                                            {selectedProperty && (
+                                                <button
+                                                    className=" btn btn-large-rent waves-effect waves-light orange darken-2"
+                                                    onClick={() => {
+                                                        toggleMortage(
+                                                            selectedProperty
+                                                        );
+                                                    }}
+                                                >
+                                                    Toggle Mortage
+                                                </button>
+                                            )}
+                                        </div>
+                                        <div className="col l7 offset-l1 ">
+                                            {selectedProperty.negativeBuildings >
+                                                0 && (
+                                                <button
+                                                    className=" btn btn-large-rent waves-effect waves-light blue darken-1"
+                                                    onClick={() => {
+                                                        sellSurgeon(
+                                                            selectedProperty
+                                                        );
+                                                    }}
+                                                >
+                                                    {"Remove Distrubance for " +
+                                                        PlayerClass.formatMoney(
+                                                            0.5 *
+                                                                10 ** 6 *
+                                                                selectedProperty.negativeBuildings
+                                                        )}
+                                                </button>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                             )}

@@ -132,7 +132,10 @@ export default function OverviewMenu({ players }) {
                                                             data.direction ===
                                                             "+"
                                                                 ? "green-text"
-                                                                : "red-text";
+                                                                : data.direction ===
+                                                                  "-"
+                                                                ? "red-text"
+                                                                : "";
                                                         return (
                                                             <tr
                                                                 className={

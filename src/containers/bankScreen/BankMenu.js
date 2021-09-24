@@ -167,10 +167,10 @@ export default function BankScreen({ players, setPlayers }) {
                                     className=" btn-large  waves-effect waves-light blue darken-1"
                                     type="submit"
                                     onClick={() => {
-                                        transfer("receive", "2M");
+                                        transfer("receive", "4M");
                                     }}
                                 >
-                                    <strong>2 M </strong>
+                                    <strong>4 M </strong>
                                     <i className="material-icons left hide-on-small-only ">
                                         keyboard_double_arrow_left
                                     </i>
@@ -181,10 +181,10 @@ export default function BankScreen({ players, setPlayers }) {
                                     className=" btn-large  waves-effect waves-light purple lighten-1"
                                     type="submit"
                                     onClick={() => {
-                                        transfer("receive", "3M");
+                                        transfer("receive", "5M");
                                     }}
                                 >
-                                    <strong>3 M </strong>
+                                    <strong>5 M </strong>
                                     <i className="material-icons left hide-on-small-only ">
                                         keyboard_double_arrow_left
                                     </i>

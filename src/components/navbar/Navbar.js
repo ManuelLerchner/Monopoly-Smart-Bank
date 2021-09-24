@@ -82,6 +82,19 @@ export default function Navbar({ setGameState }) {
                                 Overview
                             </a>
                         </li>
+                        <li>
+                            <a
+                                id="navbar_settings"
+                                href="#!"
+                                onClick={() => {
+                                    setGameState("settings");
+                                }}
+                                className=""
+                            >
+                                <i className="material-icons left">settings</i>
+                                Settings
+                            </a>
+                        </li>
                     </ul>
 
                     <ul id="nav-mobile" className="right hide-on-med-and-down">

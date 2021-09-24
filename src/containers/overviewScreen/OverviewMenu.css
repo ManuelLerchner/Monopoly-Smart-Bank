@@ -49,10 +49,10 @@
 }
 
 .align-left {
-    text-align: start;
+    text-align: start !important;
 }
 .align-right {
-    text-align: end;
+    text-align: end !important;
 }
 .align-center {
     text-align: center !important;

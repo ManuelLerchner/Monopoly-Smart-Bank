@@ -43,8 +43,10 @@
 }
 
 .modal {
-    width: 75% !important ;
-    height: 75% !important ;
+    width: 90% !important ;
+ 
+    max-height: 80% !important;
+
 }
 
 .icon {

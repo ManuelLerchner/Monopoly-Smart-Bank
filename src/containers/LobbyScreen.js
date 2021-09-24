@@ -5,7 +5,7 @@ import Logo from "../components/logo/Logo";
 
 import $ from "jquery";
 
-export default function LobbyScreen({ setPlayers, setGameState, players }) {
+export default function LobbyScreen({ setPlayers, setGameState, startMoney }) {
     $("#navbar_lobby").addClass("selected");
     $("#navbar_main").removeClass("selected");
     $("#navbar_pay").removeClass("selected");
@@ -15,12 +15,17 @@ export default function LobbyScreen({ setPlayers, setGameState, players }) {
     $("#navbar_stocks").removeClass("selected");
     $("#navbar_overview").removeClass("selected");
     $("#navbar_sell").removeClass("selected");
+    $("#navbar_settings").removeClass("selected");
 
     $(".carousel").show();
     return (
         <>
             <Logo setGameState={setGameState} />
-            <Lobby setPlayers={setPlayers} setGameState={setGameState} />
+            <Lobby
+                setPlayers={setPlayers}
+                setGameState={setGameState}
+                startMoney={startMoney}
+            />
         </>
     );
 }

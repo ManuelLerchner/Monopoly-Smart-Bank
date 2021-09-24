@@ -115,36 +115,7 @@ export default function BuyMenu({
             return;
         }
 
-        var newSlotsNeeded = 0;
-        switch (building.name) {
-            case "1 House":
-                newSlotsNeeded = 1;
-                break;
-            case "2 Houses":
-                newSlotsNeeded = 2;
-                break;
-            case "3 Houses":
-                newSlotsNeeded = 3;
-                break;
-            case "1 Industrial Building":
-                newSlotsNeeded = 1;
-                break;
-            case "2 Industrial Buildings":
-                newSlotsNeeded = 2;
-                break;
-            case "3 Industrial Buildings":
-                newSlotsNeeded = 3;
-                break;
-            case "Skyscraper":
-                newSlotsNeeded = 0;
-                break;
-            case "Monopoly Tower":
-                newSlotsNeeded = 0;
-                break;
-            default:
-                console.log(building.name);
-                return [false, "Error while building"];
-        }
+        var newSlotsNeeded = building.slotsTaken;
 
         if (selectedPropertyToBuild.buildingSlotsTaken + newSlotsNeeded > 8) {
             // eslint-disable-next-line no-undef
@@ -381,7 +352,7 @@ export default function BuyMenu({
                     description={"Select a property where you want to build"}
                     properties={playerProperties}
                     clickCallback={openBuyHome}
-                    showType={"cost"}
+                    showType={"rent"}
                 />
             </div>
 
@@ -402,7 +373,7 @@ export default function BuyMenu({
                     properties={buildings}
                     selectedProperty={selectedPropertyToBuild}
                     clickCallback={buyBuilding}
-                    showType={"cost"}
+                    showType={"/"}
                 />
             </div>
         </div>

@@ -13,6 +13,7 @@ export default function Overview({ setGameState, players }) {
     $("#navbar_stocks").removeClass("selected");
     $("#navbar_overview").addClass("selected");
     $("#navbar_sell").removeClass("selected");
+    $("#navbar_settings").removeClass("selected");
 
     $(".carousel").hide();
     return (

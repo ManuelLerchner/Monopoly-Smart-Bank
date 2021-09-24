@@ -31,11 +31,19 @@ import Three_Industrial from "../images/houses/3 Industrial.jpg";
 import Skyscraper from "../images/houses/Skyscraper.jpg";
 import MonopolyTower from "../images/houses/Monopoly Tower.jpg";
 
+import Prison from "../images/houses/Prison.jpg";
+import Dump from "../images/houses/Dump.jpg";
+import Power from "../images/houses/Power.jpg";
+import Sewage from "../images/houses/Sewage.jpg";
+import SettingScreen from "./SettingsScreen";
+
 export default function App() {
     //Player List,  Game State
     const [players, setPlayers] = useState([]);
     const [availableProperties, setAvailableProperties] = useState([]);
     const [buildings, setBuildings] = useState([]);
+
+    const [startMoney, setStartMoney] = useState(5 * 10 ** 6);
 
     const [gameState, setGameState] = useState("lobby");
     const [bank, setbank] = useState(null);
@@ -73,7 +81,8 @@ export default function App() {
                     house: property.housePrice,
                     skyscraper: property.skyScraperPrice,
                     monopolyTower: 10 * 10 ** 6,
-                    industrialBuilding: property.industrialBuildingPrice,
+                    industrial: property.industrialBuildingPrice,
+                    negative: 0,
                 };
 
                 properties.push(
@@ -94,14 +103,38 @@ export default function App() {
         fetchData();
 
         setBuildings([
-            new BuildingClass("1 House", One_House),
-            new BuildingClass("2 Houses", Two_Houses),
-            new BuildingClass("3 Houses", Three_Houses),
-            new BuildingClass("1 Industrial Building", One_Industrial),
-            new BuildingClass("2 Industrial Buildings", Two_Industrial),
-            new BuildingClass("3 Industrial Buildings", Three_Industrial),
-            new BuildingClass("Skyscraper", Skyscraper),
-            new BuildingClass("Monopoly Tower", MonopolyTower),
+            new BuildingClass("1 House", One_House, 1, "house"),
+            new BuildingClass("2 Houses", Two_Houses, 2, "house"),
+            new BuildingClass("3 Houses", Three_Houses, 3, "house"),
+            new BuildingClass(
+                "1 Industrial Building",
+                One_Industrial,
+                1,
+                "industrial"
+            ),
+            new BuildingClass(
+                "2 Industrial Buildings",
+                Two_Industrial,
+                2,
+                "industrial"
+            ),
+            new BuildingClass(
+                "3 Industrial Buildings",
+                Three_Industrial,
+                3,
+                "industrial"
+            ),
+            new BuildingClass("Skyscraper", Skyscraper, 0, "skyscraper"),
+            new BuildingClass(
+                "Monopoly Tower",
+                MonopolyTower,
+                0,
+                "monopolyTower"
+            ),
+            new BuildingClass("Sewage Treatment", Sewage, 0, "negative", 1),
+            new BuildingClass("Power Plant", Power, 0, "negative", 2),
+            new BuildingClass("Dump", Dump, 0, "negative", 3),
+            new BuildingClass("Prison", Prison, 0, "negative", 4),
         ]);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -114,6 +147,7 @@ export default function App() {
                     players={players}
                     setPlayers={setPlayers}
                     setGameState={setGameState}
+                    startMoney={startMoney}
                 />
             );
         }
@@ -122,6 +156,15 @@ export default function App() {
         }
         if (gameState === "overview") {
             return <Overview setGameState={setGameState} players={players} />;
+        }
+        if (gameState === "settings") {
+            return (
+                <SettingScreen
+                    startMoney={startMoney}
+                    setStartMoney={setStartMoney}
+                    setGameState={setGameState}
+                />
+            );
         }
 
         if (gameState === "pay") {

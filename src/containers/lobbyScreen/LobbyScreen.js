@@ -4,7 +4,7 @@ import "./LobbyScreen.css";
 
 import { PlayerClass } from "../../Data/PlayerClass";
 
-export default function AddPlayersForm({ setPlayers }) {
+export default function AddPlayersForm({ setPlayers, startMoney }) {
     const nameRef = useRef();
 
     //Rerender Materialize on rerender
@@ -31,7 +31,7 @@ export default function AddPlayersForm({ setPlayers }) {
 
         //Update PlayerList
         setPlayers((prevPlayers) => {
-            const newPlayer = new PlayerClass(name, setPlayers);
+            const newPlayer = new PlayerClass(name, startMoney);
             return [...prevPlayers, newPlayer];
         });
 

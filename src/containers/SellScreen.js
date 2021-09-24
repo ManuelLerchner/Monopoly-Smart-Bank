@@ -19,6 +19,7 @@ export default function SellScreen({
     $("#navbar_stocks").removeClass("selected");
     $("#navbar_overview").removeClass("selected");
     $("#navbar_sell").addClass("selected");
+    $("#navbar_settings").removeClass("selected");
 
     $(".carousel").show();
     return (

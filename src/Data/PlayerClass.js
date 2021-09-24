@@ -3,11 +3,11 @@ import BankIMG from "../images/Bank.png";
 const { v4: uuidv4 } = require("uuid");
 
 export class PlayerClass {
-    constructor(name) {
+    constructor(name, startMoney) {
         this.id = uuidv4();
         this.name = name;
 
-        this.balance = 5.35231 * 10 ** 6;
+        this.balance = startMoney || 10 * 10 ** 6;
         this.properties = [];
         this.houses = 0;
         this.skyscraper = 0;
@@ -57,6 +57,8 @@ export class PlayerClass {
         } else if (balanceAbs >= 10 ** 3) {
             postFix = "K";
             balanceAbs /= 10 ** 3;
+        } else {
+            postFix = "$";
         }
 
         return (
@@ -154,7 +156,10 @@ export class PlayerClass {
 
         buyer.calcEstimatedValue();
 
-        buyer.changes["balance"] = "-";
+        if (cost > 0) {
+            buyer.changes["balance"] = "-";
+        }
+        console.log(cost);
         buyer.changes["properties"] = "+";
 
         buyer.history.push({
@@ -175,54 +180,44 @@ export class PlayerClass {
             return [false, "Not enought Money"];
         }
 
-        switch (building.name) {
-            case "1 House":
-                buyer.houses += 1;
-                buyer.changes["houses"] = "+";
-                break;
-            case "2 Houses":
-                buyer.houses += 2;
-                buyer.changes["houses"] = "+";
-                break;
-            case "3 Houses":
-                buyer.houses += 3;
-                buyer.changes["houses"] = "+";
-                break;
-            case "1 Industrial Building":
-                buyer.houses += 1;
-                buyer.changes["houses"] = "+";
-                break;
-            case "2 Industrial Buildings":
-                buyer.houses += 2;
-                buyer.changes["houses"] = "+";
-                break;
-            case "3 Industrial Buildings":
-                buyer.houses += 3;
-                buyer.changes["houses"] = "+";
-                break;
-            case "Skyscraper":
-                buyer.skyscraper += 1;
-                buyer.changes["skyscraper"] = "+";
-                buyer.hasSkyScraperOn[property.color] = true;
-                break;
-            case "Monopoly Tower":
-                buyer.hasMonopolyTower = true;
-                break;
-            default:
-                console.log(building.name);
-                return [false, "Error while building"];
+        if (["house", "industrial"].includes(building.type)) {
+            buyer.houses += building.slotsTaken;
+            buyer.changes["houses"] = "+";
+        } else if (building.type === "skyscraper") {
+            buyer.skyscraper += 1;
+            buyer.changes["skyscraper"] = "+";
+            buyer.hasSkyScraperOn[property.color] = true;
+        } else if (building.type === "monopolyTower") {
+            buyer.hasMonopolyTower = true;
+        } else if (building.type === "negative") {
+            property.negativeBuildings += building.negativeSpace;
+        } else {
+            console.log("Error", building.type);
+            return [false, "Error while building"];
         }
 
         buyer.balance -= price;
-        buyer.changes["balance"] = "-";
+        if (price > 0) {
+            buyer.changes["balance"] = "-";
+        }
 
-        buyer.history.push({
-            msg: `Bought ${building.name} on ${property.name}`,
-            time: new Date().toLocaleTimeString(),
-            amount: price,
-            total: buyer.balance,
-            direction: "-",
-        });
+        if (building.type === "negative") {
+            buyer.history.push({
+                msg: `Constructed ${building.name} on ${property.name}`,
+                time: new Date().toLocaleTimeString(),
+                amount: price,
+                total: buyer.balance,
+                direction: "/",
+            });
+        } else {
+            buyer.history.push({
+                msg: `Bought ${building.name} on ${property.name}`,
+                time: new Date().toLocaleTimeString(),
+                amount: price,
+                total: buyer.balance,
+                direction: "-",
+            });
+        }
 
         buyer.calcEstimatedValue();
 

@@ -19,11 +19,12 @@ export class PropertyClass {
         this.buildingSlotsTaken = 0;
 
         this.housesCount = 0;
+        this.buildings = [];
 
         this.buildingsWorth = 0;
+        this.negativeBuildings = 0;
 
         this.img = `https://picsum.photos/id/${counter}/300/480`;
-      
 
         this.mortage = false;
 
@@ -43,37 +44,7 @@ export class PropertyClass {
     };
 
     static builtBuilding(property, building) {
-        let newSlotsNeeded = 0;
-
-        switch (building.name) {
-            case "1 House":
-                newSlotsNeeded = 1;
-                break;
-            case "2 Houses":
-                newSlotsNeeded = 2;
-                break;
-            case "3 Houses":
-                newSlotsNeeded = 3;
-                break;
-            case "1 Industrial Building":
-                newSlotsNeeded = 1;
-                break;
-            case "2 Industrial Buildings":
-                newSlotsNeeded = 2;
-                break;
-            case "3 Industrial Buildings":
-                newSlotsNeeded = 3;
-                break;
-            case "Skyscraper":
-                newSlotsNeeded = 0;
-                break;
-            case "Monopoly Tower":
-                newSlotsNeeded = 0;
-                break;
-            default:
-                console.log(building.name);
-                return [false, "Error while building"];
-        }
+        let newSlotsNeeded = building.slotsTaken;
 
         if (property.buildingSlotsTaken + newSlotsNeeded > 8) {
             return [
@@ -105,24 +76,35 @@ export class PropertyClass {
                 property.buildingPrice["house"] * newSlotsNeeded;
         }
 
+        property.buildings.push(building);
+
         return [true, "Successfull"];
     }
 
     calcRentCost() {
         let rentPrice = 0;
 
+        let rentalHousesCount = this.buildings.filter(
+            (property) => property.type === "house"
+        ).length;
+
         if (this.housesCount > 0) {
-            rentPrice += this.rentPrices[this.housesCount];
+            if (this.negativeBuildings > 0) {
+                rentPrice += this.rentPrices[rentalHousesCount];
+            } else {
+                rentPrice += this.rentPrices[this.housesCount];
+            }
         } else {
             rentPrice = this.baseRent;
         }
 
-        if (
-            this.owner.hasSkyScraperOn[this.color] ||
-            this.owner.hasMonopolyTower
-        ) {
-            rentPrice *= 2;
-        }
+        if (this.type === "")
+            if (
+                this.owner.hasSkyScraperOn[this.color] ||
+                this.owner.hasMonopolyTower
+            ) {
+                rentPrice *= 2;
+            }
 
         return rentPrice;
     }

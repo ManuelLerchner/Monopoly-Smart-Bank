@@ -14,6 +14,7 @@ export default function MainScreen({ setGameState, players }) {
     $("#navbar_stocks").removeClass("selected");
     $("#navbar_overview").removeClass("selected");
     $("#navbar_sell").removeClass("selected");
+    $("#navbar_settings").removeClass("selected");
 
     $(".carousel").show();
     return (
