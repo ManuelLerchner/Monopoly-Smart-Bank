@@ -337,7 +337,6 @@ export default function RentMenu({ players, setPlayers, bank }) {
                 total: 0,
                 direction: "/",
             });
-            
 
             seller.balance = 0;
             seller.skyscraper = 0;
@@ -411,10 +410,10 @@ export default function RentMenu({ players, setPlayers, bank }) {
                             <div className="row  center  padding10 noMarginBot">
                                 <div className="col s6 ">
                                     <button
-                                        className=" btn btn-large-rent waves-effect waves-light red darken-4"
+                                        className=" btn btn-large-rent waves-effect waves-light grey darken-3 yellow-text"
                                         onClick={declareBankruptcy}
                                     >
-                                        Declare Bankruptcy
+                                        Bankruptcy
                                     </button>
                                 </div>
 
