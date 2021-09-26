@@ -7,9 +7,12 @@ import PropertyCard from "../../components/propertyCard/PropertyCard";
 import { PlayerClass } from "../../Data/PlayerClass";
 import $ from "jquery";
 
+import "./SellMenu.css";
+
 export default function RentMenu({ players, setPlayers, bank }) {
     const [playerProperties, setplayerProperties] = useState([]);
     const [selectedProperty, setselectedProperty] = useState(null);
+    const [pressCounter, setPressCounter] = useState(0);
 
     const amountRef = useRef();
 
@@ -21,7 +24,7 @@ export default function RentMenu({ players, setPlayers, bank }) {
         if (sellerID === undefined) {
             // eslint-disable-next-line no-undef
             M.toast({
-                html: "No Renter selected",
+                html: "No Seller selected",
                 classes: "rounded red black-text",
             });
             return;
@@ -126,14 +129,14 @@ export default function RentMenu({ players, setPlayers, bank }) {
                 : amount;
 
         buyer.history.push({
-            msg: `Bought ${selectedProperty.name} from ${seller.name}`,
+            msg: `${buyer.name} bought ${selectedProperty.name} from ${seller.name}`,
             time: new Date().toLocaleTimeString(),
             amount: balanceMoved,
             total: buyer.balance,
             direction: "-",
         });
         seller.history.push({
-            msg: `Sold ${selectedProperty.name} to ${buyer.name}`,
+            msg: `${seller.name} Sold ${selectedProperty.name} to ${buyer.name}`,
             time: new Date().toLocaleTimeString(),
             amount: balanceMoved,
             total: seller.balance,
@@ -244,6 +247,119 @@ export default function RentMenu({ players, setPlayers, bank }) {
         setPlayers([...clone]);
     };
 
+    const declareBankruptcy = () => {
+        const sellerID = $("input:radio[name=Seller]:checked").val();
+        const buyerID = $("input:radio[name=Buyer]:checked").val();
+
+        if (sellerID === undefined) {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: "No Seller selected",
+                classes: "rounded red black-text",
+            });
+            return;
+        }
+        if (buyerID !== bank.id) {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: "Bank needs to be the buyer",
+                classes: "rounded red black-text",
+            });
+            return;
+        }
+
+        if (sellerID === bank.id) {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: "Bank cannot go bancrupt, we are not in Greece",
+                classes: "rounded red black-text",
+            });
+            return;
+        }
+
+        setTimeout(function () {
+            setPressCounter(0);
+        }, 8000);
+
+        setPressCounter(pressCounter + 1);
+
+        const seller = [...players, bank].find(
+            (player) => player.id === sellerID
+        );
+
+        if (pressCounter === 5) {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: `${seller.name} declared Bankruptcy`,
+                classes: "rounded black white-text",
+            });
+
+            seller.properties.forEach((property) => {
+                if (property.skyScraperBuilt) {
+                    seller.hasSkyScraperOn[property.color] = false;
+                    bank.hasSkyScraperOn[property.color] = true;
+
+                    bank.skyscraper += 1;
+                }
+
+                if (property.monopolyTowerBuilt) {
+                    seller.hasMonopolyTower = false;
+                    bank.hasMonopolyTower = true;
+                }
+
+                bank.houses += property.housesCount;
+                seller.houses -= property.housesCount;
+
+                property.skyScraperBuilt = false;
+                property.monopolyTowerBuilt = false;
+                property.buildingSlotsTaken = 0;
+                property.housesCount = 0;
+                property.buildings = [];
+                property.buildingsWorth = 0;
+                property.negativeBuildings = 0;
+                property.mortage = false;
+
+                seller.properties = seller.properties.filter((property) => {
+                    return false;
+                });
+
+                property.owner = bank;
+                bank.properties.push(property);
+            });
+
+            seller.changes["properties"] = "-";
+            bank.changes["properties"] = "+";
+
+            seller.history.push({
+                msg: `${seller.name} declared bankruptcy`,
+                time: new Date().toLocaleTimeString(),
+                amount: seller.balance,
+                total: 0,
+                direction: "/",
+            });
+
+            seller.balance = 0;
+            seller.skyscraper = 0;
+            seller.calcEstimatedValue();
+
+            let clone = players.filter((player) => {
+                return true;
+            });
+
+            setPlayers([...clone]);
+
+            setPressCounter(0);
+        } else {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: `${seller.name}, press ${
+                    5 - pressCounter
+                }  more times to declare Bankruptcy`,
+                classes: "rounded red black-text",
+            });
+        }
+    };
+
     const closeSelectList = (property) => {
         setselectedProperty(property);
         var modalElems = document.querySelectorAll("#modalSelectProperty");
@@ -291,10 +407,34 @@ export default function RentMenu({ players, setPlayers, bank }) {
                 <div className="col l4 offset-l1 s4">
                     <div className="card cardColor-pay ">
                         <div className="card-content white-text">
+                            <div className="row  center  padding10 noMarginBot">
+                                <div className="col s6 ">
+                                    <button
+                                        className=" btn btn-large-rent waves-effect waves-light red darken-4"
+                                        onClick={declareBankruptcy}
+                                    >
+                                        Declare Bankruptcy
+                                    </button>
+                                </div>
+
+                                <div className="col s6">
+                                    {selectedProperty && (
+                                        <button
+                                            className=" btn btn-large-rent waves-effect waves-light orange darken-2"
+                                            onClick={() => {
+                                                toggleMortage(selectedProperty);
+                                            }}
+                                        >
+                                            Toggle Mortage
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+
                             {selectedProperty !== null && (
-                                <div className="row smallRow center">
-                                    <div className="row   ">
-                                        <div className="gridWrapperOneColumn padding10">
+                                <div className="row smallRow center noMarginBot noPaddingTop">
+                                    <div className="row noMarginBot  ">
+                                        <div className="gridWrapperOneColumn ">
                                             <PropertyCard
                                                 property={selectedProperty}
                                                 showType={"rent"}
@@ -302,22 +442,8 @@ export default function RentMenu({ players, setPlayers, bank }) {
                                         </div>
                                     </div>
 
-                                    <div className="row   ">
-                                        <div className="col l6">
-                                            {selectedProperty && (
-                                                <button
-                                                    className=" btn btn-large-rent waves-effect waves-light orange darken-2"
-                                                    onClick={() => {
-                                                        toggleMortage(
-                                                            selectedProperty
-                                                        );
-                                                    }}
-                                                >
-                                                    Toggle Mortage
-                                                </button>
-                                            )}
-                                        </div>
-                                        <div className="col l6 ">
+                                    <div className="row  noMarginBot left ">
+                                        <div className="col s12 ">
                                             {selectedProperty.negativeBuildings >
                                                 0 && (
                                                 <button
@@ -342,7 +468,7 @@ export default function RentMenu({ players, setPlayers, bank }) {
                             )}
 
                             <div className="row   center ">
-                                <div className="col l3 offset-l1 marginBottom">
+                                <div className="col l3 offset-l1 s12 marginBottom">
                                     <button
                                         className=" btn-large btn-large-rent waves-effect waves-light green darken-1"
                                         onClick={select}
@@ -353,7 +479,7 @@ export default function RentMenu({ players, setPlayers, bank }) {
                                         </i>
                                     </button>
                                 </div>
-                                <div className="col l4 input-field">
+                                <div className="col l4 s8 offset-s2 input-field">
                                     <input
                                         id="first_name"
                                         type="text"
@@ -363,7 +489,7 @@ export default function RentMenu({ players, setPlayers, bank }) {
                                     />
                                     <label htmlFor="first_name">Amount</label>
                                 </div>
-                                <div className="col l3  marginBottom">
+                                <div className="col l3  s12 marginBottom">
                                     <button
                                         className=" btn-large btn-large-rent waves-effect waves-light red darken-2 "
                                         onClick={sell}

@@ -1,4 +1,5 @@
 import BankIMG from "../images/Bank.png";
+import HistoryIMG from "../images/history.png";
 
 const { v4: uuidv4 } = require("uuid");
 
@@ -19,7 +20,7 @@ export class PlayerClass {
         this.history = [];
 
         this.history.push({
-            msg: `Received Start Money`,
+            msg: `${this.name} Received Start Money`,
             time: new Date().toLocaleTimeString(),
             amount: this.balance,
             total: this.balance,
@@ -37,6 +38,9 @@ export class PlayerClass {
 
         if (this.name === "Bank") {
             this.img = BankIMG;
+        }
+        if (this.name === "Total History") {
+            this.img = HistoryIMG;
         }
 
         this.calcEstimatedValue = this.calcEstimatedValue.bind(this);
@@ -126,7 +130,7 @@ export class PlayerClass {
         receiver.changes["balance"] = "+";
 
         sender.history.push({
-            msg: `Paid Money to ${receiver.name}`,
+            msg: `${sender.name} paid Money to ${receiver.name}`,
             time: new Date().toLocaleTimeString(),
             amount: balanceMoved,
             total: sender.balance,
@@ -134,7 +138,7 @@ export class PlayerClass {
         });
 
         receiver.history.push({
-            msg: `Received Money from ${sender.name}`,
+            msg: `${receiver.name} received Money from ${sender.name}`,
             time: new Date().toLocaleTimeString(),
             amount: balanceMoved,
             total: receiver.balance,
@@ -163,7 +167,7 @@ export class PlayerClass {
         buyer.changes["properties"] = "+";
 
         buyer.history.push({
-            msg: `Bought ${property.name}`,
+            msg: `${buyer.name} bought ${property.name}`,
             time: new Date().toLocaleTimeString(),
             amount: cost,
             total: buyer.balance,
@@ -203,7 +207,7 @@ export class PlayerClass {
 
         if (building.type === "negative") {
             buyer.history.push({
-                msg: `Constructed ${building.name} on ${property.name}`,
+                msg: `${buyer.name} constructed ${building.name} on ${property.name}`,
                 time: new Date().toLocaleTimeString(),
                 amount: price,
                 total: buyer.balance,
@@ -211,11 +215,11 @@ export class PlayerClass {
             });
         } else {
             buyer.history.push({
-                msg: `Bought ${building.name} on ${property.name}`,
+                msg: `${buyer.name} bought ${building.name} on ${property.name}`,
                 time: new Date().toLocaleTimeString(),
                 amount: price,
                 total: buyer.balance,
-                direction: "-",
+                direction: "+",
             });
         }
 

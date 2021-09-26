@@ -5,7 +5,14 @@ import Logo from "../components/logo/Logo";
 
 import $ from "jquery";
 
-export default function LobbyScreen({ setPlayers, setGameState, startMoney }) {
+export default function LobbyScreen({
+    setPlayers,
+    setGameState,
+    startMoney,
+    setBuildings,
+    setAvailableProperties,
+    setBank,
+}) {
     $("#navbar_lobby").addClass("selected");
     $("#navbar_main").removeClass("selected");
     $("#navbar_pay").removeClass("selected");
@@ -24,6 +31,9 @@ export default function LobbyScreen({ setPlayers, setGameState, startMoney }) {
             <Lobby
                 setPlayers={setPlayers}
                 setGameState={setGameState}
+                setBuildings={setBuildings}
+                setAvailableProperties={setAvailableProperties}
+                setBank={setBank}
                 startMoney={startMoney}
             />
         </>

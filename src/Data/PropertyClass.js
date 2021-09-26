@@ -62,18 +62,18 @@ export class PropertyClass {
             return [false, "Skyscraper is already built on this color"];
         }
 
-        property.buildingSlotsTaken += newSlotsNeeded;
+        property.skyScraperBuilt = true;
 
-        if (building.name === "Skyscraper") {
-            property.buildingsWorth += property.buildingPrice["skyscraper"];
+        if (building.type === "skyscraper") {
+            property.buildingsWorth += property.buildingPrice[building.type];
             property.skyScraperBuilt = true;
-        } else if (building.name === "Monopoly Tower") {
-            property.buildingsWorth += property.buildingPrice["monopolyTower"];
+        } else if (building.type === "monopolyTower") {
+            property.buildingsWorth += property.buildingPrice[building.type];
             property.monopolyTowerBuilt = true;
         } else {
             property.housesCount += newSlotsNeeded;
             property.buildingsWorth +=
-                property.buildingPrice["house"] * newSlotsNeeded;
+                property.buildingPrice[building.type] * newSlotsNeeded;
         }
 
         property.buildings.push(building);
@@ -98,13 +98,12 @@ export class PropertyClass {
             rentPrice = this.baseRent;
         }
 
-        if (this.type === "")
-            if (
-                this.owner.hasSkyScraperOn[this.color] ||
-                this.owner.hasMonopolyTower
-            ) {
-                rentPrice *= 2;
-            }
+        if (
+            this.owner.hasSkyScraperOn[this.color] ||
+            this.owner.hasMonopolyTower
+        ) {
+            rentPrice *= 2;
+        }
 
         return rentPrice;
     }

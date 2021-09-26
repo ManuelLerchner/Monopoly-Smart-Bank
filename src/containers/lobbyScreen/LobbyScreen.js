@@ -3,8 +3,15 @@ import React, { useEffect, useRef } from "react";
 import "./LobbyScreen.css";
 
 import { PlayerClass } from "../../Data/PlayerClass";
+import { loadBuildingData, loadPropertyData } from "../../Data/loadGameData";
 
-export default function AddPlayersForm({ setPlayers, startMoney }) {
+export default function LobbyScreen({
+    setPlayers,
+    startMoney,
+    setBuildings,
+    setAvailableProperties,
+    setBank,
+}) {
     const nameRef = useRef();
 
     //Rerender Materialize on rerender
@@ -38,26 +45,39 @@ export default function AddPlayersForm({ setPlayers, startMoney }) {
         nameRef.current.value = "";
     };
 
+    const reset = () => {
+        setPlayers([]);
+
+        setBank(() => {
+            let bank = new PlayerClass("Bank");
+            bank.balance = 10 ** 10;
+            return bank;
+        });
+
+        loadPropertyData().then((data) => {
+            setAvailableProperties(data);
+        });
+
+        setBuildings(loadBuildingData());
+    };
+
     return (
         <div className="row">
             <div className="col l4 offset-l4 m8 offset-m2 s12">
                 <div className="card cardColor-lobby ">
                     <div className="card-content white-text">
                         {/*Title */}
-
                         <div className="section">
                             <div className="card-title light-blue-text text-lighten-2 center title">
                                 Add Players
                             </div>
                         </div>
-
                         {/*Form */}
-
                         <div className="row">
                             <form onSubmit={handleSubmit}>
                                 {/*Name  */}
 
-                                <div className="row">
+                                <div className="row noMargin">
                                     {/*Icon  */}
 
                                     <div className="input-field col s12">
@@ -94,9 +114,20 @@ export default function AddPlayersForm({ setPlayers, startMoney }) {
                                         </div>
                                     </div>
                                 </div>
+                                <div className="row center ">
+                                    {/*Add Player Button */}
+                                    <div className="input-field col s12  ">
+                                        <div className="col s6 offset-s3">
+                                            <button
+                                                className=" btn btn-large-rent waves-effect waves-light red darken-2"
+                                                onClick={reset}
+                                            >
+                                                Reset Game
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </form>
-
-                            {/*Start Game Button */}
                         </div>
                     </div>
                 </div>

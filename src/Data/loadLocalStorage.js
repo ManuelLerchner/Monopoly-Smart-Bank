@@ -18,7 +18,6 @@ export const loadPlayers = () => {
 
             res.balance = Number.parseFloat(res.balance);
             array.push(res);
-            console.log(res);
         });
     } catch (e) {
         console.log("No Players Loaded from Local Storage");
@@ -57,4 +56,25 @@ export const loadBuildings = () => {
         console.log("No Buildings Loaded from Local Storage");
     }
     return array;
+};
+
+export const loadBank = () => {
+    let bank;
+    try {
+        let loadedBank = JSON.parse(localStorage.getItem("bank"));
+
+        let res = Object.assign(new PlayerClass(), loadedBank);
+
+        res.properties = res.properties.map((prop) => {
+            let obj = Object.assign(new PropertyClass(), prop);
+            obj.owner = res;
+            return obj;
+        });
+        res.balance = Number.parseFloat(res.balance);
+        bank = res;
+    } catch (e) {
+        console.log("No Bank Loaded from Local Storage");
+    }
+
+    return bank;
 };

@@ -14,13 +14,29 @@
     user-select: none;
 }
 
-.tbody-scrollable {
+.smallHeight {
     display: block;
     height: 50px;
     overflow: auto;
+
     height: 100% !important;
-    max-height: 200px;
+    padding-bottom: 5px !important;
+    font-size: 15px;
+    max-height: 300px;
 }
+
+.fullHeigth {
+    display: block;
+    height: 50px;
+    overflow: auto;
+
+    height: 100% !important;
+    padding-bottom: 5px !important;
+    font-size: 15px;
+    max-height: 65vh !important;
+    height: 65vh !important;
+}
+
 .thead-scrollable,
 .tbody-scrollable tr {
     display: table;
@@ -35,7 +51,7 @@
 
 .thead-scrollable th {
     padding: 10px !important;
-    padding-top: 0px !important;
+
     font-weight: 700;
 }
 
@@ -60,4 +76,8 @@
 
 .marginTop {
     margin-top: 50px;
+}
+
+.descriptionBox {
+    width: 45% !important;
 }

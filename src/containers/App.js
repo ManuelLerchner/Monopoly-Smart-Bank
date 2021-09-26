@@ -21,7 +21,12 @@ import BottomBar from "../components/bottomBar/BottomBar";
 import { loadBuildingData, loadPropertyData } from "../Data/loadGameData";
 
 import SettingScreen from "./SettingsScreen";
-import { loadAvailableProperties, loadPlayers } from "../Data/loadLocalStorage";
+import {
+    loadAvailableProperties,
+    loadBank,
+    loadBuildings,
+    loadPlayers,
+} from "../Data/loadLocalStorage";
 
 export default function App() {
     //Player List,  Game State
@@ -30,7 +35,7 @@ export default function App() {
         loadAvailableProperties() || []
     );
 
-    const [buildings, setBuildings] = useState([]);
+    const [buildings, setBuildings] = useState(loadBuildings() || []);
 
     const [startMoney, setStartMoney] = useState(
         localStorage.getItem("startMoney") || 55 * 10 ** 6
@@ -42,11 +47,19 @@ export default function App() {
     const [gameState, setGameState] = useState(
         localStorage.getItem("gameState") || "lobby"
     );
-    const [bank, setbank] = useState(new PlayerClass("Bank"));
+    const [bank, setBank] = useState(loadBank() || null);
 
     //Update Local Storage
     useEffect(() => {
         const playerJson = JSON.stringify(players, function (key, value) {
+            if (key === "owner") {
+                return value.id;
+            } else {
+                return value;
+            }
+        });
+
+        const bankJson = JSON.stringify(bank, function (key, value) {
             if (key === "owner") {
                 return value.id;
             } else {
@@ -64,6 +77,7 @@ export default function App() {
         localStorage.setItem("startMoney", startMoney);
         localStorage.setItem("maxHouses", maxHouses);
         localStorage.setItem("gameState", gameState);
+        localStorage.setItem("bank", bankJson);
     }, [
         players,
         availableProperties,
@@ -75,11 +89,13 @@ export default function App() {
     ]);
 
     useEffect(() => {
-        setbank(() => {
-            let bank = new PlayerClass("Bank");
-            bank.balance = 10 ** 10;
-            return bank;
-        });
+        if (bank === null) {
+            setBank(() => {
+                let bank = new PlayerClass("Bank");
+                bank.balance = 10 ** 10;
+                return bank;
+            });
+        }
 
         if (availableProperties.length === 0) {
             loadPropertyData().then((data) => {
@@ -103,6 +119,9 @@ export default function App() {
                         players={players}
                         setPlayers={setPlayers}
                         setGameState={setGameState}
+                        setBuildings={setBuildings}
+                        setAvailableProperties={setAvailableProperties}
+                        setBank={setBank}
                         startMoney={startMoney}
                     />
                 );
