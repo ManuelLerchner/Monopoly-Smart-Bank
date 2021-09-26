@@ -337,6 +337,7 @@ export default function RentMenu({ players, setPlayers, bank }) {
                 total: 0,
                 direction: "/",
             });
+            
 
             seller.balance = 0;
             seller.skyscraper = 0;
