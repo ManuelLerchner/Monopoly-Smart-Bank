@@ -19,3 +19,12 @@ input.valid[type="text"],
     border-bottom: 1px solid #10be44 !important;
     box-shadow: 0 1px 0 0 #10be44;
 }
+
+.noPadding {
+    padding: 0px !important;
+}
+
+.noMargin {
+    margin: 0px !important;
+    margin-bottom: 10px !important;
+}

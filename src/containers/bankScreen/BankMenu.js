@@ -8,7 +8,7 @@ import BankImg from "../../images/Bank.png"; //
 import $ from "jquery";
 import "./BankMenu.css";
 
-export default function BankScreen({ players, setPlayers }) {
+export default function BankScreen({ players, setPlayers, bank }) {
     const amountRef = useRef();
 
     const transfer = (direction, val) => {
@@ -36,13 +36,10 @@ export default function BankScreen({ players, setPlayers }) {
 
         const customer = players.find((player) => player.id === customerID);
 
-        let Bank = new PlayerClass("Bank");
-        Bank.balance = 10 ** 16;
-
         const [succesfull, paymentMSG] =
             direction === "send"
-                ? PlayerClass.sendMoney(customer, Bank, amount)
-                : PlayerClass.sendMoney(Bank, customer, amount);
+                ? PlayerClass.sendMoney(customer, bank, amount)
+                : PlayerClass.sendMoney(bank, customer, amount);
 
         if (!succesfull) {
             // eslint-disable-next-line no-undef
@@ -167,10 +164,10 @@ export default function BankScreen({ players, setPlayers }) {
                                     className=" btn-large  waves-effect waves-light blue darken-1"
                                     type="submit"
                                     onClick={() => {
-                                        transfer("receive", "4M");
+                                        transfer("receive", "5M");
                                     }}
                                 >
-                                    <strong>4 M </strong>
+                                    <strong>5 M </strong>
                                     <i className="material-icons left hide-on-small-only ">
                                         keyboard_double_arrow_left
                                     </i>
@@ -181,10 +178,10 @@ export default function BankScreen({ players, setPlayers }) {
                                     className=" btn-large  waves-effect waves-light purple lighten-1"
                                     type="submit"
                                     onClick={() => {
-                                        transfer("receive", "5M");
+                                        transfer("receive", "7M");
                                     }}
                                 >
-                                    <strong>5 M </strong>
+                                    <strong>7 M </strong>
                                     <i className="material-icons left hide-on-small-only ">
                                         keyboard_double_arrow_left
                                     </i>

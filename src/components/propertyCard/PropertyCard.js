@@ -9,7 +9,9 @@ export default function PropertyCard({ property, clickCallback, showType }) {
     }`;
 
     const handleClick = () => {
-        clickCallback(property);
+        try {
+            clickCallback(property);
+        } catch (e) {}
     };
 
     return (

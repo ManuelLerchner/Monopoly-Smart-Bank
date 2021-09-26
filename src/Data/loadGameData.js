@@ -1,6 +1,22 @@
 import gamedata from "../Data/gamedata.csv";
+import { PropertyClass } from "./PropertyClass";
+import { BuildingClass } from "./BuildingClass";
 
-export default function loadCSV() {
+import One_House from "../images/houses/1 House.jpg";
+import Two_Houses from "../images/houses/2 Houses.jpg";
+import Three_Houses from "../images/houses/3 Houses.jpg";
+import One_Industrial from "../images/houses/1 Industrial.jpg";
+import Two_Industrial from "../images/houses/2 Industrial.jpg";
+import Three_Industrial from "../images/houses/3 Industrial.jpg";
+import Skyscraper from "../images/houses/Skyscraper.jpg";
+import MonopolyTower from "../images/houses/Monopoly Tower.jpg";
+
+import Prison from "../images/houses/Prison.jpg";
+import Dump from "../images/houses/Dump.jpg";
+import Power from "../images/houses/Power.jpg";
+import Sewage from "../images/houses/Sewage.jpg";
+
+function loadCSV() {
     return new Promise(function (resolve, reject) {
         const xhr = new XMLHttpRequest();
         const dataArray = [];
@@ -60,4 +76,81 @@ export default function loadCSV() {
         xhr.open("GET", gamedata, true);
         xhr.send();
     });
+}
+
+export async function loadPropertyData() {
+    const data = await loadCSV();
+
+    const properties = [];
+    for (const id in data) {
+        const property = data[id];
+
+        let name = property.name;
+        let cost = property.cost;
+        let color = property.color;
+        let rentPrice = {
+            1: property.rentPrice_1,
+            2: property.rentPrice_2,
+            3: property.rentPrice_3,
+            4: property.rentPrice_4,
+            5: property.rentPrice_5,
+            6: property.rentPrice_6,
+            7: property.rentPrice_7,
+            8: property.rentPrice_8,
+        };
+
+        let baseRent = property.baseRent;
+        let buildingPrice = {
+            house: property.housePrice,
+            skyscraper: property.skyScraperPrice,
+            monopolyTower: 10 * 10 ** 6,
+            industrial: property.industrialBuildingPrice,
+            negative: 0,
+        };
+
+        properties.push(
+            new PropertyClass(
+                name,
+                cost,
+                color,
+                baseRent,
+                rentPrice,
+                buildingPrice
+            )
+        );
+    }
+
+    return properties;
+}
+
+export function loadBuildingData() {
+    return [
+        new BuildingClass("1 House", One_House, 1, "house"),
+        new BuildingClass("2 Houses", Two_Houses, 2, "house"),
+        new BuildingClass("3 Houses", Three_Houses, 3, "house"),
+        new BuildingClass(
+            "1 Industrial Building",
+            One_Industrial,
+            1,
+            "industrial"
+        ),
+        new BuildingClass(
+            "2 Industrial Buildings",
+            Two_Industrial,
+            2,
+            "industrial"
+        ),
+        new BuildingClass(
+            "3 Industrial Buildings",
+            Three_Industrial,
+            3,
+            "industrial"
+        ),
+        new BuildingClass("Skyscraper", Skyscraper, 0, "skyscraper"),
+        new BuildingClass("Monopoly Tower", MonopolyTower, 0, "monopolyTower"),
+        new BuildingClass("Sewage Treatment", Sewage, 0, "negative", 1),
+        new BuildingClass("Power Plant", Power, 0, "negative", 2),
+        new BuildingClass("Dump", Dump, 0, "negative", 3),
+        new BuildingClass("Prison", Prison, 0, "negative", 4),
+    ];
 }

@@ -39,13 +39,19 @@ export default function BuyModal({
 
             let type = property.type;
 
-            let priceMultiplier = property.type === "house" ? property.slotsTaken : 1;
+            let priceMultiplier = ["house", "industrial"].includes(
+                property.type
+            )
+                ? property.slotsTaken
+                : 1;
 
             return (
                 <BuildingCard
                     key={property.id}
                     building={property}
-                    price={selectedProperty.buildingPrice[type] * priceMultiplier}
+                    price={
+                        selectedProperty.buildingPrice[type] * priceMultiplier
+                    }
                     clickCallback={clickCallback}
                 />
             );
@@ -63,7 +69,11 @@ export default function BuyModal({
                 {properties.length === 0 && (
                     <h5>Player doesn't own any properties</h5>
                 )}
-                {properties.map((property, i) => renderCards(property, i))}
+                {properties
+                    .sort((a, b) => {
+                        return a.idx - b.idx;
+                    })
+                    .map((property, i) => renderCards(property, i))}
             </div>
         </div>
     );

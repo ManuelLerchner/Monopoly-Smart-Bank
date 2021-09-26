@@ -4,7 +4,12 @@ import BankMenu from "./bankScreen/BankMenu";
 
 import $ from "jquery";
 
-export default function BankScreen({ players, setPlayers, setGameState }) {
+export default function BankScreen({
+    players,
+    setPlayers,
+    setGameState,
+    bank,
+}) {
     $("#navbar_lobby").removeClass("selected");
     $("#navbar_main").removeClass("selected");
     $("#navbar_pay").removeClass("selected");
@@ -20,7 +25,7 @@ export default function BankScreen({ players, setPlayers, setGameState }) {
     return (
         <>
             <Logo setGameState={setGameState} />
-            <BankMenu players={players} setPlayers={setPlayers} />
+            <BankMenu players={players} setPlayers={setPlayers} bank={bank} />
         </>
     );
 }

@@ -14,6 +14,7 @@ export default function BuyScreen({
     buildings,
     setBuildings,
     bank,
+    maxHouses
 }) {
     $("#navbar_lobby").removeClass("selected");
     $("#navbar_main").removeClass("selected");
@@ -39,6 +40,7 @@ export default function BuyScreen({
                 buildings={buildings}
                 setBuildings={setBuildings}
                 bank={bank}
+                maxHouses={maxHouses}
             />
         </>
     );

@@ -9,7 +9,6 @@ export class BuildingClass {
         this.slotsTaken = slotsTaken;
         this.type = type;
         this.negativeSpace = negativeSpace;
-
         this.className = "BuildingClass";
     }
 }

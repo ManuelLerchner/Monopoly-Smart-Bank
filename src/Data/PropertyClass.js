@@ -23,14 +23,16 @@ export class PropertyClass {
 
         this.buildingsWorth = 0;
         this.negativeBuildings = 0;
-
-        this.img = `https://picsum.photos/id/${counter}/300/480`;
-
         this.mortage = false;
+
+        this.img = `https://picsum.photos/id/${0}/300/480`;
+        this.idx = counter;
+        counter++;
 
         this.className = "PropertyClass";
 
-        this.loadImage(name);
+        this.loadImage(this.name);
+        this.calcRentCost = this.calcRentCost.bind(this);
     }
 
     loadImage = async (imageName) => {
@@ -38,9 +40,7 @@ export class PropertyClass {
             .then((image) => {
                 this.img = image.default;
             })
-            .catch((e) => {
-                console.log(e);
-            });
+            .catch((e) => {});
     };
 
     static builtBuilding(property, building) {
@@ -62,18 +62,18 @@ export class PropertyClass {
             return [false, "Skyscraper is already built on this color"];
         }
 
-        property.buildingSlotsTaken += newSlotsNeeded;
+        property.skyScraperBuilt = true;
 
-        if (building.name === "Skyscraper") {
-            property.buildingsWorth += property.buildingPrice["skyscraper"];
+        if (building.type === "skyscraper") {
+            property.buildingsWorth += property.buildingPrice[building.type];
             property.skyScraperBuilt = true;
-        } else if (building.name === "Monopoly Tower") {
-            property.buildingsWorth += property.buildingPrice["monopolyTower"];
+        } else if (building.type === "monopolyTower") {
+            property.buildingsWorth += property.buildingPrice[building.type];
             property.monopolyTowerBuilt = true;
         } else {
             property.housesCount += newSlotsNeeded;
             property.buildingsWorth +=
-                property.buildingPrice["house"] * newSlotsNeeded;
+                property.buildingPrice[building.type] * newSlotsNeeded;
         }
 
         property.buildings.push(building);
@@ -98,13 +98,12 @@ export class PropertyClass {
             rentPrice = this.baseRent;
         }
 
-        if (this.type === "")
-            if (
-                this.owner.hasSkyScraperOn[this.color] ||
-                this.owner.hasMonopolyTower
-            ) {
-                rentPrice *= 2;
-            }
+        if (
+            this.owner.hasSkyScraperOn[this.color] ||
+            this.owner.hasMonopolyTower
+        ) {
+            rentPrice *= 2;
+        }
 
         return rentPrice;
     }

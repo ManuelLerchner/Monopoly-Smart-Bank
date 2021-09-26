@@ -44,25 +44,27 @@
 
 .modal {
     width: 90% !important ;
- 
     max-height: 80% !important;
-
 }
 
 .icon {
+    filter: drop-shadow(0 3px 0.7rem rgb(19, 2, 4));
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     width: 64px;
     height: 64px;
-    padding-right: 8px;
-    filter: drop-shadow(0 8px 0.7rem rgb(19, 2, 4));
 }
 
 .iconSmall {
-    width: auto;
-    height: 50px;
-    margin-top: 6px;
-    margin-bottom: 6px;
-    margin-right: 6px;
     filter: drop-shadow(0 0 0.75rem rgb(219, 201, 204));
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50px;
+
 }
 
 .toast {
