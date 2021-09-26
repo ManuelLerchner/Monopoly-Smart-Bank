@@ -59,9 +59,13 @@ export const loadBuildings = () => {
 };
 
 export const loadBank = () => {
-    let bank;
+    let bank = null;
     try {
         let loadedBank = JSON.parse(localStorage.getItem("bank"));
+
+        if (loadedBank === null) {
+            throw new Error("");
+        }
 
         let res = Object.assign(new PlayerClass(), loadedBank);
 

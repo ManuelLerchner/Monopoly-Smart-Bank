@@ -77,6 +77,7 @@ export default function App() {
         localStorage.setItem("startMoney", startMoney);
         localStorage.setItem("maxHouses", maxHouses);
         localStorage.setItem("gameState", gameState);
+
         localStorage.setItem("bank", bankJson);
     }, [
         players,
@@ -91,9 +92,7 @@ export default function App() {
     useEffect(() => {
         if (bank === null) {
             setBank(() => {
-                let bank = new PlayerClass("Bank");
-                bank.balance = 10 ** 10;
-                return bank;
+                return new PlayerClass("Bank", 10 ** 10);
             });
         }
 
