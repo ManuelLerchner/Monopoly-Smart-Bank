@@ -7,7 +7,7 @@ import PropertyCard from "../../components/propertyCard/PropertyCard";
 import { PlayerClass } from "../../Data/PlayerClass";
 import $ from "jquery";
 
-export default function RentMenu({ players, setPlayers, bank, set }) {
+export default function RentMenu({ players, setPlayers, bank }) {
     const [playerProperties, setplayerProperties] = useState([]);
     const [selectedProperty, setselectedProperty] = useState(null);
 
@@ -97,7 +97,18 @@ export default function RentMenu({ players, setPlayers, bank, set }) {
         }
 
         buyer.houses += selectedProperty.housesCount;
-        seller.houses += selectedProperty.housesCount;
+        seller.houses -= selectedProperty.housesCount;
+
+        if (buyer === bank) {
+            selectedProperty.skyScraperBuilt = false;
+            selectedProperty.monopolyTowerBuilt = false;
+            selectedProperty.buildingSlotsTaken = 0;
+            selectedProperty.housesCount = 0;
+            selectedProperty.buildings = [];
+            selectedProperty.buildingsWorth = 0;
+            selectedProperty.negativeBuildings = 0;
+            selectedProperty.mortage = false;
+        }
 
         seller.properties = seller.properties.filter((property) => {
             return property.id !== selectedProperty.id;
@@ -128,6 +139,9 @@ export default function RentMenu({ players, setPlayers, bank, set }) {
             total: seller.balance,
             direction: "-",
         });
+
+        buyer.calcEstimatedValue();
+        seller.calcEstimatedValue();
 
         let clone = players.map((player) => {
             if (player.id === seller.id) {
@@ -171,9 +185,20 @@ export default function RentMenu({ players, setPlayers, bank, set }) {
     const toggleMortage = (property) => {
         property.mortage = !property.mortage;
 
+        const ownerID = $("input:radio[name=Seller]:checked").val();
+        const owner = [...players, bank].find(
+            (player) => player.id === ownerID
+        );
+
         let clone = players.map((player) => {
             return player;
         });
+
+        if (property.mortage === true) {
+            PlayerClass.sendMoney(bank, owner, property.calcRentCost());
+        } else {
+            PlayerClass.sendMoney(owner, bank, property.calcRentCost());
+        }
 
         setPlayers([...clone]);
 
@@ -188,7 +213,6 @@ export default function RentMenu({ players, setPlayers, bank, set }) {
 
     const sellSurgeon = (property) => {
         const amount = property.negativeBuildings * 0.5 * 10 ** 6;
-        console.log(amount);
 
         const sellerID = $("input:radio[name=Seller]:checked").val();
 
@@ -269,15 +293,17 @@ export default function RentMenu({ players, setPlayers, bank, set }) {
                         <div className="card-content white-text">
                             {selectedProperty !== null && (
                                 <div className="row smallRow center">
-                                    <div className="gridWrapperOneColumn padding10">
-                                        <PropertyCard
-                                            property={selectedProperty}
-                                            showType={"rent"}
-                                        />
+                                    <div className="row   ">
+                                        <div className="gridWrapperOneColumn padding10">
+                                            <PropertyCard
+                                                property={selectedProperty}
+                                                showType={"rent"}
+                                            />
+                                        </div>
                                     </div>
 
-                                    <div className="row  padding10 noMargin ">
-                                        <div className="col l4">
+                                    <div className="row   ">
+                                        <div className="col l6">
                                             {selectedProperty && (
                                                 <button
                                                     className=" btn btn-large-rent waves-effect waves-light orange darken-2"
@@ -291,7 +317,7 @@ export default function RentMenu({ players, setPlayers, bank, set }) {
                                                 </button>
                                             )}
                                         </div>
-                                        <div className="col l7 offset-l1 ">
+                                        <div className="col l6 ">
                                             {selectedProperty.negativeBuildings >
                                                 0 && (
                                                 <button
@@ -302,7 +328,7 @@ export default function RentMenu({ players, setPlayers, bank, set }) {
                                                         );
                                                     }}
                                                 >
-                                                    {"Remove Distrubance for " +
+                                                    {"Remove Distrubance: " +
                                                         PlayerClass.formatMoney(
                                                             0.5 *
                                                                 10 ** 6 *
@@ -315,7 +341,7 @@ export default function RentMenu({ players, setPlayers, bank, set }) {
                                 </div>
                             )}
 
-                            <div className="row  padding10 center ">
+                            <div className="row   center ">
                                 <div className="col l3 offset-l1 marginBottom">
                                     <button
                                         className=" btn-large btn-large-rent waves-effect waves-light green darken-1"

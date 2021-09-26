@@ -10,6 +10,8 @@ import $ from "jquery";
 
 import "./BuyMenu.css";
 
+let housesBuilt = 0;
+
 export default function BuyMenu({
     players,
     setPlayers,
@@ -18,6 +20,7 @@ export default function BuyMenu({
     buildings,
     setBuildings,
     bank,
+    maxHouses,
 }) {
     const [selectedProperty, setselectedProperty] = useState(null);
     const [playerProperties, setplayerProperties] = useState([]);
@@ -104,6 +107,17 @@ export default function BuyMenu({
             return;
         }
 
+        if (maxHouses < housesBuilt + building.slotsTaken) {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: `Missing ${
+                    housesBuilt + building.slotsTaken - maxHouses 
+                } houses`,
+                classes: "rounded red black-text",
+            });
+            return;
+        }
+
         const buyer = players.find((player) => player.id === buyerID);
 
         if (buyer.balance < price) {
@@ -154,6 +168,10 @@ export default function BuyMenu({
 
         if (building.name === "Monopoly Tower") {
             setBuildings(buildings.filter((build) => build.id !== building.id));
+        }
+
+        if (building.type === "house") {
+            housesBuilt += newSlotsNeeded;
         }
 
         if (!succesfullTransaction) {

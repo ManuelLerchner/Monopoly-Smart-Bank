@@ -126,8 +126,20 @@ export default function OverviewMenu({ players }) {
                                         </thead>
                                         <tbody className="tbody-scrollable  ">
                                             {selectedPlayer &&
-                                                selectedPlayer.history.map(
-                                                    (data) => {
+                                                selectedPlayer.history
+                                                    .sort((a, b) => {
+                                                        return (
+                                                            new Date(
+                                                                "1970/01/01 " +
+                                                                    b.time
+                                                            ) -
+                                                            new Date(
+                                                                "1970/01/01 " +
+                                                                    a.time
+                                                            )
+                                                        );
+                                                    })
+                                                    .map((data) => {
                                                         let style =
                                                             data.direction ===
                                                             "+"
@@ -144,7 +156,7 @@ export default function OverviewMenu({ players }) {
                                                                 }
                                                                 key={
                                                                     data.time +
-                                                                    selectedPlayer.id
+                                                                    selectedPlayer.id+data.direction
                                                                 }
                                                             >
                                                                 <td className="align-center">
@@ -165,8 +177,7 @@ export default function OverviewMenu({ players }) {
                                                                 </td>
                                                             </tr>
                                                         );
-                                                    }
-                                                )}
+                                                    })}
                                         </tbody>
                                     </table>
                                 </div>

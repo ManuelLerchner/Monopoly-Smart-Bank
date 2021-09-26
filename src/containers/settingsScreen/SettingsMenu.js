@@ -3,8 +3,14 @@ import { PlayerClass } from "../../Data/PlayerClass";
 
 import "./SettingsMenu.css";
 
-export default function SettingsMenu({ startMoney, setStartMoney }) {
+export default function SettingsMenu({
+    startMoney,
+    setStartMoney,
+    maxHouses,
+    setMaxHouses,
+}) {
     const startMoneyRef = useRef(null);
+    const totalHousesRef = useRef(null);
 
     const updateStartMoney = () => {
         const newVal = startMoneyRef.current.value;
@@ -30,6 +36,32 @@ export default function SettingsMenu({ startMoney, setStartMoney }) {
         }
 
         setStartMoney(val);
+    };
+
+    const updateTotalHouses = () => {
+        const val = totalHousesRef.current.value;
+
+        if (val === "") {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: "No new value provided",
+                classes: "rounded red black-text",
+            });
+            return;
+        }
+
+        const numInt = Number.parseInt(val);
+
+        if (!Number.isInteger(numInt)) {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: "Invalid Money Format",
+                classes: "rounded red black-text",
+            });
+            return;
+        }
+
+        setMaxHouses(val);
     };
 
     return (
@@ -73,11 +105,11 @@ export default function SettingsMenu({ startMoney, setStartMoney }) {
                                                 <div className="row center">
                                                     <div className="input-field col s9 offset-s2">
                                                         <input
-                                                            id="first_name"
+                                                            id="startmoney"
                                                             type="text"
                                                             ref={startMoneyRef}
                                                         />
-                                                        <label for="first_name">
+                                                        <label htmlFor="startmoney">
                                                             New Start Value
                                                         </label>
                                                     </div>
@@ -92,6 +124,50 @@ export default function SettingsMenu({ startMoney, setStartMoney }) {
                                                             name="action"
                                                             onClick={
                                                                 updateStartMoney
+                                                            }
+                                                        >
+                                                            Update
+                                                            <i className="material-icons right">
+                                                                sync_alt
+                                                            </i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td className="align-left">
+                                                Total Houses
+                                            </td>
+
+                                            <td className="align-left">
+                                                {maxHouses}
+                                            </td>
+
+                                            <td className="align-right">
+                                                <div className="row center">
+                                                    <div className="input-field col s9 offset-s2">
+                                                        <input
+                                                            id="totalhouses"
+                                                            type="text"
+                                                            ref={totalHousesRef}
+                                                        />
+                                                        <label htmlFor="totalhouses">
+                                                            New Total Houses
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div className="row center">
+                                                    <div className="col s8 offset-s2">
+                                                        <button
+                                                            className="btn waves-effect orange darken-3 waves-light"
+                                                            type="submit"
+                                                            name="action"
+                                                            onClick={
+                                                                updateTotalHouses
                                                             }
                                                         >
                                                             Update

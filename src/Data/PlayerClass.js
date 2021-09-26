@@ -7,7 +7,7 @@ export class PlayerClass {
         this.id = uuidv4();
         this.name = name;
 
-        this.balance = startMoney || 10 * 10 ** 6;
+        this.balance = Number.parseFloat(startMoney) || 10 * 10 ** 6;
         this.properties = [];
         this.houses = 0;
         this.skyscraper = 0;
@@ -159,7 +159,7 @@ export class PlayerClass {
         if (cost > 0) {
             buyer.changes["balance"] = "-";
         }
-        console.log(cost);
+
         buyer.changes["properties"] = "+";
 
         buyer.history.push({

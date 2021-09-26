@@ -23,14 +23,16 @@ export class PropertyClass {
 
         this.buildingsWorth = 0;
         this.negativeBuildings = 0;
-
-        this.img = `https://picsum.photos/id/${counter}/300/480`;
-
         this.mortage = false;
+
+        this.img = `https://picsum.photos/id/${0}/300/480`;
+        this.idx = counter;
+        counter++;
 
         this.className = "PropertyClass";
 
-        this.loadImage(name);
+        this.loadImage(this.name);
+        this.calcRentCost = this.calcRentCost.bind(this);
     }
 
     loadImage = async (imageName) => {
@@ -38,9 +40,7 @@ export class PropertyClass {
             .then((image) => {
                 this.img = image.default;
             })
-            .catch((e) => {
-                console.log(e);
-            });
+            .catch((e) => {});
     };
 
     static builtBuilding(property, building) {

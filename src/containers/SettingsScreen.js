@@ -8,6 +8,8 @@ export default function SettingScreen({
     setGameState,
     startMoney,
     setStartMoney,
+    maxHouses,
+    setMaxHouses,
 }) {
     $("#navbar_lobby").removeClass("selected");
     $("#navbar_main").removeClass("selected");
@@ -27,6 +29,8 @@ export default function SettingScreen({
             <SettingsMenu
                 startMoney={startMoney}
                 setStartMoney={setStartMoney}
+                maxHouses={maxHouses}
+                setMaxHouses={setMaxHouses}
             />
         </>
     );
