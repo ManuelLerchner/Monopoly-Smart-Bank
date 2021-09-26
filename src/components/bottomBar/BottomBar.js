@@ -22,7 +22,7 @@ export default function BottomBar({ players }) {
 
     return (
         <div className="stickBottom">
-            <div className="carousel">
+            <div id="bottomBar" className="carousel">
                 <div style={style}>
                     {players.map((player) => {
                         return <PlayerCard key={player.id} player={player} />;

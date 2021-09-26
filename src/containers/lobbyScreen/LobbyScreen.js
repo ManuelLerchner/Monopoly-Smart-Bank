@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import "./LobbyScreen.css";
 
@@ -13,6 +13,7 @@ export default function LobbyScreen({
     setBank,
 }) {
     const nameRef = useRef();
+    const [pressCounter, setPressCounter] = useState(0);
 
     //Rerender Materialize on rerender
     useEffect(() => {
@@ -45,20 +46,40 @@ export default function LobbyScreen({
         nameRef.current.value = "";
     };
 
-    const reset = () => {
-        setPlayers([]);
+    const resetGame = () => {
+        setTimeout(function () {
+            setPressCounter(0);
+        }, 8000);
 
-        setBank(() => {
-            let bank = new PlayerClass("Bank");
-            bank.balance = 10 ** 10;
-            return bank;
-        });
+        setPressCounter(pressCounter + 1);
 
-        loadPropertyData().then((data) => {
-            setAvailableProperties(data);
-        });
+        if (pressCounter === 5) {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: `Game reset`,
+                classes: "rounded black white-text",
+            });
+            setPlayers([]);
 
-        setBuildings(loadBuildingData());
+            setBank(() => {
+                let bank = new PlayerClass("Bank");
+                bank.balance = 10 ** 10;
+                return bank;
+            });
+
+            loadPropertyData().then((data) => {
+                setAvailableProperties(data);
+            });
+
+            setBuildings(loadBuildingData());
+            setPressCounter(0);
+        } else {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: `Press ${5 - pressCounter}  more times to reset Game`,
+                classes: "rounded red black-text",
+            });
+        }
     };
 
     return (
@@ -120,7 +141,7 @@ export default function LobbyScreen({
                                         <div className="col s6 offset-s3">
                                             <button
                                                 className=" btn btn-large-rent waves-effect waves-light red darken-2"
-                                                onClick={reset}
+                                                onClick={resetGame}
                                             >
                                                 Reset Game
                                             </button>

@@ -9,6 +9,9 @@ import $ from "jquery";
 
 import "./SellMenu.css";
 
+import moment from "moment";
+const DATE_RFC2822 = "ddd, DD MMM YYYY HH:mm:ss ZZ";
+
 export default function RentMenu({ players, setPlayers, bank }) {
     const [playerProperties, setplayerProperties] = useState([]);
     const [selectedProperty, setselectedProperty] = useState(null);
@@ -130,16 +133,18 @@ export default function RentMenu({ players, setPlayers, bank }) {
 
         buyer.history.push({
             msg: `${buyer.name} bought ${selectedProperty.name} from ${seller.name}`,
-            time: new Date().toLocaleTimeString(),
+            time: moment(new Date()).format(DATE_RFC2822),
             amount: balanceMoved,
             total: buyer.balance,
+            netWorth: seller.calcEstimatedValue(),
             direction: "-",
         });
         seller.history.push({
             msg: `${seller.name} Sold ${selectedProperty.name} to ${buyer.name}`,
-            time: new Date().toLocaleTimeString(),
+            time: moment(new Date()).format(DATE_RFC2822),
             amount: balanceMoved,
             total: seller.balance,
+            netWorth: seller.calcEstimatedValue(),
             direction: "-",
         });
 
@@ -332,8 +337,9 @@ export default function RentMenu({ players, setPlayers, bank }) {
 
             seller.history.push({
                 msg: `${seller.name} declared bankruptcy`,
-                time: new Date().toLocaleTimeString(),
+                time: moment(new Date()).format(DATE_RFC2822),
                 amount: seller.balance,
+                netWorth: seller.calcEstimatedValue(),
                 total: 0,
                 direction: "/",
             });

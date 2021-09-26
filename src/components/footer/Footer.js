@@ -29,6 +29,9 @@ export default function Footer() {
                     </div>
                     <div className="col l4 offset-l1 s7 ">
                         <h5 className="orange-text text-darken-1">Features</h5>
+                        <p className="grey-text text-lighten-4">
+                            Here is a basic guide to the website:
+                        </p>
                         <ol>
                             <li>Add Players in the "Lobby"</li>
                             <li>Transfer money between players in "Pay"</li>
@@ -40,6 +43,11 @@ export default function Footer() {
                             <li>Toggle mortage on a property in "Sell"</li>
                             <li>Look at the game history in "Overview"</li>
                         </ol>
+                        <p className="grey-text text-lighten-4">
+                            The game progress gets saved in local storage. If
+                            you want to reset the game click the "Reset" button
+                            in the Lobby.
+                        </p>
                     </div>
                     <div className="col l2  offset-l1 s3 offset-s1">
                         <h5 className="orange-text text-darken-1">Links</h5>

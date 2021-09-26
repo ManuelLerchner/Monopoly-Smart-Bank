@@ -79,7 +79,7 @@ export default function Navbar({ setGameState }) {
                                 <i className="material-icons left">
                                     visibility
                                 </i>
-                                Overview
+                                Stats
                             </a>
                         </li>
                         <li>
@@ -228,6 +228,20 @@ export default function Navbar({ setGameState }) {
                     >
                         <i className="material-icons left">visibility</i>
                         Overview
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        id="navbar_settings"
+                        href="#!"
+                        onClick={() => {
+                            setGameState("settings");
+                        }}
+                        className=""
+                    >
+                        <i className="material-icons left">settings</i>
+                        Settings
                     </a>
                 </li>
 

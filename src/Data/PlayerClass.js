@@ -1,7 +1,10 @@
 import BankIMG from "../images/Bank.png";
 import HistoryIMG from "../images/history.png";
 
+import moment from "moment";
+
 const { v4: uuidv4 } = require("uuid");
+const DATE_RFC2822 = "ddd, DD MMM YYYY HH:mm:ss ZZ";
 
 export class PlayerClass {
     constructor(name, startMoney) {
@@ -21,9 +24,10 @@ export class PlayerClass {
 
         this.history.push({
             msg: `${this.name} Received Start Money`,
-            time: new Date().toLocaleTimeString(),
+            time: moment(new Date()).format(DATE_RFC2822),
             amount: this.balance,
             total: this.balance,
+            netWorth: this.calcEstimatedValue(),
             direction: "+",
         });
 
@@ -34,7 +38,7 @@ export class PlayerClass {
             skyscraper: "",
         };
 
-        this.img = `https://avatars.dicebear.com/api/open-peeps/${name}.svg`;
+        this.img = `https://avatars.dicebear.com/api/open-peeps/${name+Date()}.svg`;
 
         if (this.name === "Bank") {
             this.img = BankIMG;
@@ -131,17 +135,19 @@ export class PlayerClass {
 
         sender.history.push({
             msg: `${sender.name} paid Money to ${receiver.name}`,
-            time: new Date().toLocaleTimeString(),
+            time: moment(new Date()).format(DATE_RFC2822),
             amount: balanceMoved,
             total: sender.balance,
+            netWorth: sender.calcEstimatedValue(),
             direction: "-",
         });
 
         receiver.history.push({
             msg: `${receiver.name} received Money from ${sender.name}`,
-            time: new Date().toLocaleTimeString(),
+            time: moment(new Date()).format(DATE_RFC2822),
             amount: balanceMoved,
             total: receiver.balance,
+            netWorth: receiver.calcEstimatedValue(),
             direction: "+",
         });
 
@@ -168,9 +174,10 @@ export class PlayerClass {
 
         buyer.history.push({
             msg: `${buyer.name} bought ${property.name}`,
-            time: new Date().toLocaleTimeString(),
+            time: moment(new Date()).format(DATE_RFC2822),
             amount: cost,
             total: buyer.balance,
+            netWorth: buyer.calcEstimatedValue(),
             direction: "-",
         });
 
@@ -208,17 +215,19 @@ export class PlayerClass {
         if (building.type === "negative") {
             buyer.history.push({
                 msg: `${buyer.name} constructed ${building.name} on ${property.name}`,
-                time: new Date().toLocaleTimeString(),
+                time: moment(new Date()).format(DATE_RFC2822),
                 amount: price,
                 total: buyer.balance,
+                netWorth: buyer.calcEstimatedValue(),
                 direction: "/",
             });
         } else {
             buyer.history.push({
                 msg: `${buyer.name} bought ${building.name} on ${property.name}`,
-                time: new Date().toLocaleTimeString(),
+                time: moment(new Date()).format(DATE_RFC2822),
                 amount: price,
                 total: buyer.balance,
+                netWorth: buyer.calcEstimatedValue(),
                 direction: "+",
             });
         }
@@ -236,5 +245,6 @@ export class PlayerClass {
         });
 
         this.estimatedValue = estimated;
+        return estimated;
     }
 }
