@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import PlayerList from "../../components/playerList/PlayerList";
 import BuyModal from "../../components/modal/Modal";
@@ -74,10 +74,12 @@ export default function RentMenu({ players, setPlayers, bank }) {
             return;
         }
 
-        const [succesfull, paymentMSG] = PlayerClass.sendMoney(
-            buyer,
+        const [succesfull, paymentMSG] = PlayerClass.sellProperty(
             seller,
-            amount
+            buyer,
+            amount,
+            selectedProperty,
+            bank
         );
 
         if (!succesfull) {
@@ -88,68 +90,6 @@ export default function RentMenu({ players, setPlayers, bank }) {
             });
             return;
         }
-
-        if (selectedProperty.skyScraperBuilt) {
-            seller.hasSkyScraperOn[selectedProperty.color] = false;
-            buyer.hasSkyScraperOn[selectedProperty.color] = true;
-
-            seller.skyscraper -= 1;
-            buyer.skyscraper += 1;
-        }
-
-        if (selectedProperty.monopolyTowerBuilt) {
-            seller.hasMonopolyTower = false;
-            buyer.hasMonopolyTower = true;
-        }
-
-        buyer.houses += selectedProperty.housesCount;
-        seller.houses -= selectedProperty.housesCount;
-
-        if (buyer === bank) {
-            selectedProperty.skyScraperBuilt = false;
-            selectedProperty.monopolyTowerBuilt = false;
-            selectedProperty.buildingSlotsTaken = 0;
-            selectedProperty.housesCount = 0;
-            selectedProperty.buildings = [];
-            selectedProperty.buildingsWorth = 0;
-            selectedProperty.negativeBuildings = 0;
-            selectedProperty.mortage = false;
-        }
-
-        seller.properties = seller.properties.filter((property) => {
-            return property.id !== selectedProperty.id;
-        });
-
-        selectedProperty.owner = buyer;
-        buyer.properties.push(selectedProperty);
-
-        seller.changes["properties"] = "-";
-        buyer.changes["properties"] = "+";
-
-        const balanceMoved =
-            typeof amount === "string"
-                ? PlayerClass.parseMoney(amount)
-                : amount;
-
-        buyer.history.push({
-            msg: `${buyer.name} bought ${selectedProperty.name} from ${seller.name}`,
-            time: moment(new Date()).format(DATE_RFC2822),
-            amount: balanceMoved,
-            total: buyer.balance,
-            netWorth: seller.calcEstimatedValue(),
-            direction: "-",
-        });
-        seller.history.push({
-            msg: `${seller.name} Sold ${selectedProperty.name} to ${buyer.name}`,
-            time: moment(new Date()).format(DATE_RFC2822),
-            amount: balanceMoved,
-            total: seller.balance,
-            netWorth: seller.calcEstimatedValue(),
-            direction: "-",
-        });
-
-        buyer.calcEstimatedValue();
-        seller.calcEstimatedValue();
 
         let clone = players.map((player) => {
             if (player.id === seller.id) {
@@ -252,6 +192,16 @@ export default function RentMenu({ players, setPlayers, bank }) {
         setPlayers([...clone]);
     };
 
+    const timer = useRef(null);
+    useEffect(() => {
+        let timer = window.setTimeout(() => {
+            setPressCounter(0);
+        }, 8000);
+        return () => {
+            clearInterval(timer);
+        };
+    });
+
     const declareBankruptcy = () => {
         const sellerID = $("input:radio[name=Seller]:checked").val();
         const buyerID = $("input:radio[name=Buyer]:checked").val();
@@ -282,10 +232,7 @@ export default function RentMenu({ players, setPlayers, bank }) {
             return;
         }
 
-        setTimeout(function () {
-            setPressCounter(0);
-        }, 8000);
-
+        clearInterval(timer);
         setPressCounter(pressCounter + 1);
 
         const seller = [...players, bank].find(
@@ -293,68 +240,16 @@ export default function RentMenu({ players, setPlayers, bank }) {
         );
 
         if (pressCounter === 5) {
+            seller.declareBankruptcy(bank);
+
+            setPlayers([...players]);
+            setPressCounter(0);
+
             // eslint-disable-next-line no-undef
             M.toast({
                 html: `${seller.name} declared Bankruptcy`,
                 classes: "rounded black white-text",
             });
-
-            seller.properties.forEach((property) => {
-                if (property.skyScraperBuilt) {
-                    seller.hasSkyScraperOn[property.color] = false;
-                    bank.hasSkyScraperOn[property.color] = true;
-
-                    bank.skyscraper += 1;
-                }
-
-                if (property.monopolyTowerBuilt) {
-                    seller.hasMonopolyTower = false;
-                    bank.hasMonopolyTower = true;
-                }
-
-                bank.houses += property.housesCount;
-                seller.houses -= property.housesCount;
-
-                property.skyScraperBuilt = false;
-                property.monopolyTowerBuilt = false;
-                property.buildingSlotsTaken = 0;
-                property.housesCount = 0;
-                property.buildings = [];
-                property.buildingsWorth = 0;
-                property.negativeBuildings = 0;
-                property.mortage = false;
-
-                seller.properties = seller.properties.filter((property) => {
-                    return false;
-                });
-
-                property.owner = bank;
-                bank.properties.push(property);
-            });
-
-            seller.changes["properties"] = "-";
-            bank.changes["properties"] = "+";
-
-            seller.history.push({
-                msg: `${seller.name} declared bankruptcy`,
-                time: moment(new Date()).format(DATE_RFC2822),
-                amount: seller.balance,
-                netWorth: seller.calcEstimatedValue(),
-                total: 0,
-                direction: "/",
-            });
-
-            seller.balance = 0;
-            seller.skyscraper = 0;
-            seller.calcEstimatedValue();
-
-            let clone = players.filter((player) => {
-                return true;
-            });
-
-            setPlayers([...clone]);
-
-            setPressCounter(0);
         } else {
             // eslint-disable-next-line no-undef
             M.toast({

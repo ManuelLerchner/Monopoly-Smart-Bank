@@ -46,10 +46,18 @@ export default function LobbyScreen({
         nameRef.current.value = "";
     };
 
-    const resetGame = () => {
-        setTimeout(function () {
+    const timer = useRef(null);
+    useEffect(() => {
+        let timer = window.setTimeout(() => {
             setPressCounter(0);
         }, 8000);
+        return () => {
+            clearInterval(timer);
+        };
+    });
+
+    const resetGame = () => {
+        clearInterval(timer);
 
         setPressCounter(pressCounter + 1);
 
@@ -110,7 +118,7 @@ export default function LobbyScreen({
 
                                         {/*Name Input  */}
 
-                                        <div className="input-field col s6">
+                                        <div className="input-field col s7">
                                             <input
                                                 id="icon_prefix"
                                                 type="text"
@@ -124,7 +132,7 @@ export default function LobbyScreen({
                                         </div>
 
                                         {/*Add Player Button */}
-                                        <div className="input-field col s3  ">
+                                        <div className="input-field col s2  ">
                                             <button
                                                 className="btn waves-effect waves-light green"
                                                 type="submit"

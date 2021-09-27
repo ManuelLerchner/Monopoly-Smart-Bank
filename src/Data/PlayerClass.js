@@ -22,14 +22,11 @@ export class PlayerClass {
 
         this.history = [];
 
-        this.history.push({
-            msg: `${this.name} Received Start Money`,
-            time: moment(new Date()).format(DATE_RFC2822),
-            amount: this.balance,
-            total: this.balance,
-            netWorth: this.calcEstimatedValue(),
-            direction: "+",
-        });
+        this.addHistoryPoint(
+            `${this.name} Received Start Money`,
+            this.balance,
+            "+"
+        );
 
         this.changes = {
             balance: "",
@@ -38,7 +35,9 @@ export class PlayerClass {
             skyscraper: "",
         };
 
-        this.img = `https://avatars.dicebear.com/api/open-peeps/${name+Date()}.svg`;
+        this.img = `https://avatars.dicebear.com/api/open-peeps/${
+            name + Date()
+        }.svg`;
 
         if (this.name === "Bank") {
             this.img = BankIMG;
@@ -48,6 +47,7 @@ export class PlayerClass {
         }
 
         this.calcEstimatedValue = this.calcEstimatedValue.bind(this);
+        this.declareBankruptcy = this.declareBankruptcy.bind(this);
         this.calcEstimatedValue();
     }
 
@@ -133,24 +133,17 @@ export class PlayerClass {
         sender.changes["balance"] = "-";
         receiver.changes["balance"] = "+";
 
-        sender.history.push({
-            msg: `${sender.name} paid Money to ${receiver.name}`,
-            time: moment(new Date()).format(DATE_RFC2822),
-            amount: balanceMoved,
-            total: sender.balance,
-            netWorth: sender.calcEstimatedValue(),
-            direction: "-",
-        });
+        sender.addHistoryPoint(
+            `${sender.name} paid Money to ${receiver.name}`,
+            balanceMoved,
+            "-"
+        );
 
-        receiver.history.push({
-            msg: `${receiver.name} received Money from ${sender.name}`,
-            time: moment(new Date()).format(DATE_RFC2822),
-            amount: balanceMoved,
-            total: receiver.balance,
-            netWorth: receiver.calcEstimatedValue(),
-            direction: "+",
-        });
-
+        receiver.addHistoryPoint(
+            `${receiver.name} received Money from ${sender.name}`,
+            balanceMoved,
+            "+"
+        );
         return [true, "Successfull"];
     }
 
@@ -172,18 +165,135 @@ export class PlayerClass {
 
         buyer.changes["properties"] = "+";
 
-        buyer.history.push({
-            msg: `${buyer.name} bought ${property.name}`,
-            time: moment(new Date()).format(DATE_RFC2822),
-            amount: cost,
-            total: buyer.balance,
-            netWorth: buyer.calcEstimatedValue(),
-            direction: "-",
-        });
+        buyer.addHistoryPoint(
+            `${buyer.name} bought ${property.name}`,
+            cost,
+            "-"
+        );
 
         property.owner = buyer;
 
         return [true, "Successfull"];
+    }
+
+    static sellProperty(seller, buyer, amount, property, bank) {
+        const [succesfull, paymentMSG] = PlayerClass.sendMoney(
+            buyer,
+            seller,
+            amount
+        );
+
+        if (!succesfull) {
+            return [false, paymentMSG];
+        }
+
+        if (property.skyScraperBuilt) {
+            seller.hasSkyScraperOn[property.color] = false;
+            buyer.hasSkyScraperOn[property.color] = true;
+
+            seller.skyscraper -= 1;
+            buyer.skyscraper += 1;
+        }
+
+        if (property.monopolyTowerBuilt) {
+            seller.hasMonopolyTower = false;
+            buyer.hasMonopolyTower = true;
+        }
+
+        buyer.houses += property.housesCount;
+        seller.houses -= property.housesCount;
+
+        if (buyer === bank) {
+            property.skyScraperBuilt = false;
+            property.monopolyTowerBuilt = false;
+            property.buildingSlotsTaken = 0;
+            property.housesCount = 0;
+            property.buildings = [];
+            property.buildingsWorth = 0;
+            property.negativeBuildings = 0;
+            property.mortage = false;
+
+            if (property.owner.hasSkyScraperOn[property.color]) {
+                property.owner.hasSkyScraperOn[property.color] = false;
+            }
+            buyer.hasSkyScraperOn[property.color] = false;
+        }
+
+        seller.properties = seller.properties.filter((prop) => {
+            return prop.id !== property.id;
+        });
+
+        property.owner = buyer;
+        buyer.properties.push(property);
+
+        seller.changes["properties"] = "-";
+        buyer.changes["properties"] = "+";
+
+        const balanceMoved =
+            typeof amount === "string"
+                ? PlayerClass.parseMoney(amount)
+                : amount;
+
+        buyer.addHistoryPoint(
+            `${buyer.name} bought ${property.name} from ${seller.name}`,
+            balanceMoved,
+            "+"
+        );
+
+        seller.addHistoryPoint(
+            `${seller.name} Sold ${property.name} to ${buyer.name}`,
+            balanceMoved,
+            "-"
+        );
+
+        buyer.calcEstimatedValue();
+        seller.calcEstimatedValue();
+
+        return [true, paymentMSG];
+    }
+
+    declareBankruptcy(bank) {
+        this.properties.forEach((property) => {
+            if (property.skyScraperBuilt) {
+                this.hasSkyScraperOn[property.color] = false;
+            }
+
+            if (property.monopolyTowerBuilt) {
+                this.hasMonopolyTower = false;
+                bank.hasMonopolyTower = true;
+            }
+
+            property.skyScraperBuilt = false;
+            property.monopolyTowerBuilt = false;
+            property.buildingSlotsTaken = 0;
+            property.housesCount = 0;
+            property.buildings = [];
+            property.buildingsWorth = 0;
+            property.negativeBuildings = 0;
+            property.mortage = false;
+
+            property.owner = bank;
+            bank.properties.push(property);
+        });
+
+        this.properties = [];
+        this.hasSkyScraperOn = {};
+
+        this.changes["balance"] = "-";
+        this.changes["properties"] = "-";
+        this.changes["houses"] = "-";
+        this.changes["skyscraper"] = "-";
+
+        this.addHistoryPoint(
+            `${this.name} declared bankruptcy`,
+            this.balance,
+            "/"
+        );
+
+        this.balance = 0;
+        this.skyscraper = 0;
+        this.houses = 0;
+        this.calcEstimatedValue();
     }
 
     static builtBuilding(buyer, property, building, price) {
@@ -213,28 +323,33 @@ export class PlayerClass {
         }
 
         if (building.type === "negative") {
-            buyer.history.push({
-                msg: `${buyer.name} constructed ${building.name} on ${property.name}`,
-                time: moment(new Date()).format(DATE_RFC2822),
-                amount: price,
-                total: buyer.balance,
-                netWorth: buyer.calcEstimatedValue(),
-                direction: "/",
-            });
+            buyer.addHistoryPoint(
+                `${buyer.name} constructed ${building.name} on ${property.name}`,
+                price,
+                "/"
+            );
         } else {
-            buyer.history.push({
-                msg: `${buyer.name} bought ${building.name} on ${property.name}`,
-                time: moment(new Date()).format(DATE_RFC2822),
-                amount: price,
-                total: buyer.balance,
-                netWorth: buyer.calcEstimatedValue(),
-                direction: "+",
-            });
+            buyer.addHistoryPoint(
+                `${buyer.name} bought ${building.name} on ${property.name}`,
+                price,
+                "+"
+            );
         }
 
         buyer.calcEstimatedValue();
 
         return [true, "Successfull"];
+    }
+
+    addHistoryPoint(msg, amount, direction) {
+        this.history.push({
+            msg: msg,
+            time: moment(new Date()).format(DATE_RFC2822),
+            amount: amount,
+            total: this.balance,
+            netWorth: this.calcEstimatedValue(),
+            direction: direction,
+        });
     }
 
     calcEstimatedValue() {

@@ -1,4 +1,5 @@
 const { v4: uuidv4 } = require("uuid");
+
 let counter = 0;
 export class PropertyClass {
     constructor(name, cost, color, baseRent, rentPrices, buildingPrice) {
@@ -25,22 +26,24 @@ export class PropertyClass {
         this.negativeBuildings = 0;
         this.mortage = false;
 
-        this.img = `https://picsum.photos/id/${0}/300/480`;
         this.idx = counter;
-        counter++;
 
         this.className = "PropertyClass";
 
         this.loadImage(this.name);
         this.calcRentCost = this.calcRentCost.bind(this);
+        this.loadImage = this.loadImage.bind(this);
     }
 
     loadImage = async (imageName) => {
+        counter++;
         return await import(`../images/properties/${imageName}.jpg`)
             .then((image) => {
                 this.img = image.default;
             })
-            .catch((e) => {});
+            .catch((e) => {
+                this.img = `https://picsum.photos/id/${0}/300/480`;
+            });
     };
 
     static builtBuilding(property, building) {
@@ -61,8 +64,6 @@ export class PropertyClass {
         ) {
             return [false, "Skyscraper is already built on this color"];
         }
-
-        property.skyScraperBuilt = true;
 
         if (building.type === "skyscraper") {
             property.buildingsWorth += property.buildingPrice[building.type];

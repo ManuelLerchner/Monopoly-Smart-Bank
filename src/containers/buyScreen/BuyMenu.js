@@ -111,7 +111,7 @@ export default function BuyMenu({
             // eslint-disable-next-line no-undef
             M.toast({
                 html: `Missing ${
-                    housesBuilt + building.slotsTaken - maxHouses 
+                    housesBuilt + building.slotsTaken - maxHouses
                 } houses`,
                 classes: "rounded red black-text",
             });
@@ -148,7 +148,7 @@ export default function BuyMenu({
             selectedPropertyToBuild.owner.hasSkyScraperOn[
                 selectedPropertyToBuild.color
             ] &&
-            building.name === "Skyscraper"
+            building.type === "skyscraper"
         ) {
             // eslint-disable-next-line no-undef
             M.toast({
@@ -166,7 +166,7 @@ export default function BuyMenu({
                 price
             );
 
-        if (building.name === "Monopoly Tower") {
+        if (building.type === "monopolyTower") {
             setBuildings(buildings.filter((build) => build.id !== building.id));
         }
 

@@ -1,6 +1,6 @@
 import { PlayerClass } from "./../../Data/PlayerClass";
 
-export const options = (name) => {
+export const options = (name, messages) => {
     return {
         layout: {
             padding: 20,
@@ -51,14 +51,14 @@ export const options = (name) => {
                     pinch: {
                         enabled: true,
                     },
-                    mode: "xy",
+                    overScaleMode: "y",
                 },
                 pan: {
                     enabled: true,
                     mode: "xy",
                 },
                 limits: {
-                    y: { min: 0, max: 250*10**6 },
+                    y: { min: 0, max: 250 * 10 ** 6 },
                 },
             },
         },

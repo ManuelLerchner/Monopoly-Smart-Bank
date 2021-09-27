@@ -29,7 +29,17 @@ export default function OverviewMenu({ players }) {
         const datasets = [];
 
         if (selectedPlayer.name === "Total History") {
-            const colors = ["red", "green", "blue", "purple", "cyan"];
+            const colors = [
+                "red",
+                "Turquoise",
+                "Gold",
+                "OrangeRed",
+                "MintCream",
+                "lime",
+                "Violet",
+                "cyan",
+                "blue",
+            ];
 
             players.forEach((player, i) => {
                 const dataBalance = [];
@@ -269,6 +279,9 @@ export default function OverviewMenu({ players }) {
                                                 <th className="align-center">
                                                     Total Money
                                                 </th>
+                                                <th className="align-center">
+                                                    Net Worth
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody className="tbody-scrollable  ">
@@ -317,6 +330,11 @@ export default function OverviewMenu({ players }) {
                                                                 <td className="align-center">
                                                                     {PlayerClass.formatMoney(
                                                                         data.total
+                                                                    )}
+                                                                </td>
+                                                                <td>
+                                                                    {PlayerClass.formatMoney(
+                                                                        data.netWorth
                                                                     )}
                                                                 </td>
                                                             </tr>
