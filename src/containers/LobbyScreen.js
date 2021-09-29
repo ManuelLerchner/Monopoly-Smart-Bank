@@ -12,9 +12,10 @@ export default function LobbyScreen({
     setBuildings,
     setAvailableProperties,
     setBank,
+    setGameID,
 }) {
     $("#navbar_lobby").addClass("selected");
-    $("#navbar_main").removeClass("selected");
+    $("#navbar_spectate").removeClass("selected");
     $("#navbar_pay").removeClass("selected");
     $("#navbar_buy").removeClass("selected");
     $("#navbar_rent").removeClass("selected");
@@ -35,6 +36,7 @@ export default function LobbyScreen({
                 setAvailableProperties={setAvailableProperties}
                 setBank={setBank}
                 startMoney={startMoney}
+                setGameID={setGameID}
             />
         </>
     );

@@ -54,17 +54,17 @@ export default function Navbar({ setGameState }) {
                         </li>
                         <li>
                             <a
-                                id="navbar_main"
+                                id="navbar_spectate"
                                 href="#!"
                                 onClick={() => {
-                                    setGameState("main");
+                                    setGameState("spectate");
                                 }}
                                 className=""
                             >
                                 <i className="material-icons left">
-                                    sports_esports
+                                    visibility
                                 </i>
-                                Main
+                                Spectate
                             </a>
                         </li>
                         <li>
@@ -76,9 +76,7 @@ export default function Navbar({ setGameState }) {
                                 }}
                                 className=""
                             >
-                                <i className="material-icons left">
-                                    visibility
-                                </i>
+                                <i className="material-icons left">insights</i>
                                 Stats
                             </a>
                         </li>
@@ -206,15 +204,15 @@ export default function Navbar({ setGameState }) {
                 </li>
                 <li>
                     <a
-                        id="navbar_main"
+                        id="navbar_spectate"
                         href="#!"
                         onClick={() => {
-                            setGameState("main");
+                            setGameState("spectate");
                         }}
                         className=""
                     >
-                        <i className="material-icons left">sports_esports</i>
-                        Main
+                        <i className="material-icons left">visibility</i>
+                        Spectate
                     </a>
                 </li>
                 <li>
@@ -226,7 +224,7 @@ export default function Navbar({ setGameState }) {
                         }}
                         className=""
                     >
-                        <i className="material-icons left">visibility</i>
+                        <i className="material-icons left">insights</i>
                         Overview
                     </a>
                 </li>

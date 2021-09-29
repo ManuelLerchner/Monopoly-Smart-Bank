@@ -14,6 +14,7 @@ import StocksScreen from "./StocksScreen";
 import RentScreen from "./RentScreen";
 import SellScreen from "./SellScreen";
 import Overview from "./OverviewScreen";
+import io from "socket.io-client";
 
 import "./App.css";
 import BottomBar from "../components/bottomBar/BottomBar";
@@ -27,6 +28,11 @@ import {
     loadBuildings,
     loadPlayers,
 } from "../Data/loadLocalStorage";
+
+import SpectateScreen from "./SpectateScreen";
+import OverviewScreen from "./OverviewScreen";
+
+const serverconfig = require("../serverconfig.json");
 
 export default function App() {
     //Player List,  Game State
@@ -48,6 +54,12 @@ export default function App() {
         localStorage.getItem("gameState") || "lobby"
     );
     const [bank, setBank] = useState(loadBank() || null);
+
+    const [gameID, setGameID] = useState(
+        localStorage.getItem("gameID") || "null"
+    );
+
+    const [socket, setSocket] = useState(null);
 
     //Update Local Storage
     useEffect(() => {
@@ -79,6 +91,8 @@ export default function App() {
         localStorage.setItem("gameState", gameState);
 
         localStorage.setItem("bank", bankJson);
+
+        localStorage.setItem("gameID", gameID);
     }, [
         players,
         availableProperties,
@@ -87,6 +101,7 @@ export default function App() {
         maxHouses,
         gameState,
         bank,
+        gameID,
     ]);
 
     useEffect(() => {
@@ -105,9 +120,21 @@ export default function App() {
         if (buildings.length === 0) {
             setBuildings(loadBuildingData());
         }
+        if (gameID === "null") {
+            const zeroPad = (num, places) => String(num).padStart(places, "0");
+            setGameID(zeroPad(Math.round(Math.random() * 10 ** 6), 6));
+        }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    useEffect(() => {
+        const newSocket = io(
+            `http://${window.location.hostname}:${serverconfig.BACKEND_PORT}`
+        );
+        setSocket(newSocket);
+        return () => newSocket.close();
+    }, [setSocket]);
 
     // Determine which main Content to load
     function Content() {
@@ -122,6 +149,7 @@ export default function App() {
                         setAvailableProperties={setAvailableProperties}
                         setBank={setBank}
                         startMoney={startMoney}
+                        setGameID={setGameID}
                     />
                 );
             case "main":
@@ -130,7 +158,18 @@ export default function App() {
                 );
             case "overview":
                 return (
-                    <Overview setGameState={setGameState} players={players} />
+                    <OverviewScreen
+                        setGameState={setGameState}
+                        players={players}
+                    />
+                );
+            case "spectate":
+                return (
+                    <SpectateScreen
+                        setGameState={setGameState}
+                        gameID={gameID}
+                        socket={socket}
+                    />
                 );
             case "settings":
                 return (

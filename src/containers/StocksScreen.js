@@ -5,7 +5,7 @@ import StocksMenu from "./stocksScreen/StocksMenu";
 
 export default function StocksScreen({ players, setPlayers, setGameState }) {
     $("#navbar_lobby").removeClass("selected");
-    $("#navbar_main").removeClass("selected");
+    $("#navbar_spectate").removeClass("selected");
     $("#navbar_pay").removeClass("selected");
     $("#navbar_buy").removeClass("selected");
     $("#navbar_rent").removeClass("selected");

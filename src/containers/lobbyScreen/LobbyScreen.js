@@ -11,6 +11,7 @@ export default function LobbyScreen({
     setBuildings,
     setAvailableProperties,
     setBank,
+    setGameID,
 }) {
     const nameRef = useRef();
     const [pressCounter, setPressCounter] = useState(0);
@@ -81,6 +82,9 @@ export default function LobbyScreen({
 
             setBuildings(loadBuildingData());
             setPressCounter(0);
+
+            const zeroPad = (num, places) => String(num).padStart(places, "0");
+            setGameID(zeroPad(Math.round(Math.random() * 10 ** 6), 6));
         } else {
             // eslint-disable-next-line no-undef
             M.toast({
