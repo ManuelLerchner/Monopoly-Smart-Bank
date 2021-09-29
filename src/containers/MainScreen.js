@@ -6,7 +6,7 @@ import $ from "jquery";
 
 export default function MainScreen({ setGameState, players }) {
     $("#navbar_lobby").removeClass("selected");
-    $("#navbar_main").addClass("selected");
+    $("#navbar_spectate").remove("selected");
     $("#navbar_pay").removeClass("selected");
     $("#navbar_buy").removeClass("selected");
     $("#navbar_rent").removeClass("selected");

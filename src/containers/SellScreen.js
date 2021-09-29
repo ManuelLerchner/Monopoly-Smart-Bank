@@ -11,7 +11,7 @@ export default function SellScreen({
     setBank,
 }) {
     $("#navbar_lobby").removeClass("selected");
-    $("#navbar_main").removeClass("selected");
+    $("#navbar_spectate").removeClass("selected");
     $("#navbar_pay").removeClass("selected");
     $("#navbar_buy").removeClass("selected");
     $("#navbar_rent").removeClass("selected");

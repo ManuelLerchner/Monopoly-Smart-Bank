@@ -3,9 +3,9 @@ import React from "react";
 import $ from "jquery";
 import OverviewMenu from "./overviewScreen/OverviewMenu";
 
-export default function Overview({ setGameState, players }) {
+export default function OverviewScreen({ players }) {
     $("#navbar_lobby").removeClass("selected");
-    $("#navbar_main").removeClass("selected");
+    $("#navbar_spectate").removeClass("selected");
     $("#navbar_pay").removeClass("selected");
     $("#navbar_buy").removeClass("selected");
     $("#navbar_rent").removeClass("selected");
