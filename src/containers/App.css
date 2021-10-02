@@ -3,6 +3,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center top;
+
     height: 100vh;
 }
 
@@ -50,9 +51,7 @@
 .icon {
     filter: drop-shadow(0 3px 0.7rem rgb(19, 2, 4));
 
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+
     width: 64px;
     height: 64px;
 }

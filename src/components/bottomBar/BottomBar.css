@@ -7,9 +7,9 @@
 .carousel-item,
 .carousel {
     opacity: 1 !important;
-    height: 300px !important;
+    height: 260px !important;
 }
 
 .carousel-item {
-    width: 240px !important;
+    width: 240px;
 }

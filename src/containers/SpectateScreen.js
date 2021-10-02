@@ -4,7 +4,12 @@ import Logo from "../components/logo/Logo";
 import $ from "jquery";
 import SpectateMenu from "./spectateScreen/SpectateMenu";
 
-export default function SpectateScreen({ setGameState, gameID, socket }) {
+export default function SpectateScreen({
+    socket,
+    socketConnected,
+    spectateID,
+    setSpectateID,
+}) {
     $("#navbar_lobby").removeClass("selected");
     $("#navbar_spectate").addClass("selected");
     $("#navbar_pay").removeClass("selected");
@@ -16,11 +21,15 @@ export default function SpectateScreen({ setGameState, gameID, socket }) {
     $("#navbar_sell").removeClass("selected");
     $("#navbar_settings").remove("selected");
 
-    $(".carousel").show();
+    $(".carousel").hide();
     return (
         <>
-            <Logo setGameState={setGameState} />
-            <SpectateMenu socket={socket} gameID={gameID} />
+            <SpectateMenu
+                socket={socket}
+                socketConnected={socketConnected}
+                spectateID={spectateID}
+                setSpectateID={setSpectateID}
+            />
         </>
     );
 }

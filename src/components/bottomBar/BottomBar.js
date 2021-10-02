@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import PlayerCard from "../playerCard/PlayerCard";
 
+import { isMobile } from "react-device-detect";
+
 import "./BottomBar.css";
 
 export default function BottomBar({ players }) {
@@ -10,14 +12,16 @@ export default function BottomBar({ players }) {
             // eslint-disable-next-line no-undef
             M.Carousel.init(elemsCarousell, {
                 dist: 0,
-                padding: 100,
+                padding: 80,
                 numVisible: 10,
             });
         } catch (e) {}
     });
 
     let style = {
-        transform: `translateX(${players.length % 2 === 0 ? 130 : 0}px)`,
+        transform: !isMobile
+            ? `translateX(${players.length % 2 === 0 ? 115 : 0}px)`
+            : "",
     };
 
     return (

@@ -267,10 +267,10 @@ export default function OverviewMenu({ players }) {
                                     <table className={`white-text fullHeigth`}>
                                         <thead className="thead-scrollable light-blue-text">
                                             <tr className="tr-scrollable">
-                                                <th className="align-center">
+                                                <th className="align-center hide-on-med-and-down">
                                                     Time
                                                 </th>
-                                                <th className="align-left descriptionBox">
+                                                <th className="align-left descriptionBox hide-on-med-and-down">
                                                     Description
                                                 </th>
                                                 <th className="align-center">
@@ -314,12 +314,12 @@ export default function OverviewMenu({ players }) {
                                                                     data.time
                                                                 }
                                                             >
-                                                                <td className="align-center">
+                                                                <td className="align-center hide-on-med-and-down">
                                                                     {new Date(
                                                                         data.time
                                                                     ).toLocaleTimeString()}
                                                                 </td>
-                                                                <td className="align-left descriptionBox">
+                                                                <td className="align-left descriptionBox hide-on-med-and-down">
                                                                     {data.msg}
                                                                 </td>
                                                                 <td className="align-center">
@@ -346,7 +346,7 @@ export default function OverviewMenu({ players }) {
                             </div>
                         </li>
 
-                        <li>
+                        <li className="hide-on-med-and-down">
                             <div className="collapsible-header grey darken-4 white-text">
                                 <i className="material-icons">trending_up</i>
                                 Money Graph

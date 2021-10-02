@@ -12,6 +12,7 @@ export default function LobbyScreen({
     setAvailableProperties,
     setBank,
     setGameID,
+    gameID,
 }) {
     const nameRef = useRef();
     const [pressCounter, setPressCounter] = useState(0);
@@ -100,13 +101,16 @@ export default function LobbyScreen({
                 <div className="card cardColor-lobby ">
                     <div className="card-content white-text">
                         {/*Title */}
-                        <div className="section">
+                        <div className="section ">
                             <div className="card-title light-blue-text text-lighten-2 center title">
                                 Add Players
                             </div>
                         </div>
                         {/*Form */}
-                        <div className="row">
+                        <h4 className="center orange-text padding10">
+                            Game ID: {gameID}
+                        </h4>
+                        <div className="row padding10">
                             <form onSubmit={handleSubmit}>
                                 {/*Name  */}
 
