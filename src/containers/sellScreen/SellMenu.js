@@ -9,9 +9,6 @@ import $ from "jquery";
 
 import "./SellMenu.css";
 
-import moment from "moment";
-const DATE_RFC2822 = "ddd, DD MMM YYYY HH:mm:ss ZZ";
-
 export default function RentMenu({ players, setPlayers, bank }) {
     const [playerProperties, setplayerProperties] = useState([]);
     const [selectedProperty, setselectedProperty] = useState(null);

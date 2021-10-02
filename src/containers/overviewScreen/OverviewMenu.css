@@ -10,6 +10,7 @@
 
 .carousel-item-small {
     width: 340px !important;
+    height: 250px !important;
     padding: 20px !important;
     user-select: none;
 }
@@ -23,7 +24,7 @@
     padding-bottom: 5px !important;
     font-size: 15px;
 
-    max-height: 55vh !important;
+    max-height: 75vh !important;
 }
 
 .thead-scrollable,

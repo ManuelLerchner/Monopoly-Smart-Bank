@@ -20,9 +20,8 @@ export default function PlayerCard({ player }) {
         setTimeout(() => {
             $(`#${key}_${player.id}`).removeClass("animationIncrease");
             $(`#${key}_${player.id}`).removeClass("animationDecrease");
+            player.changes[key] = "";
         }, 2000);
-
-        player.changes[key] = "";
     }
 
     return (
@@ -38,7 +37,7 @@ export default function PlayerCard({ player }) {
                             <b>{player.name}</b>
                         </h4>
                     </div>
-                    <div className="col s4">
+                    <div className="col s4 no-padding">
                         <img className="icon " src={player.img} alt="Avatar" />
                     </div>
                 </div>

@@ -59,7 +59,14 @@ export default function App() {
         localStorage.getItem("gameID") || "null"
     );
 
+
+    const [spectateID, setSpectateID] = useState(
+        localStorage.getItem("spectateID") || "/"
+    );
+
     const [socket, setSocket] = useState(null);
+    const [socketConnected, setSocketConnected] = useState(false);
+
 
     //Update Local Storage
     useEffect(() => {
@@ -93,6 +100,13 @@ export default function App() {
         localStorage.setItem("bank", bankJson);
 
         localStorage.setItem("gameID", gameID);
+
+
+        if (socket && socketConnected) {
+            socket.emit("message", { groupID: gameID, players: players });
+        }
+
+        localStorage.setItem("spectateID", spectateID);
     }, [
         players,
         availableProperties,
@@ -102,6 +116,10 @@ export default function App() {
         gameState,
         bank,
         gameID,
+
+        socket,
+        socketConnected,
+        spectateID,
     ]);
 
     useEffect(() => {
@@ -133,6 +151,30 @@ export default function App() {
             `http://${window.location.hostname}:${serverconfig.BACKEND_PORT}`
         );
         setSocket(newSocket);
+
+
+        try {
+            (async function () {
+                const checkIfOnline = () =>
+                    new Promise((resolve) => {
+                        newSocket.on("connect", (data) => {
+                            newSocket.emit("checkIfOnline");
+                            newSocket.on("isOnlineResponse", (response) => {
+                                resolve(response);
+                            });
+                        });
+                        setTimeout(() => {
+                            resolve(false);
+                        }, 5000);
+                    });
+
+                setSocketConnected(await checkIfOnline());
+            })();
+        } catch (e) {
+            setSocketConnected(false);
+        }
+
+
         return () => newSocket.close();
     }, [setSocket]);
 
@@ -150,6 +192,7 @@ export default function App() {
                         setBank={setBank}
                         startMoney={startMoney}
                         setGameID={setGameID}
+                        gameID={gameID}
                     />
                 );
             case "main":
@@ -167,8 +210,11 @@ export default function App() {
                 return (
                     <SpectateScreen
                         setGameState={setGameState}
-                        gameID={gameID}
+
                         socket={socket}
+                        socketConnected={socketConnected}
+                        spectateID={spectateID}
+                        setSpectateID={setSpectateID}
                     />
                 );
             case "settings":
