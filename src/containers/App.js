@@ -59,12 +59,14 @@ export default function App() {
         localStorage.getItem("gameID") || "null"
     );
 
+
     const [spectateID, setSpectateID] = useState(
         localStorage.getItem("spectateID") || "/"
     );
 
     const [socket, setSocket] = useState(null);
     const [socketConnected, setSocketConnected] = useState(false);
+
 
     //Update Local Storage
     useEffect(() => {
@@ -99,6 +101,7 @@ export default function App() {
 
         localStorage.setItem("gameID", gameID);
 
+
         if (socket && socketConnected) {
             socket.emit("message", { groupID: gameID, players: players });
         }
@@ -113,6 +116,7 @@ export default function App() {
         gameState,
         bank,
         gameID,
+
         socket,
         socketConnected,
         spectateID,
@@ -148,6 +152,7 @@ export default function App() {
         );
         setSocket(newSocket);
 
+
         try {
             (async function () {
                 const checkIfOnline = () =>
@@ -168,6 +173,7 @@ export default function App() {
         } catch (e) {
             setSocketConnected(false);
         }
+
 
         return () => newSocket.close();
     }, [setSocket]);
@@ -204,6 +210,7 @@ export default function App() {
                 return (
                     <SpectateScreen
                         setGameState={setGameState}
+
                         socket={socket}
                         socketConnected={socketConnected}
                         spectateID={spectateID}
