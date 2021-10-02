@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
-import { PlayerClass } from "../../Data/PlayerClass";
+import React, { useEffect, useState } from "react";
 
 import "./SpectateMenu.css";
 

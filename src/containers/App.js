@@ -13,7 +13,6 @@ import BankScreen from "./BankScreen";
 import StocksScreen from "./StocksScreen";
 import RentScreen from "./RentScreen";
 import SellScreen from "./SellScreen";
-import Overview from "./OverviewScreen";
 import io from "socket.io-client";
 
 import "./App.css";

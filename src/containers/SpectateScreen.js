@@ -1,5 +1,4 @@
 import React from "react";
-import Logo from "../components/logo/Logo";
 
 import $ from "jquery";
 import SpectateMenu from "./spectateScreen/SpectateMenu";
