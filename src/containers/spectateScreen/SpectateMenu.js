@@ -13,13 +13,11 @@ export default function SpectateMenu({
 }) {
     const [submitedPlayers, setSubmitedPlayers] = useState([]);
 
-
     //Rerender Materialize on rerender
     useEffect(() => {
         setTimeout(() => {
             // eslint-disable-next-line no-undef
             M.updateTextFields();
-
         }, 200);
     });
 
@@ -64,11 +62,10 @@ export default function SpectateMenu({
             var instance = M.Modal.getInstance(elem);
             instance.close();
         });
-
+    };
 
     return (
         <>
-
             <div className="row center">
                 <div className="row ">
                     <a
@@ -126,7 +123,6 @@ export default function SpectateMenu({
                                     </form>
                                 </div>
                             )}
-
                         </div>
                     </div>
                 </div>

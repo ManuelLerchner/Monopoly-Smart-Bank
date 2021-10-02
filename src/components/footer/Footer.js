@@ -42,6 +42,10 @@ export default function Footer() {
                             </li>
                             <li>Toggle mortage on a property in "Sell"</li>
                             <li>Look at the game history in "Overview"</li>
+                            <li>
+                                Reopen the website on your mobile and
+                                live-spectate the game
+                            </li>
                         </ol>
                         <p className="grey-text text-lighten-4">
                             The game progress gets saved in local storage. If
