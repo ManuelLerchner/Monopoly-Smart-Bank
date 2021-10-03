@@ -1,0 +1,8 @@
+ul.dropdown-content.select-dropdown li span {
+    color: rgb(235, 225, 225);
+    font-weight: 500;
+}
+
+ul.dropdown-content {
+    background-color: rgb(88, 77, 77) !important;
+}

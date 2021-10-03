@@ -30,6 +30,7 @@ import {
 
 import SpectateScreen from "./SpectateScreen";
 import OverviewScreen from "./OverviewScreen";
+import { Stock } from "../Data/Stocks";
 
 const serverconfig = require("../serverconfig.json");
 const CircularJSON = require("circular-json");
@@ -66,6 +67,18 @@ export default function App() {
 
     const [socket, setSocket] = useState(null);
     const [socketConnected, setSocketConnected] = useState(false);
+
+    function randomB(min, max) {
+        return Math.random() * (max - min + 1) + min;
+    }
+
+    const [stocks, setStocks] = useState([
+        new Stock("A", randomB(0.65, 0.9) * 10 ** 5, randomB(5, 12), 0.5),
+        new Stock("B", randomB(0.65, 0.9) * 10 ** 5, randomB(5, 12), 0.5),
+        new Stock("C", randomB(0.65, 0.9) * 10 ** 5, randomB(5, 12), 0.5),
+        new Stock("D", randomB(0.65, 0.9) * 10 ** 5, randomB(5, 12), 0.5),
+        new Stock("E", randomB(0.65, 0.9) * 10 ** 5, randomB(5, 12), 0.5),
+    ]);
 
     //Update Local Storage
     useEffect(() => {
@@ -268,6 +281,9 @@ export default function App() {
                         players={players}
                         setPlayers={setPlayers}
                         setGameState={setGameState}
+                        stocks={stocks}
+                        setStocks={setStocks}
+                        bank={bank}
                     />
                 );
             default:

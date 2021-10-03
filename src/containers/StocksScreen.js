@@ -3,7 +3,14 @@ import Logo from "../components/logo/Logo";
 import $ from "jquery";
 import StocksMenu from "./stocksScreen/StocksMenu";
 
-export default function StocksScreen({ players, setPlayers, setGameState }) {
+export default function StocksScreen({
+    stocks,
+    setPlayers,
+    players,
+    setStocks,
+    setGameState,
+    bank,
+}) {
     $("#navbar_lobby").removeClass("selected");
     $("#navbar_spectate").removeClass("selected");
     $("#navbar_pay").removeClass("selected");
@@ -20,7 +27,13 @@ export default function StocksScreen({ players, setPlayers, setGameState }) {
     return (
         <>
             <Logo setGameState={setGameState} />
-            <StocksMenu />
+            <StocksMenu
+                stocks={stocks}
+                setStocks={setStocks}
+                setPlayers={setPlayers}
+                players={players}
+                bank={bank}
+            />
         </>
     );
 }

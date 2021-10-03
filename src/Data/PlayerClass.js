@@ -22,6 +22,8 @@ export class PlayerClass {
 
         this.history = [];
 
+        this.stocks = {};
+
         this.addHistoryPoint(
             `${this.name} Received Start Money`,
             this.balance,
@@ -361,5 +363,13 @@ export class PlayerClass {
 
         this.estimatedValue = estimated;
         return estimated;
+    }
+
+    static calcStockPrice(player, name, stocks) {
+        let stock = stocks.find((stock) => stock.name === name);
+        let price = stock.data.at(-1).y;
+        let amount = player.stocks[name];
+
+        return price * amount;
     }
 }
