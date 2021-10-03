@@ -30,8 +30,9 @@ export default function SpectateMenu({
     const submitForm = (e) => {
         e.preventDefault();
         const groupID = e.target[0].value;
+
         socket.emit("changeRoom", groupID);
-        socket.emit("requestMessage", groupID);
+        socket.emit("requestData", groupID);
         e.target[0].value = "";
         closeModal();
         setSpectateID(groupID);
@@ -39,20 +40,26 @@ export default function SpectateMenu({
 
     useEffect(() => {
         if (socket) {
-            const messageListener = (message) => {
-                var players = CircularJSON.parse(message.playersJSON);
+            const dataListener = (data) => {
+                var players = CircularJSON.parse(data.playersJSON);
                 setSubmitedPlayers(players);
             };
 
-            socket.on("message", messageListener);
-            if (spectateID !== "/") {
-                socket.emit("getMessages", spectateID);
-            }
+            socket.on("Data", dataListener);
+
             return () => {
-                socket.off("message", messageListener);
+                socket.off("Data", dataListener);
             };
         }
     }, [socket, spectateID]);
+
+    useEffect(() => {
+        if (socket && spectateID !== "/") {
+            socket.emit("changeRoom", spectateID);
+            socket.emit("requestData", spectateID);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const closeModal = () => {
         var modalElems = document.querySelectorAll("#settingsModal");
@@ -68,10 +75,10 @@ export default function SpectateMenu({
             <div className="row center">
                 <div className="row ">
                     <a
-                        className="waves-effect waves-light btn-large modal-trigger marginTop orange darken-2 black-text"
+                        className="waves-effect waves-light btn modal-trigger marginTop orange darken-2 black-text"
                         href="#settingsModal"
                     >
-                        Spectate Settings
+                        Settings
                     </a>
                 </div>
             </div>
@@ -100,7 +107,7 @@ export default function SpectateMenu({
                                             <input
                                                 autoComplete="off"
                                                 id="listeingID"
-                                                type="text"
+                                                type="number"
                                                 className="validate"
                                             />
                                             <label htmlFor="listeingID">

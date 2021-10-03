@@ -37,6 +37,7 @@ const CircularJSON = require("circular-json");
 export default function App() {
     //Player List,  Game State
     const [players, setPlayers] = useState(loadPlayers() || []);
+
     const [availableProperties, setAvailableProperties] = useState(
         loadAvailableProperties() || []
     );
@@ -68,44 +69,21 @@ export default function App() {
 
     //Update Local Storage
     useEffect(() => {
-        const playerJson = JSON.stringify(players, function (key, value) {
-            if (key === "owner") {
-                return value.id;
-            } else {
-                return value;
-            }
-        });
+        const playerJson = CircularJSON.stringify(players);
+        const bankJson = CircularJSON.stringify(bank);
+        const availablePropertiesJson =
+            CircularJSON.stringify(availableProperties);
 
-        const bankJson = JSON.stringify(bank, function (key, value) {
-            if (key === "owner") {
-                return value.id;
-            } else {
-                return value;
-            }
-        });
+        const buildingsJson = CircularJSON.stringify(buildings);
 
         localStorage.setItem("players", playerJson);
-
-        localStorage.setItem(
-            "availableProperties",
-            JSON.stringify(availableProperties)
-        );
-        localStorage.setItem("buildings", JSON.stringify(buildings));
+        localStorage.setItem("availableProperties", availablePropertiesJson);
+        localStorage.setItem("buildings", buildingsJson);
         localStorage.setItem("startMoney", startMoney);
         localStorage.setItem("maxHouses", maxHouses);
         localStorage.setItem("gameState", gameState);
-
         localStorage.setItem("bank", bankJson);
-
         localStorage.setItem("gameID", gameID);
-
-        if (socket && socketConnected) {
-            socket.emit("message", {
-                groupID: gameID,
-                players: CircularJSON.stringify(players),
-            });
-        }
-
         localStorage.setItem("spectateID", spectateID);
     }, [
         players,
@@ -116,11 +94,21 @@ export default function App() {
         gameState,
         bank,
         gameID,
-
         socket,
         socketConnected,
         spectateID,
     ]);
+
+    //Send updates to spectators
+    useEffect(() => {
+        if (socket && socketConnected) {
+            socket.emit("Data", {
+                groupID: gameID,
+                players: CircularJSON.stringify(players),
+            });
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [gameID, players, socketConnected]);
 
     useEffect(() => {
         if (bank === null) {

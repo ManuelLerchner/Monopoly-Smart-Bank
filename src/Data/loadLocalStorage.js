@@ -2,21 +2,16 @@ import { BuildingClass } from "./BuildingClass";
 import { PlayerClass } from "./PlayerClass";
 import { PropertyClass } from "./PropertyClass";
 
+const CircularJSON = require("circular-json");
+
 export const loadPlayers = () => {
     let array = [];
     try {
-        let loadedPlayers = JSON.parse(localStorage.getItem("players"));
+        let loadedPlayers = CircularJSON.parse(localStorage.getItem("players"));
 
         loadedPlayers.forEach((player) => {
             let res = Object.assign(new PlayerClass(), player);
-
-            res.properties = res.properties.map((prop) => {
-                let obj = Object.assign(new PropertyClass(), prop);
-                obj.owner = res;
-                return obj;
-            });
-
-            res.balance = Number.parseFloat(res.balance);
+            //res.balance = Number.parseFloat(res.balance);
             array.push(res);
         });
     } catch (e) {
@@ -29,12 +24,13 @@ export const loadPlayers = () => {
 export const loadAvailableProperties = () => {
     let array = [];
     try {
-        let loadedProperties = JSON.parse(
+        let loadedProperties = CircularJSON.parse(
             localStorage.getItem("availableProperties")
         );
 
         loadedProperties.forEach((prop) => {
             let res = Object.assign(new PropertyClass(), prop);
+            res.loadImage(res.name);
             array.push(res);
         });
     } catch (e) {
@@ -46,7 +42,9 @@ export const loadAvailableProperties = () => {
 export const loadBuildings = () => {
     let array = [];
     try {
-        let loadedProperties = JSON.parse(localStorage.getItem("buildings"));
+        let loadedProperties = CircularJSON.parse(
+            localStorage.getItem("buildings")
+        );
 
         loadedProperties.forEach((prop) => {
             let res = Object.assign(new BuildingClass(), prop);
@@ -61,7 +59,7 @@ export const loadBuildings = () => {
 export const loadBank = () => {
     let bank = null;
     try {
-        let loadedBank = JSON.parse(localStorage.getItem("bank"));
+        let loadedBank = CircularJSON.parse(localStorage.getItem("bank"));
 
         if (loadedBank === null) {
             throw new Error("");
@@ -69,12 +67,7 @@ export const loadBank = () => {
 
         let res = Object.assign(new PlayerClass(), loadedBank);
 
-        res.properties = res.properties.map((prop) => {
-            let obj = Object.assign(new PropertyClass(), prop);
-            obj.owner = res;
-            return obj;
-        });
-        res.balance = Number.parseFloat(res.balance);
+        //res.balance = Number.parseFloat(res.balance);
         bank = res;
     } catch (e) {
         console.log("No Bank Loaded from Local Storage");
