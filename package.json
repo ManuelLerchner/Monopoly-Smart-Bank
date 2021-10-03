@@ -9,6 +9,7 @@
         "chart.js": "^3.5.1",
         "chartjs-adapter-moment": "^1.0.0",
         "chartjs-plugin-zoom": "^1.1.1",
+        "circular-json": "^0.5.9",
         "cors": "2.8.5",
         "jquery": "^3.6.0",
         "materialize-css": "^1.0.0",

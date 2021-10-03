@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./SpectateMenu.css";
 
 import BottomBar from "../../components/bottomBar/BottomBar";
+const CircularJSON = require("circular-json");
 
 export default function SpectateMenu({
     socket,
@@ -39,9 +40,8 @@ export default function SpectateMenu({
     useEffect(() => {
         if (socket) {
             const messageListener = (message) => {
-                console.log(message);
-                setSubmitedPlayers(message.players);
-                console.log(message.players);
+                var players = CircularJSON.parse(message.playersJSON);
+                setSubmitedPlayers(players);
             };
 
             socket.on("message", messageListener);
@@ -68,7 +68,7 @@ export default function SpectateMenu({
             <div className="row center">
                 <div className="row ">
                     <a
-                        class="waves-effect waves-light btn-large modal-trigger marginTop orange darken-2 black-text"
+                        className="waves-effect waves-light btn-large modal-trigger marginTop orange darken-2 black-text"
                         href="#settingsModal"
                     >
                         Spectate Settings
@@ -76,8 +76,8 @@ export default function SpectateMenu({
                 </div>
             </div>
 
-            <div id="settingsModal" class="modal">
-                <div class="modal-content   cardColor-main">
+            <div id="settingsModal" className="modal">
+                <div className="modal-content   cardColor-main">
                     <div className="col l6 offset-l3 m8 offset-m2 s12 ">
                         <h4 className="center orange-text padding10">
                             {spectateID === "/"
@@ -98,10 +98,10 @@ export default function SpectateMenu({
                                     >
                                         <div className="input-field col l5 offset-l3 m7 offset-m2 s8 offset-s1">
                                             <input
-                                                autocomplete="off"
+                                                autoComplete="off"
                                                 id="listeingID"
                                                 type="text"
-                                                class="validate"
+                                                className="validate"
                                             />
                                             <label htmlFor="listeingID">
                                                 Enter Listening ID
@@ -110,11 +110,11 @@ export default function SpectateMenu({
 
                                         <div className="input-field col s2 ">
                                             <button
-                                                class=" btn-small waves-effect waves-light yellow darken-4 "
+                                                className=" btn-small waves-effect waves-light yellow darken-4 "
                                                 type="submit"
                                                 name="action"
                                             >
-                                                <i class="material-icons right noMargin ">
+                                                <i className="material-icons right noMargin ">
                                                     send
                                                 </i>
                                             </button>
