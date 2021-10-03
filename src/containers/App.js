@@ -192,6 +192,7 @@ export default function App() {
                         startMoney={startMoney}
                         setGameID={setGameID}
                         gameID={gameID}
+                        setSpectateID={setSpectateID}
                     />
                 );
             case "main":

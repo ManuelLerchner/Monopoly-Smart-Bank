@@ -13,6 +13,7 @@ export default function LobbyScreen({
     setBank,
     setGameID,
     gameID,
+    setSpectateID,
 }) {
     const nameRef = useRef();
     const [pressCounter, setPressCounter] = useState(0);
@@ -83,6 +84,8 @@ export default function LobbyScreen({
 
             setBuildings(loadBuildingData());
             setPressCounter(0);
+
+            setSpectateID("/");
 
             const zeroPad = (num, places) => String(num).padStart(places, "0");
             setGameID(zeroPad(Math.round(Math.random() * 10 ** 6), 6));
