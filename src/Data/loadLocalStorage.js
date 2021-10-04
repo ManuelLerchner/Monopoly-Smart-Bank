@@ -91,8 +91,7 @@ export const loadStocks = () => {
             array.push(res);
         });
     } catch (e) {
-        console.log("No Properties Loaded from Local Storage");
+        console.log("No Stocks Loaded from Local Storage");
     }
-    console.log("load",array);
     return array;
 };

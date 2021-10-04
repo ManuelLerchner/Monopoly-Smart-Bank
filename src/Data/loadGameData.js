@@ -176,6 +176,5 @@ export function createStocks() {
     stocks.push(
         new StockClass("E", randomB(0.65, 0.9) * 10 ** 5, randomB(5, 12), 0.5)
     );
-    console.log("crate", stocks);
     return stocks;
 }
