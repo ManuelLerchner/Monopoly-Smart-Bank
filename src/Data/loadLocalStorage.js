@@ -1,6 +1,7 @@
 import { BuildingClass } from "./BuildingClass";
 import { PlayerClass } from "./PlayerClass";
 import { PropertyClass } from "./PropertyClass";
+import { StockClass } from "./StockClass";
 
 const CircularJSON = require("circular-json");
 
@@ -74,4 +75,24 @@ export const loadBank = () => {
     }
 
     return bank;
+};
+
+export const loadStocks = () => {
+    let array = [];
+    try {
+        let loadedStocks = CircularJSON.parse(localStorage.getItem("stocks"));
+
+        if (loadedStocks === null) {
+            throw new Error("");
+        }
+
+        loadedStocks.forEach((stock) => {
+            let res = Object.assign(new StockClass(), stock);
+            array.push(res);
+        });
+    } catch (e) {
+        console.log("No Properties Loaded from Local Storage");
+    }
+    console.log("load",array);
+    return array;
 };

@@ -3,7 +3,11 @@ import React, { useEffect, useRef, useState } from "react";
 import "./LobbyScreen.css";
 
 import { PlayerClass } from "../../Data/PlayerClass";
-import { loadBuildingData, loadPropertyData } from "../../Data/loadGameData";
+import {
+    createStocks,
+    loadBuildingData,
+    loadPropertyData,
+} from "../../Data/loadGameData";
 
 export default function LobbyScreen({
     setPlayers,
@@ -13,6 +17,7 @@ export default function LobbyScreen({
     setBank,
     setGameID,
     gameID,
+    setStocks,
     setSpectateID,
 }) {
     const nameRef = useRef();
@@ -86,6 +91,8 @@ export default function LobbyScreen({
             setPressCounter(0);
 
             setSpectateID("/");
+
+            setStocks(createStocks());
 
             const zeroPad = (num, places) => String(num).padStart(places, "0");
             setGameID(zeroPad(Math.round(Math.random() * 10 ** 6), 6));

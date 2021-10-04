@@ -1,7 +1,7 @@
 import moment from "moment";
 const DATE_RFC2822 = "ddd, DD MMM YYYY HH:mm:ss ZZ";
 
-export class Stock {
+export class StockClass {
     constructor(name, startValue, risk, percentage) {
         this.name = name;
         this.startValue = startValue;

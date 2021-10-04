@@ -4,6 +4,7 @@ import { PlayerClass } from "./../Data/PlayerClass";
 
 import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/Footer";
+import BottomBar from "../components/bottomBar/BottomBar";
 
 import LobbyScreen from "./LobbyScreen";
 import MainScreen from "./MainScreen";
@@ -13,24 +14,27 @@ import BankScreen from "./BankScreen";
 import StocksScreen from "./StocksScreen";
 import RentScreen from "./RentScreen";
 import SellScreen from "./SellScreen";
+import SpectateScreen from "./SpectateScreen";
+import OverviewScreen from "./OverviewScreen";
+import SettingScreen from "./SettingsScreen";
+
 import io from "socket.io-client";
 
-import "./App.css";
-import BottomBar from "../components/bottomBar/BottomBar";
+import {
+    createStocks,
+    loadBuildingData,
+    loadPropertyData,
+} from "../Data/loadGameData";
 
-import { loadBuildingData, loadPropertyData } from "../Data/loadGameData";
-
-import SettingScreen from "./SettingsScreen";
 import {
     loadAvailableProperties,
     loadBank,
     loadBuildings,
     loadPlayers,
+    loadStocks,
 } from "../Data/loadLocalStorage";
 
-import SpectateScreen from "./SpectateScreen";
-import OverviewScreen from "./OverviewScreen";
-import { Stock } from "../Data/Stocks";
+import "./App.css";
 
 const serverconfig = require("../serverconfig.json");
 const CircularJSON = require("circular-json");
@@ -65,38 +69,29 @@ export default function App() {
         localStorage.getItem("spectateID") || "/"
     );
 
+    const [stocks, setStocks] = useState(loadStocks() || []);
+
     const [socket, setSocket] = useState(null);
     const [socketConnected, setSocketConnected] = useState(false);
-
-    function randomB(min, max) {
-        return Math.random() * (max - min + 1) + min;
-    }
-
-    const [stocks, setStocks] = useState([
-        new Stock("A", randomB(0.65, 0.9) * 10 ** 5, randomB(5, 12), 0.5),
-        new Stock("B", randomB(0.65, 0.9) * 10 ** 5, randomB(5, 12), 0.5),
-        new Stock("C", randomB(0.65, 0.9) * 10 ** 5, randomB(5, 12), 0.5),
-        new Stock("D", randomB(0.65, 0.9) * 10 ** 5, randomB(5, 12), 0.5),
-        new Stock("E", randomB(0.65, 0.9) * 10 ** 5, randomB(5, 12), 0.5),
-    ]);
 
     //Update Local Storage
     useEffect(() => {
         const playerJson = CircularJSON.stringify(players);
         const bankJson = CircularJSON.stringify(bank);
-        const availablePropertiesJson =
+        const availablePropertiesJSON =
             CircularJSON.stringify(availableProperties);
 
         const buildingsJson = CircularJSON.stringify(buildings);
 
         localStorage.setItem("players", playerJson);
-        localStorage.setItem("availableProperties", availablePropertiesJson);
+        localStorage.setItem("availableProperties", availablePropertiesJSON);
         localStorage.setItem("buildings", buildingsJson);
         localStorage.setItem("startMoney", startMoney);
         localStorage.setItem("maxHouses", maxHouses);
         localStorage.setItem("gameState", gameState);
         localStorage.setItem("bank", bankJson);
         localStorage.setItem("gameID", gameID);
+        localStorage.setItem("spectateID", spectateID);
         localStorage.setItem("spectateID", spectateID);
     }, [
         players,
@@ -110,6 +105,7 @@ export default function App() {
         socket,
         socketConnected,
         spectateID,
+        stocks,
     ]);
 
     //Send updates to spectators
@@ -134,6 +130,11 @@ export default function App() {
             loadPropertyData().then((data) => {
                 setAvailableProperties(data);
             });
+        }
+
+        if (stocks.length === 0) {
+            let stocks = createStocks();
+            setStocks(stocks);
         }
 
         if (buildings.length === 0) {
@@ -193,6 +194,7 @@ export default function App() {
                         setGameID={setGameID}
                         gameID={gameID}
                         setSpectateID={setSpectateID}
+                        setStocks={setStocks}
                     />
                 );
             case "main":

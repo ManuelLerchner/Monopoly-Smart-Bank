@@ -14,7 +14,8 @@ export default function LobbyScreen({
     setBank,
     setGameID,
     gameID,
-    setSpectateID
+    setSpectateID,
+    setStocks,
 }) {
     $("#navbar_lobby").addClass("selected");
     $("#navbar_spectate").removeClass("selected");
@@ -41,6 +42,7 @@ export default function LobbyScreen({
                 setGameID={setGameID}
                 gameID={gameID}
                 setSpectateID={setSpectateID}
+                setStocks={setStocks}
             />
         </>
     );

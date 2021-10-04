@@ -15,6 +15,7 @@ import Prison from "../images/houses/Prison.jpg";
 import Dump from "../images/houses/Dump.jpg";
 import Power from "../images/houses/Power.jpg";
 import Sewage from "../images/houses/Sewage.jpg";
+import { StockClass } from "./StockClass";
 
 function loadCSV() {
     return new Promise(function (resolve, reject) {
@@ -153,4 +154,28 @@ export function loadBuildingData() {
         new BuildingClass("Dump", Dump, 0, "negative", 3),
         new BuildingClass("Prison", Prison, 0, "negative", 4),
     ];
+}
+
+export function createStocks() {
+    function randomB(min, max) {
+        return Math.random() * (max - min + 1) + min;
+    }
+    const stocks = [];
+    stocks.push(
+        new StockClass("A", randomB(0.65, 0.9) * 10 ** 5, randomB(5, 12), 0.5)
+    );
+    stocks.push(
+        new StockClass("B", randomB(0.65, 0.9) * 10 ** 5, randomB(5, 12), 0.5)
+    );
+    stocks.push(
+        new StockClass("C", randomB(0.65, 0.9) * 10 ** 5, randomB(5, 12), 0.5)
+    );
+    stocks.push(
+        new StockClass("D", randomB(0.65, 0.9) * 10 ** 5, randomB(5, 12), 0.5)
+    );
+    stocks.push(
+        new StockClass("E", randomB(0.65, 0.9) * 10 ** 5, randomB(5, 12), 0.5)
+    );
+    console.log("crate", stocks);
+    return stocks;
 }

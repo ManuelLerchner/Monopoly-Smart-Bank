@@ -8,8 +8,15 @@ import { options } from "./Plot";
 import $ from "jquery";
 
 import "./StocksMenu.css";
+import CircularJSON from "circular-json";
 
-export default function StocksMenu({ stocks, setPlayers, players, bank }) {
+export default function StocksMenu({
+    stocks,
+    setPlayers,
+    players,
+    bank,
+    setStocks,
+}) {
     const [selectedPlayer, setselectedPlayer] = useState(players[0] || null);
     const [chartData, setChartData] = useState({});
 
@@ -58,15 +65,15 @@ export default function StocksMenu({ stocks, setPlayers, players, bank }) {
     }, [data]);
 
     useEffect(() => {
-        const Intervall = setInterval(() => {
+        setInterval(() => {
             setData([...stocks]);
+
+            const stockJSON = CircularJSON.stringify(stocks);
+            localStorage.setItem("stocks", stockJSON);
         }, 5000);
 
         setData([...stocks]);
 
-        return () => {
-            clearInterval(Intervall);
-        };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
