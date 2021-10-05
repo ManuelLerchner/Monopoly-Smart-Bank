@@ -78,6 +78,7 @@ export default function App() {
     useEffect(() => {
         const playerJson = CircularJSON.stringify(players);
         const bankJson = CircularJSON.stringify(bank);
+        const stockJSON = CircularJSON.stringify(stocks);
         const availablePropertiesJSON =
             CircularJSON.stringify(availableProperties);
 
@@ -93,6 +94,7 @@ export default function App() {
         localStorage.setItem("gameID", gameID);
         localStorage.setItem("spectateID", spectateID);
         localStorage.setItem("spectateID", spectateID);
+        localStorage.setItem("stocks", stockJSON);
     }, [
         players,
         availableProperties,

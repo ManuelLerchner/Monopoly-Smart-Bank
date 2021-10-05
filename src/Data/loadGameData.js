@@ -157,24 +157,11 @@ export function loadBuildingData() {
 }
 
 export function createStocks() {
-    function randomB(min, max) {
-        return Math.random() * (max - min + 1) + min;
-    }
     const stocks = [];
-    stocks.push(
-        new StockClass("A", randomB(0.65, 0.9) * 10 ** 5, randomB(5, 12), 0.5)
-    );
-    stocks.push(
-        new StockClass("B", randomB(0.65, 0.9) * 10 ** 5, randomB(5, 12), 0.5)
-    );
-    stocks.push(
-        new StockClass("C", randomB(0.65, 0.9) * 10 ** 5, randomB(5, 12), 0.5)
-    );
-    stocks.push(
-        new StockClass("D", randomB(0.65, 0.9) * 10 ** 5, randomB(5, 12), 0.5)
-    );
-    stocks.push(
-        new StockClass("E", randomB(0.65, 0.9) * 10 ** 5, randomB(5, 12), 0.5)
-    );
+    stocks.push(new StockClass("Apple"));
+    stocks.push(new StockClass("SpaceX"));
+    stocks.push(new StockClass("Alphabet"));
+    stocks.push(new StockClass("Amazon"));
+    stocks.push(new StockClass("Tesla"));
     return stocks;
 }
