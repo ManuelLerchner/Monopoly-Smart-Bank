@@ -25,6 +25,8 @@ export default function StocksMenu({
 
     const [data, setData] = useState([]);
 
+    const [paused, setpaused] = useState(false);
+
     useEffect(() => {
         var elems = document.querySelectorAll("select");
         // eslint-disable-next-line no-undef
@@ -66,10 +68,12 @@ export default function StocksMenu({
 
     useEffect(() => {
         setInterval(() => {
-            setData([...stocks]);
+            if (stocks[0].paused === false) {
+                setData([...stocks]);
 
-            const stockJSON = CircularJSON.stringify(stocks);
-            localStorage.setItem("stocks", stockJSON);
+                const stockJSON = CircularJSON.stringify(stocks);
+                localStorage.setItem("stocks", stockJSON);
+            }
         }, 5000);
 
         setData([...stocks]);
@@ -206,6 +210,22 @@ export default function StocksMenu({
         setPlayers([...clone]);
     };
 
+    const pause = () => {
+        stocks.forEach((stock) => {
+            stock.paused = !stock.paused;
+        });
+
+        setpaused(!paused);
+    };
+
+    const clear = () => {
+        stocks.forEach((stock) => {
+            stock.data = [];
+            stock.calcNew();
+        });
+        setData([...stocks]);
+    };
+
     return (
         <>
             <div className="row">
@@ -236,6 +256,30 @@ export default function StocksMenu({
                             options={options}
                             height={200}
                         />
+                        <div className="row center marginBottom  paddingBot">
+                            <div className="col l4 offset-l1 s12">
+                                <button
+                                    className=" btn btn waves-effect waves-light red darken-1"
+                                    onClick={clear}
+                                >
+                                    Clear
+                                    <i className="material-icons right hide-on-med-and-down ">
+                                        restart_alt
+                                    </i>
+                                </button>
+                            </div>
+                            <div className="col l4 offset-l2 s12 ">
+                                <button
+                                    className=" btn btn waves-effect waves-light blue darken-1"
+                                    onClick={pause}
+                                >
+                                    {paused ? "Start" : "Pause"}
+                                    <i className="material-icons right hide-on-med-and-down ">
+                                        {paused ? "play_arrow" : " pause"}
+                                    </i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -276,7 +320,7 @@ export default function StocksMenu({
                             <div className="row center marginBottom padding10">
                                 <div className="col l4 offset-l1 s12 ">
                                     <button
-                                        className=" btn-large btn waves-effect waves-light green darken-1"
+                                        className=" btn btn waves-effect waves-light green darken-1"
                                         onClick={() => {
                                             interact("buy");
                                         }}
@@ -287,9 +331,9 @@ export default function StocksMenu({
                                         </i>
                                     </button>
                                 </div>
-                                <div className="col l4 offset-l1 s12">
+                                <div className="col l4 offset-l2 s12">
                                     <button
-                                        className=" btn-large btn-rent waves-effect waves-light red darken-2 "
+                                        className=" btn btn-rent waves-effect waves-light red darken-2 "
                                         onClick={() => {
                                             interact("sell");
                                         }}

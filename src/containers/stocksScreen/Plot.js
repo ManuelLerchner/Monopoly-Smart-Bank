@@ -2,7 +2,12 @@ import { PlayerClass } from "../../Data/PlayerClass";
 
 export const options = {
     layout: {
-        padding: 10,
+        padding: {
+            top: 20,
+            bottom : 0,
+            left: 10,
+            right: 10,
+        },
     },
 
     scales: {

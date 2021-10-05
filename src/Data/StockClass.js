@@ -12,9 +12,13 @@ export class StockClass {
         this.percentage = percentage;
 
         setInterval(() => {
-            this.calcNew();
+            if (!this.paused) {
+                this.calcNew();
+            }
         }, 4000);
         this.calcNew();
+
+        this.paused = false;
 
         function randomB(min, max) {
             return Math.random() * (max - min + 1) + min;
