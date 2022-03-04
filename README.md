@@ -2,7 +2,7 @@
 
 In this project I built a Smart-Bank system for a custom made Monopoly-Game I built with my friends.
 
-You can check out this project on: http://manuellerchner.ddns.net/
+You can check out this project on: https://manuellerchner.de.net
 
 ![image](https://user-images.githubusercontent.com/54124311/134827394-fe2e4230-c9e2-481a-94b7-96430477ad07.png)
 
