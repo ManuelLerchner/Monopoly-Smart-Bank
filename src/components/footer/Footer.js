@@ -59,7 +59,7 @@ export default function Footer() {
                             <li>
                                 <a
                                     className="grey-text text-lighten-3"
-                                    href="http://manuellerchner.ddns.net/"
+                                    href="https://manuellerchner.de/"
                                 >
                                     Website
                                 </a>
@@ -67,7 +67,7 @@ export default function Footer() {
                             <li>
                                 <a
                                     className="grey-text text-lighten-3"
-                                    href="http://manuellerchner.ddns.net/about"
+                                    href="https://manuellerchner.de/about"
                                 >
                                     About Me
                                 </a>

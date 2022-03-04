@@ -151,9 +151,7 @@ export default function App() {
     }, []);
 
     useEffect(() => {
-        const newSocket = io(
-            `http://${window.location.hostname}:${serverconfig.BACKEND_PORT}`
-        );
+        const newSocket = io(`https://monopolybackend.manuellerchner.de`);
         setSocket(newSocket);
 
         try {
