@@ -20,11 +20,7 @@ import SettingScreen from "./SettingsScreen";
 
 import io from "socket.io-client";
 
-import {
-    createStocks,
-    loadBuildingData,
-    loadPropertyData,
-} from "../Data/loadGameData";
+import { createStocks, loadBuildingData, loadPropertyData } from "../Data/loadGameData";
 
 import {
     loadAvailableProperties,
@@ -43,31 +39,21 @@ export default function App() {
     //Player List,  Game State
     const [players, setPlayers] = useState(loadPlayers() || []);
 
-    const [availableProperties, setAvailableProperties] = useState(
-        loadAvailableProperties() || []
-    );
+    const [availableProperties, setAvailableProperties] = useState(loadAvailableProperties() || []);
 
     const [buildings, setBuildings] = useState(loadBuildings() || []);
 
     const [startMoney, setStartMoney] = useState(
         localStorage.getItem("startMoney") || 55 * 10 ** 6
     );
-    const [maxHouses, setMaxHouses] = useState(
-        localStorage.getItem("maxHouses") || 25
-    );
+    const [maxHouses, setMaxHouses] = useState(localStorage.getItem("maxHouses") || 25);
 
-    const [gameState, setGameState] = useState(
-        localStorage.getItem("gameState") || "lobby"
-    );
+    const [gameState, setGameState] = useState(localStorage.getItem("gameState") || "lobby");
     const [bank, setBank] = useState(loadBank() || null);
 
-    const [gameID, setGameID] = useState(
-        localStorage.getItem("gameID") || "null"
-    );
+    const [gameID, setGameID] = useState(localStorage.getItem("gameID") || "null");
 
-    const [spectateID, setSpectateID] = useState(
-        localStorage.getItem("spectateID") || "/"
-    );
+    const [spectateID, setSpectateID] = useState(localStorage.getItem("spectateID") || "/");
 
     const [stocks, setStocks] = useState(loadStocks() || []);
 
@@ -79,8 +65,7 @@ export default function App() {
         const playerJson = CircularJSON.stringify(players);
         const bankJson = CircularJSON.stringify(bank);
         const stockJSON = CircularJSON.stringify(stocks);
-        const availablePropertiesJSON =
-            CircularJSON.stringify(availableProperties);
+        const availablePropertiesJSON = CircularJSON.stringify(availableProperties);
 
         const buildingsJson = CircularJSON.stringify(buildings);
 
@@ -151,7 +136,9 @@ export default function App() {
     }, []);
 
     useEffect(() => {
-        const newSocket = io(`https://monopolybackend.manuellerchner.de`);
+        const newSocket = io(serverconfig.BACKEND_URL, {
+            path: "/monopoly/socket.io",
+        });
         setSocket(newSocket);
 
         try {
@@ -198,16 +185,9 @@ export default function App() {
                     />
                 );
             case "main":
-                return (
-                    <MainScreen setGameState={setGameState} players={players} />
-                );
+                return <MainScreen setGameState={setGameState} players={players} />;
             case "overview":
-                return (
-                    <OverviewScreen
-                        setGameState={setGameState}
-                        players={players}
-                    />
-                );
+                return <OverviewScreen setGameState={setGameState} players={players} />;
             case "spectate":
                 return (
                     <SpectateScreen

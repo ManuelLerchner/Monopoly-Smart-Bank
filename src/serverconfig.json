@@ -1,3 +1,4 @@
 {
-    "BACKEND_PORT": 3015
+    "BACKEND_URL": "https://api.manuellerchner.de",
+    "BACKEND_URL_DEV": "localhost:4000"
 }
