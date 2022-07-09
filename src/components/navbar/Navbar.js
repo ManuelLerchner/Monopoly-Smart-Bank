@@ -21,22 +21,21 @@ export default function Navbar({ setGameState }) {
                         href="#!"
                         data-target="mobile-demo"
                         className="sidenav-trigger"
-                    >
+                        >
                         <i className="material-icons">menu</i>
                     </a>
-                    <a
-                        id="logoText"
-                        href="#!"
+                    <div id="logoText">
+                        <h1
+                                href="#!"
                         className="brand-logo center "
                         onClick={() => {
                             setGameState("main");
                         }}
-                    >
-                        <i className="material-icons right hide-on-small-only">
-                            apartment
-                        </i>
-                        Smart-Bank
-                    </a>
+                        >
+                        <span> Smart-Bank</span>
+                        <i className="material-icons right hide-on-small-only">apartment</i>
+                        </h1>
+                    </div>
 
                     <ul id="nav-mobile" className="left hide-on-med-and-down">
                         <li>

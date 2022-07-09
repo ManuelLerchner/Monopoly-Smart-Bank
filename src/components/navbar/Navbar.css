@@ -1,25 +1,34 @@
 .selected {
-    background-color: rgb(109, 93, 93) !important;
+  background-color: rgb(109, 93, 93) !important;
 }
 #nav-mobile li {
-    background-color: rgb(53, 49, 49) !important;
-    border-radius: 5px !important;
-    margin-left: 1px !important;
-    margin-right: 1px !important;
+  background-color: rgb(53, 49, 49) !important;
+  border-radius: 5px !important;
+  margin-left: 1px !important;
+  margin-right: 1px !important;
 }
 
 #nav-mobile li a {
-    border-radius: 10px !important;
+  border-radius: 10px !important;
 }
 
 @media (min-width: 981px) and (max-width: 1400px) {
-    #logoText {
-        display: none;
-    }
+  #logoText {
+    display: none;
+  }
 }
 
 @media (max-width: 980px) {
-    #logoText {
-        display: block;
-    }
+  #logoText {
+    display: block;
+  }
+}
+
+h1 {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin: 0;
+  height: 100%;
 }
