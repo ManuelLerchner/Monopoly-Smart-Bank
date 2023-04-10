@@ -18,22 +18,20 @@ export default function Navbar({ setGameState }) {
             <nav>
                 <div className="nav-wrapper grey darken-4">
                     <a
-                        href="#!"
                         data-target="mobile-demo"
                         className="sidenav-trigger"
-                        >
+                    >
                         <i className="material-icons">menu</i>
                     </a>
                     <div id="logoText">
                         <h1
-                                href="#!"
-                        className="brand-logo center "
-                        onClick={() => {
-                            setGameState("main");
-                        }}
+                            className="brand-logo center "
+                            onClick={() => {
+                                setGameState("main");
+                            }}
                         >
-                        <span> Smart-Bank</span>
-                        <i className="material-icons right hide-on-small-only">apartment</i>
+                            <span> Smart-Bank</span>
+                            <i className="material-icons right hide-on-small-only">apartment</i>
                         </h1>
                     </div>
 
@@ -41,7 +39,6 @@ export default function Navbar({ setGameState }) {
                         <li>
                             <a
                                 id="navbar_lobby"
-                                href="#!"
                                 onClick={() => {
                                     setGameState("lobby");
                                 }}
@@ -54,7 +51,6 @@ export default function Navbar({ setGameState }) {
                         <li>
                             <a
                                 id="navbar_spectate"
-                                href="#!"
                                 onClick={() => {
                                     setGameState("spectate");
                                 }}
@@ -69,7 +65,6 @@ export default function Navbar({ setGameState }) {
                         <li>
                             <a
                                 id="navbar_overview"
-                                href="#!"
                                 onClick={() => {
                                     setGameState("overview");
                                 }}
@@ -82,7 +77,6 @@ export default function Navbar({ setGameState }) {
                         <li>
                             <a
                                 id="navbar_settings"
-                                href="#!"
                                 onClick={() => {
                                     setGameState("settings");
                                 }}
@@ -98,7 +92,6 @@ export default function Navbar({ setGameState }) {
                         <li>
                             <a
                                 id="navbar_pay"
-                                href="#!"
                                 onClick={() => {
                                     setGameState("pay");
                                 }}
@@ -113,7 +106,6 @@ export default function Navbar({ setGameState }) {
                         <li>
                             <a
                                 id="navbar_buy"
-                                href="#!"
                                 onClick={() => {
                                     setGameState("buy");
                                 }}
@@ -128,7 +120,6 @@ export default function Navbar({ setGameState }) {
                         <li>
                             <a
                                 id="navbar_rent"
-                                href="#!"
                                 onClick={() => {
                                     setGameState("rent");
                                 }}
@@ -143,7 +134,6 @@ export default function Navbar({ setGameState }) {
                         <li>
                             <a
                                 id="navbar_sell"
-                                href="#!"
                                 onClick={() => {
                                     setGameState("sell");
                                 }}
@@ -156,7 +146,6 @@ export default function Navbar({ setGameState }) {
                         <li>
                             <a
                                 id="navbar_bank"
-                                href="#!"
                                 onClick={() => {
                                     setGameState("bank");
                                 }}
@@ -171,7 +160,6 @@ export default function Navbar({ setGameState }) {
                         <li>
                             <a
                                 id="navbar_stocks"
-                                href="#!"
                                 onClick={() => {
                                     setGameState("stocks");
                                 }}
@@ -191,7 +179,6 @@ export default function Navbar({ setGameState }) {
                 <li>
                     <a
                         id="navbar_lobby"
-                        href="#!"
                         onClick={() => {
                             setGameState("lobby");
                         }}
@@ -204,7 +191,6 @@ export default function Navbar({ setGameState }) {
                 <li>
                     <a
                         id="navbar_spectate"
-                        href="#!"
                         onClick={() => {
                             setGameState("spectate");
                         }}
@@ -217,7 +203,6 @@ export default function Navbar({ setGameState }) {
                 <li>
                     <a
                         id="navbar_overview"
-                        href="#!"
                         onClick={() => {
                             setGameState("overview");
                         }}
@@ -231,7 +216,6 @@ export default function Navbar({ setGameState }) {
                 <li>
                     <a
                         id="navbar_settings"
-                        href="#!"
                         onClick={() => {
                             setGameState("settings");
                         }}
@@ -245,7 +229,6 @@ export default function Navbar({ setGameState }) {
                 <li>
                     <a
                         id="navbar_pay"
-                        href="#!"
                         onClick={() => {
                             setGameState("pay");
                         }}
@@ -258,7 +241,6 @@ export default function Navbar({ setGameState }) {
                 <li>
                     <a
                         id="navbar_buy"
-                        href="#!"
                         onClick={() => {
                             setGameState("buy");
                         }}
@@ -271,7 +253,6 @@ export default function Navbar({ setGameState }) {
                 <li>
                     <a
                         id="navbar_rent"
-                        href="#!"
                         onClick={() => {
                             setGameState("rent");
                         }}
@@ -284,7 +265,6 @@ export default function Navbar({ setGameState }) {
                 <li>
                     <a
                         id="navbar_sell"
-                        href="#!"
                         onClick={() => {
                             setGameState("sell");
                         }}
@@ -297,7 +277,6 @@ export default function Navbar({ setGameState }) {
                 <li>
                     <a
                         id="navbar_bank"
-                        href="#!"
                         onClick={() => {
                             setGameState("bank");
                         }}
@@ -310,7 +289,6 @@ export default function Navbar({ setGameState }) {
                 <li>
                     <a
                         id="navbar_stocks"
-                        href="#!"
                         onClick={() => {
                             setGameState("stocks");
                         }}

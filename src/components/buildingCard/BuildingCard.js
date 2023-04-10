@@ -19,7 +19,7 @@ export default function BuildingCard({ building, price, clickCallback }) {
     }`;
 
     return (
-        <a className={style} href="#!" onClick={handleClick}>
+        <a className={style} onClick={handleClick}>
             <div className="flexContainerProperty">
                 <div className="descriptionFlex">
                     <p className="propertyTitle">{building.name}</p>

@@ -12,7 +12,6 @@ export default function MainMenu({ setGameState }) {
                             <div className="">
                                 <a
                                     className="waves-effect waves-light btn-large btn-large-main red darken-2"
-                                    href="#!"
                                     onClick={() => {
                                         setGameState("pay");
                                     }}
@@ -26,7 +25,6 @@ export default function MainMenu({ setGameState }) {
                             <div className="">
                                 <a
                                     className="waves-effect waves-light btn-large btn-large-main deep-orange darken-1"
-                                    href="#!"
                                     onClick={() => {
                                         setGameState("buy");
                                     }}
@@ -40,7 +38,6 @@ export default function MainMenu({ setGameState }) {
                             <div className="">
                                 <a
                                     className="waves-effect waves-light btn-large btn-large-main light-green darken-3"
-                                    href="#!"
                                     onClick={() => {
                                         setGameState("rent");
                                     }}
@@ -54,7 +51,6 @@ export default function MainMenu({ setGameState }) {
                             <div className="">
                                 <a
                                     className="waves-effect waves-light btn-large btn-large-main teal darken-1"
-                                    href="#!"
                                     onClick={() => {
                                         setGameState("bank");
                                     }}
@@ -68,7 +64,6 @@ export default function MainMenu({ setGameState }) {
                             <div className="">
                                 <a
                                     className="waves-effect waves-light btn-large btn-large-main light-blue darken-2"
-                                    href="#!"
                                     onClick={() => {
                                         setGameState("bank");
                                     }}
@@ -82,7 +77,6 @@ export default function MainMenu({ setGameState }) {
                             <div className="">
                                 <a
                                     className="waves-effect waves-light btn-large btn-large-main deep-purple darken-1"
-                                    href="#!"
                                     onClick={() => {
                                         setGameState("stocks");
                                     }}

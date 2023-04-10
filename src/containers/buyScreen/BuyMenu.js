@@ -309,7 +309,6 @@ export default function BuyMenu({
                             <div className="row center padding10">
                                 <a
                                     className="waves-effect waves-light btn-large btn-large-buy blue lighten-1"
-                                    href="#!"
                                     onClick={purchaseProperty}
                                 >
                                     <i className="material-icons right  hide-on-small-only">
