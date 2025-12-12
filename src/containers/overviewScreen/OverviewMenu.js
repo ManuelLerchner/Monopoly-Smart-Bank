@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { PlayerClass } from "../../Data/PlayerClass";
 import PlayerList from "../../components/playerList/PlayerList";
 
-import "./OverviewMenu.css";
 import PropertyCard from "../../components/propertyCard/PropertyCard";
+import "./OverviewMenu.css";
 
 import $ from "jquery";
 
-import { Chart, Scatter } from "react-chartjs-2";
-import { options } from "./Plot";
 import "chartjs-adapter-moment";
-import zoomPlugin from "chartjs-plugin-zoom";
+import { Scatter } from "react-chartjs-2";
+import { options } from "./Plot";
 
-Chart.register(zoomPlugin);
 
 export default function OverviewMenu({ players }) {
     const [selectedPlayer, setselectedPlayer] = useState(players[0] || null);
