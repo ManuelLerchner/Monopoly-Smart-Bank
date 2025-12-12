@@ -8,12 +8,11 @@ import "./OverviewMenu.css";
 
 import $ from "jquery";
 
-import "chartjs-adapter-moment";
 import { Scatter } from "react-chartjs-2";
 import { options } from "./Plot";
 
 
-export default function OverviewMenu({ players }) {
+export default function OverviewMenu({ players = [] }) {
     const [selectedPlayer, setselectedPlayer] = useState(players[0] || null);
     const [totalHistory, settotalHistory] = useState(
         new PlayerClass("Total History", 10)
@@ -21,7 +20,7 @@ export default function OverviewMenu({ players }) {
 
     const getData = () => {
         if (selectedPlayer === null) {
-            return {};
+            return { datasets: [] };
         }
 
         const datasets = [];
@@ -39,16 +38,18 @@ export default function OverviewMenu({ players }) {
                 "blue",
             ];
 
-            players.forEach((player, i) => {
+            (Array.isArray(players) ? players : []).forEach((player, i) => {
                 const dataBalance = [];
                 const dataNetWorth = [];
                 const playerLabels = [];
 
-                player.history.forEach(({ time, total, netWorth }, i) => {
+                (Array.isArray(player?.history) ? player.history : []).forEach(
+                    ({ time, total, netWorth }, i) => {
                     playerLabels.push(time);
                     dataBalance.push({ x: time, y: total });
                     dataNetWorth.push(netWorth);
-                });
+                    }
+                );
 
                 datasets.push({
                     label: player.name,
@@ -68,7 +69,10 @@ export default function OverviewMenu({ players }) {
             const dataNetWorth = [];
             const playerLabels = [];
 
-            selectedPlayer.history.forEach(({ time, total, netWorth }, i) => {
+            (Array.isArray(selectedPlayer?.history)
+                ? selectedPlayer.history
+                : []
+            ).forEach(({ time, total, netWorth }, i) => {
                 playerLabels.push(time);
                 dataBalance.push({ x: time, y: total });
                 dataNetWorth.push({ x: time, y: netWorth });

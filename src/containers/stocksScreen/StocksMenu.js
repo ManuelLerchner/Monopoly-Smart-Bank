@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Scatter } from "react-chartjs-2";
 import PlayerList from "../../components/playerList/PlayerList";
 import { PlayerClass } from "../../Data/PlayerClass";
@@ -7,18 +7,20 @@ import { options } from "./Plot";
 
 import $ from "jquery";
 
-import "./StocksMenu.css";
 import CircularJSON from "circular-json";
+import "./StocksMenu.css";
 
 export default function StocksMenu({
-    stocks,
+    stocks = [],
     setPlayers,
     players,
     bank,
     setStocks,
 }) {
     const [selectedPlayer, setselectedPlayer] = useState(players[0] || null);
-    const [chartData, setChartData] = useState({});
+    const [chartData, setChartData] = useState({ datasets: [] });
+
+    const stocksRef = useRef(stocks);
 
     const amountRef = useRef(0);
     const stockRef = useRef(null);
@@ -26,6 +28,11 @@ export default function StocksMenu({
     const [data, setData] = useState([]);
 
     const [paused, setpaused] = useState(false);
+
+    useEffect(() => {
+        stocksRef.current = stocks;
+        setData([...(stocks ?? [])]);
+    }, [stocks]);
 
     useEffect(() => {
         var elems = document.querySelectorAll("select");
@@ -48,10 +55,10 @@ export default function StocksMenu({
             "blue",
         ];
 
-        datasets = data.map((stock, i) => {
+        datasets = (Array.isArray(data) ? data : []).map((stock, i) => {
             return {
-                data: stock.data,
-                label: stock.name,
+                data: Array.isArray(stock?.data) ? stock.data : [],
+                label: stock?.name ?? "",
                 showLine: true,
                 backgroundColor: "black",
                 borderColor: colors[i % colors.length],
@@ -67,16 +74,17 @@ export default function StocksMenu({
     }, [data]);
 
     useEffect(() => {
-        setInterval(() => {
-            if (stocks[0].paused === false) {
-                setData([...stocks]);
+        const id = setInterval(() => {
+            const latestStocks = stocksRef.current ?? [];
+            if (latestStocks?.[0]?.paused === false) {
+                setData([...(latestStocks ?? [])]);
 
-                const stockJSON = CircularJSON.stringify(stocks);
+                const stockJSON = CircularJSON.stringify(latestStocks ?? []);
                 localStorage.setItem("stocks", stockJSON);
             }
         }, 5000);
 
-        setData([...stocks]);
+        return () => clearInterval(id);
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -118,7 +126,16 @@ export default function StocksMenu({
 
         let stock = stocks.find((stock) => stock.name === stockName);
 
-        if (stock.data.length === 0) {
+        if (!stock) {
+            // eslint-disable-next-line no-undef
+            M.toast({
+                html: "Stock not found",
+                classes: "rounded red black-text",
+            });
+            return;
+        }
+
+        if (!Array.isArray(stock.data) || stock.data.length === 0) {
             // eslint-disable-next-line no-undef
             M.toast({
                 html: "Stock has no values yet",
