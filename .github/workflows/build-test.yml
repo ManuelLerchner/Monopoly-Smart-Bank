@@ -30,8 +30,8 @@ jobs:
       run: |
         if [ -f "build/index.html" ]; then
           echo "✅ HTML output found: build/index.html"
-          echo "📄 HTML file contents:"
-          cat build/index.html
+          echo "📄 HTML file preview (first 10 lines):"
+          head -10 build/index.html
           echo ""
           echo "✅ Build successful with HTML output!"
         else
@@ -40,6 +40,7 @@ jobs:
         fi
 
     - name: Upload build artifacts
+      if: success()
       uses: actions/upload-artifact@v4
       with:
         name: build-output
