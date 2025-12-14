@@ -1,0 +1,51 @@
+name: Build Test
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm install --legacy-peer-deps
+
+    - name: Build the project
+      run: CI=false npm run build
+
+    - name: Check for HTML output
+      run: |
+        if [ -f "build/index.html" ]; then
+          echo "✅ HTML output found: build/index.html"
+          echo "📄 HTML file preview (first 10 lines):"
+          head -10 build/index.html
+          echo ""
+          echo "✅ Build successful with HTML output!"
+        else
+          echo "❌ Error: build/index.html not found"
+          exit 1
+        fi
+
+    - name: Upload build artifacts
+      if: success()
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-output
+        path: build/
+        retention-days: 7
